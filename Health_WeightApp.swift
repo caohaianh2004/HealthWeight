@@ -11,7 +11,10 @@ import SwiftUI
 struct Health_WeightApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RouterView {
+                OnBoandingScreen()
+            }
         }
     }
 }
+

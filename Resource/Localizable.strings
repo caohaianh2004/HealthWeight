@@ -1,0 +1,19 @@
+/* 
+  Localizable.strings
+  Health_Weight
+
+  Created by Boss on 09/06/2025.
+  
+*/
+
+"abc_delete" = "Xoá";
+"abc_confim" = "Xác nhận";
+"abc_create_your_profile" = "Create your profile";
+"abc_next" = "Next";
+"abc_welcome" = "Welcome back, \n Please take case of your body!";
+"abc_daily" = "Daily Weight Tracking";
+"abc_filtness" = "Fitness & Health Calculators";
+"abc_bmi" = "bmi \n calculator";
+"abc_calorice" = "calorie \n calculator";
+"abc_bmr" = "bmr \n calculator";
+"abc_body" = "body fat \n calculator";
