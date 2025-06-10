@@ -1,28 +1,12 @@
 import SwiftUI
 
 struct HamburgerMenuView: View {
+    @EnvironmentObject var route: Router
     @Binding var showMenu: Bool
     let url = URL(string: "https://www.example.com")!
     
     var body: some View {
-        NavigationStack {
         ZStack {
-            //                HStack {
-            //                    Button(action: {
-            //                        withAnimation {
-            //                            showMenu.toggle()
-            //                        }
-            //                    }) {
-            //                        Image(systemName: "line.3.horizontal")
-            //                            .resizable()
-            //                            .frame(width: 24, height: 18)
-            //                            .padding()
-            //                            .foregroundColor(.black)
-            //                    }
-            //                    Spacer()
-            //                }
-            //                Spacer()
-            
             if showMenu {
                 Color.white.opacity(0.5)
                     .ignoresSafeArea()
@@ -36,14 +20,16 @@ struct HamburgerMenuView: View {
             HStack(spacing: 0) {
                 if showMenu {
                     VStack(alignment: .leading, spacing: 20) {
-                        Image("group")
+                        Image("Image5")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 250, height: 200)
+                            .frame(width: 250, height: 250)
                             .padding(.top, 20)
                         
                         Group {
-                            NavigationLink(destination: SelectFunctions()) {
+                            Button {
+                                route.navigateTo(.selecfunctions)
+                            } label: {
                                 Image(systemName: "list.clipboard.fill")
                                 Text("Select Functions")
                                 Spacer()
@@ -95,7 +81,7 @@ struct HamburgerMenuView: View {
                                 Label("Share", systemImage: "square.and.arrow.up.fill")
                             }
                         }
-                        .foregroundColor(.primary)
+                        .foregroundColor(.black)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         
                         Spacer()
@@ -104,7 +90,7 @@ struct HamburgerMenuView: View {
                     .padding(.horizontal, 20)
                     .frame( maxHeight: .infinity)
                     .frame(width: 300)
-                    .background(.ultraThinMaterial)
+                    .background(.white)
                     .edgesIgnoringSafeArea(.all)
                     .transition(.move(edge: .leading))
                 }
@@ -112,7 +98,10 @@ struct HamburgerMenuView: View {
                 Spacer()
             }
         }
-    }
         .animation(.easeInOut, value: showMenu)
     }
 }
+
+//#Preview {
+//    HamburgerMenuView()
+//}

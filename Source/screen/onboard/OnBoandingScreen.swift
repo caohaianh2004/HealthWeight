@@ -81,6 +81,7 @@ struct OnBoandingScreen: View {
                         if selectionTab < 2 {
                             selectionTab += 1
                         } else {
+                            UserDefaults.standard.set(true, forKey: KEY_FIRST_APP)
                             router.navigateTo(.editProfile)
                         }
                     } label: {
@@ -96,6 +97,8 @@ struct OnBoandingScreen: View {
             
         }
     }
+
+let KEY_FIRST_APP = "firstApp"
 
 
 #Preview {

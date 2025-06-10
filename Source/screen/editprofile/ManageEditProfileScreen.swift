@@ -62,7 +62,5 @@ struct ManaEditProfileScreen: View {
     }
 
 #Preview {
-    RouterView {
         ManaEditProfileScreen()
-    }
 }

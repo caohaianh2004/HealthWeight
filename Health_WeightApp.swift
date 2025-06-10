@@ -12,7 +12,7 @@ struct Health_WeightApp: App {
     var body: some Scene {
         WindowGroup {
             RouterView {
-                OnBoandingScreen()
+                StandbyScreen()
             }
         }
     }

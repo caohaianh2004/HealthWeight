@@ -21,7 +21,9 @@ struct HealthWeight: View {
                 VStack {
                     HStack {
                         Button {
-                            showMenu.toggle()
+                            withAnimation {
+                                showMenu.toggle()
+                            }
                         } label: {
                             Image(systemName: "line.3.horizontal")
                                 .resizable()
@@ -29,10 +31,11 @@ struct HealthWeight: View {
                                 .padding()
                                 .foregroundColor(.black)
                         }
+                        
                         Spacer()
                         
                         Button {
-                            /*Nhập nội dung*/
+                            
                         } label: {
                             Image("crown")
                                 .resizable()
@@ -201,10 +204,17 @@ struct HealthWeight: View {
                     })
                 }
             }
-//            HamburgerMenuView(showMenu: $showMenu)
+            HamburgerMenuView(showMenu: $showMenu)
+            
+            AddWeight()
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
+                .padding()
         }
     }
 }
+
+
+
 
 #Preview {
     HealthWeight()
