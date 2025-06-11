@@ -17,3 +17,10 @@
 "abc_calorice" = "calorie \n calculator";
 "abc_bmr" = "bmr \n calculator";
 "abc_body" = "body fat \n calculator";
+"abc_weightToday" = "Enter Your Weight Today ";
+"abc_text" = "Slide your weight today to track";
+"abc_result" = "BMI Result";
+"abc_bmiResult" = "Healthy weight range for your height:";
+"abc_textbmi" = "We suggest you maintain your weight. \n We've got lots of workouts and activity ides \n to help you stay active.";
+"abc_tryAgain" = "TRY AGAIN";
+"abc_home" = "HOME";

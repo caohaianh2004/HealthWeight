@@ -50,82 +50,7 @@ struct HealthWeight: View {
                         .padding(30)
                         .padding(.top, -42)
                     
-                    HStack {
-                        VStack {
-                            Button {
-                                
-                            } label: {
-                                HStack {
-                                    Text(localizedkey: "abc_daily")
-                                        .foregroundColor(.black)
-                                        .bold()
-                                    Image("hicon")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 20, height: 20)
-                                }
-                            }
-                            
-                            Button {
-                                
-                            } label: {
-                                HStack {
-                                    Image("scales")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 20, height: 20)
-                                    Text("Weight")
-                                        .foregroundStyle(Color.black)
-                                        .font(.system(size: 15))
-                                    Text("62 kg")
-                                        .foregroundStyle(Color.black)
-                                        .bold()
-                                    Text("-1.0")
-                                        .padding(5)
-                                        .foregroundStyle(.white)
-                                        .background(Color.red)
-                                        .cornerRadius(5)
-                                }
-                            }
-                            
-                            Button {
-                                
-                            } label: {
-                                HStack {
-                                    Image("goal")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 20, height: 20)
-                                    Text("Goal")
-                                        .foregroundStyle(Color.black)
-                                        .font(.system(size: 15))
-                                    Text("68 kg")
-                                        .foregroundStyle(Color.black)
-                                        .bold()
-                                    Text("+6.0")
-                                        .padding(5)
-                                        .foregroundStyle(.white)
-                                        .background(Color.green)
-                                        .cornerRadius(5)
-                                }
-                            }
-                        }
-                        Spacer()
-                        
-                        VStack {
-                            Spacer()
-                            Image("llustration")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 100, height: 100)
-                            Spacer()
-                        }
-                    }
-                    .padding()
-                    .background(Color.white.opacity(0.4))
-                    .cornerRadius(15)
-                    .padding()
-                    .padding(.top, -30)
+                   dailyWeght()
                     
                     Text(localizedkey: "abc_filtness")
                         .font(.system(size: 20))
@@ -206,14 +131,93 @@ struct HealthWeight: View {
             }
             HamburgerMenuView(showMenu: $showMenu)
             
-            AddWeight()
+            Add()
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
                 .padding()
         }
     }
 }
 
-
+struct dailyWeght: View {
+    var body: some View {
+        HStack {
+            VStack {
+                Button {
+                    
+                } label: {
+                    HStack {
+                        Text(localizedkey: "abc_daily")
+                            .foregroundColor(.black)
+                            .bold()
+                        Image("hicon")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20, height: 20)
+                    }
+                }
+                
+                Button {
+                    
+                } label: {
+                    HStack {
+                        Image("scales")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20, height: 20)
+                        Text("Weight")
+                            .foregroundStyle(Color.black)
+                            .font(.system(size: 15))
+                        Text("62 kg")
+                            .foregroundStyle(Color.black)
+                            .bold()
+                        Text("-1.0")
+                            .padding(5)
+                            .foregroundStyle(.white)
+                            .background(Color.red)
+                            .cornerRadius(5)
+                    }
+                }
+                
+                Button {
+                    
+                } label: {
+                    HStack {
+                        Image("goal")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20, height: 20)
+                        Text("Goal")
+                            .foregroundStyle(Color.black)
+                            .font(.system(size: 15))
+                        Text("68 kg")
+                            .foregroundStyle(Color.black)
+                            .bold()
+                        Text("+6.0")
+                            .padding(5)
+                            .foregroundStyle(.white)
+                            .background(Color.green)
+                            .cornerRadius(5)
+                    }
+                }
+            }
+            Spacer()
+            
+            VStack {
+                Spacer()
+                Image("llustration")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100, height: 100)
+                Spacer()
+            }
+        }
+        .padding()
+        .background(Color.white.opacity(0.4))
+        .cornerRadius(15)
+        .padding()
+        .padding(.top, -30)
+    }
+}
 
 
 #Preview {

@@ -10,6 +10,8 @@ import SwiftUI
 
 struct RouterView<Content: View>: View {
     @StateObject var router: Router = Router()
+    @StateObject var viewModelData: Databasedata = Databasedata()
+    @StateObject var viewModelPeople: DatabasePeople = DatabasePeople()
     
     private let content: Content
     
@@ -25,6 +27,8 @@ struct RouterView<Content: View>: View {
                 }
         }
         .environmentObject(router)
+        .environmentObject(viewModelData)
+        .environmentObject(viewModelPeople)
     }
 }
 
@@ -35,6 +39,7 @@ class Router: ObservableObject {
         case standbyscreen
         case selecfunctions
         case editProfile
+        case add
     }
     @Published var path: NavigationPath = NavigationPath()
     
@@ -51,6 +56,8 @@ class Router: ObservableObject {
             SelectFunctions().navigationBarBackButtonHidden()
         case .editProfile:
             ManaEditProfileScreen().navigationBarBackButtonHidden()
+        case .add:
+            AddWeight().navigationBarBackButtonHidden()
         }
     }
     

@@ -41,10 +41,10 @@ struct UsUnits: View {
                             .foregroundColor(selectionGenden == .man ? .blue : .gray)
                     }
                     
-                    Image(selectionGenden == .man ? "Image3" : "Image4")
+                    Image(selectionGenden == .man ? "Image6" : "Image7")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 250)
+                        .frame(width: 200)
                     
                     Button {
                         selectionGenden = .woden
@@ -54,7 +54,7 @@ struct UsUnits: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width: 40)
-                            .foregroundColor(selectionGenden == .woden ? .blue : .gray)
+                            .foregroundColor(selectionGenden == .woden ? .pink : .gray)
                     }
                 }
                 

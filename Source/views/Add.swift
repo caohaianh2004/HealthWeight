@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct AddWeight: View {
+struct Add: View {
     @EnvironmentObject var route: Router
     @State private var offsetY: CGFloat = 0
     
     var body: some View {
         ZStack {
             Button {
-                
+                route.navigateTo(.add)
             } label: {
                 Image(systemName: "plus")
                     .foregroundColor(.white)
@@ -55,5 +55,5 @@ func shakeLoop() {
 }
 
 #Preview {
-    AddWeight()
+    Add()
 }

@@ -8,11 +8,11 @@
 import Foundation
 import FMDB
 
-struct Databasedata {
+class Databasedata: ObservableObject {
     static let shared = Databasedata()
     var databasequeue: FMDatabaseQueue?
     
-    private init() {
+     init() {
         let urlfile = FileManager.default
             .urls(for: .documentDirectory, in: .userDomainMask)
             .first!
@@ -27,7 +27,7 @@ struct Databasedata {
            id INTEGER PRIMARY KEY AUTOINCREMENT,
            time TEXT,
            weight REAL,
-           weight_lb REAL,
+           weight_lb REAL
         )
         """
             do {

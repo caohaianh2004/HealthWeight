@@ -60,7 +60,6 @@ struct StandbyScreen: View {
                 }
             }
         }
-        
     }
 }
 

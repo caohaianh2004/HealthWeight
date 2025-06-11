@@ -8,11 +8,11 @@
 import Foundation
 import FMDB
 
-struct DatabasePeople {
+class DatabasePeople: ObservableObject {
     static let shared = DatabasePeople()
     var databaseQueue: FMDatabaseQueue?
     
-    private init() {
+     init() {
         let urlfile = FileManager.default
             .urls(for: .documentDirectory, in: .userDomainMask)
             .first!
@@ -23,18 +23,18 @@ struct DatabasePeople {
         databaseQueue?.inDatabase { db in
         let query = """
         CREATE TABLE IF NOT EXISTS people (
-        id INTEGER PRIMARY KEY AUTOINCREMENT
-        name TEXT
-        image TEXT
-        age INTEGER
-        weightKg REAL
-        weightLb REAL
-        heightCm REAL
-        heightFt REAL
-        heightln REAL
-        targetWeightKg REAL
-        targetWeightLb REAL
-        isMale INTEGER
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT,
+        image TEXT,
+        age INTEGER,
+        weightKg REAL,
+        weightLb REAL,
+        heightCm REAL,
+        heightFt REAL,
+        heightln REAL,
+        targetWeightKg REAL,
+        targetWeightLb REAL,
+        isMale INTEGER,
         isUSUnit INTEGER
        )
        """

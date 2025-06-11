@@ -41,10 +41,10 @@ struct MetricUnits: View {
                             .foregroundColor(selectionGenden == .man ? .blue : .gray)
                     }
                     
-                    Image(selectionGenden == .man ? "Image3" : "Image4")
+                    Image(selectionGenden == .man ? "Image6" : "Image7")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 250)
+                        .frame(width: 200)
                     
                     Button {
                         selectionGenden = .woden
@@ -56,7 +56,7 @@ struct MetricUnits: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width: 40)
-                            .foregroundColor(selectionGenden == .woden ? .blue : .gray)
+                            .foregroundColor(selectionGenden == .woden ? .pink : .gray)
                     }
                 }
                 VStack {
@@ -68,7 +68,7 @@ struct MetricUnits: View {
                        
                     
                     HStack(spacing: 20) {
-                        stepperBox(title: "Weight(Ib)", value: $weight, field: .weight)
+                        stepperBox(title: "Weight(Kg)", value: $weight, field: .weight)
                             .padding(20)
                             .border(Color.black)
                         
