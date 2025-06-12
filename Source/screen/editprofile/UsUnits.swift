@@ -16,12 +16,12 @@ struct UsUnits: View {
        case none, weight, age, goal
     }
     @State private var selectionGenden: Gender = .man
-    @State private var height = 165
-    @State private var age = 25
-    @State private var weight = 153
-    @State private var weightgoal = 160
-    @State private var selectedHeight: Double = 4.0
-    @State private var selectionValue: Double = 6.5
+    @Binding var height: Int
+    @Binding var age: Int
+    @Binding var weight: Double
+    @Binding var weightgoal: Double
+    @Binding var selectedHeight: Double
+    @Binding var selectionValue: Double
     @State private var isShowDialog = false
     @State private var input = ""
     @State private var editingField: EditingField = .none
@@ -78,12 +78,11 @@ struct UsUnits: View {
                     }
                         
                     HStack(spacing: 20) {
-                       
                         stepperBox(title: "Weight(Ib)", value: $weight, field: .weight)
                             .padding(20)
                             .border(Color.black)
                         
-                        stepperBox(title: "Age", value: $age, field: .age)
+                        stepperBoxAge(title: "Age", value: $age, field: .age)
                             .padding(20)
                             .border(Color.black)
                     }
@@ -93,8 +92,8 @@ struct UsUnits: View {
                             .bold()
                         HStack {
                             stepperButton("-", action: { weightgoal -= 1 })
-                            Text("\(weightgoal)")
-                                .font(.title2)
+                            Text(String(format: "%.1f", weightgoal))
+                                .font(.title3)
                                 .frame(width: 50)
                                 .onTapGesture {
                                     input = "\(weightgoal)"
@@ -115,11 +114,11 @@ struct UsUnits: View {
             ChooseWeight(isShowDialog: $isShowDialog, input: $input)
                      .onChange(of: isShowDialog) { newValue in
                          if !newValue {
-                             if let value = Int(input) {
+                             if let value = Double(input) {
                                  switch editingField {
-                                 case .weight: weight = value
-                                 case .age: age = value
-                                 case .goal: weightgoal = value
+                                 case .weight: weight = Double(value)
+                                 case .age: age = Int(value)
+                                 case .goal: weightgoal = Double(value)
                                  default: break
                                  }
                              }
@@ -128,13 +127,31 @@ struct UsUnits: View {
                      }
 }
     
-    private func stepperBox(title: String, value: Binding<Int>, field: EditingField) -> some View {
+    private func stepperBox(title: String, value: Binding<Double>, field: EditingField) -> some View {
+        VStack {
+            Text(title).bold()
+            HStack {
+                stepperButton("-", action: { value.wrappedValue -= 1 })
+                Text(String(format: "%.1f", value.wrappedValue))
+                    .font(.title3)
+                    .frame(width: 50)
+                    .onTapGesture {
+                        input = "\(value.wrappedValue)"
+                        editingField = field
+                        isShowDialog = true
+                    }
+                stepperButton("+", action: { value.wrappedValue += 1 })
+            }
+        }
+    }
+    
+    private func stepperBoxAge(title: String, value: Binding<Int>, field: EditingField) -> some View {
         VStack {
             Text(title).bold()
             HStack {
                 stepperButton("-", action: { value.wrappedValue -= 1 })
                 Text("\(value.wrappedValue)")
-                    .font(.title2)
+                    .font(.title3)
                     .frame(width: 50)
                     .onTapGesture {
                         input = "\(value.wrappedValue)"
@@ -166,6 +183,4 @@ struct UsUnits: View {
 
 }
 
-#Preview {
-    UsUnits()
-}
+

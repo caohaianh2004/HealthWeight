@@ -8,11 +8,7 @@
 import SwiftUI
 
 struct SelectFunctions: View {
-    @Environment(\.dismiss) var dismiss
-    @State private var selection = true
-    @State private var selection1 = true
-    @State private var selection2 = true
-    @State private var selection3 = true
+    @EnvironmentObject var route: Router
     @State private var selection4 = true
     @State private var selection5 = true
     @State private var selection6 = true
@@ -20,7 +16,24 @@ struct SelectFunctions: View {
     @State private var selection8 = true
     
     var body: some View {
-        NavigationStack {
+        VStack {
+            HStack {
+                Button {
+                    route.navigateBack()
+                } label: {
+                    Image(systemName: "arrow.left")
+                        .font(.title)
+                        .foregroundColor(.black)
+                }
+                Spacer()
+                
+                Text(localizedkey: "abc_selection")
+                    .font(.title3)
+                    .bold()
+                    .frame(maxWidth: .infinity)
+                    .padding(.leading, -30)
+            }
+            .padding(10)
             ScrollView{
                 VStack {
                     HStack {
@@ -33,12 +46,9 @@ struct SelectFunctions: View {
                         
                         Spacer()
                         
-                        Button {
-                            selection.toggle()
-                        } label: {
-                            Image(systemName: selection ? "circle.circle" : "circle.circle.fill")
-                                .foregroundStyle(Color.black)
-                        }
+                            Image(systemName: "circle.circle.fill")
+                            .foregroundStyle(Color.black.opacity(0.2))
+                        
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(6)
@@ -52,13 +62,10 @@ struct SelectFunctions: View {
                             .font(.system(size: 15))
                         
                         Spacer()
-                        
-                        Button {
-                            selection1.toggle()
-                        } label: {
-                            Image(systemName: selection1 ? "circle.circle" : "circle.circle.fill")
-                                .foregroundStyle(Color.black)
-                        }
+
+                            Image(systemName:"circle.circle.fill")
+                            .foregroundStyle(Color.black.opacity(0.2))
+
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(6)
@@ -72,14 +79,10 @@ struct SelectFunctions: View {
                             .font(.system(size: 15))
                         
                         Spacer()
-                        
-                        Button {
-                            selection2.toggle()
-                        } label: {
-                            Image(systemName: selection2 ? "circle.circle" : "circle.circle.fill")
-                                .foregroundStyle(Color.black)
+          
+                            Image(systemName: "circle.circle.fill")
+                            .foregroundStyle(Color.black.opacity(0.2))
                         }
-                    }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(6)
                     
@@ -92,13 +95,10 @@ struct SelectFunctions: View {
                             .font(.system(size: 15))
                         
                         Spacer()
-                        
-                        Button {
-                            selection3.toggle()
-                        } label: {
-                            Image(systemName: selection3 ? "circle.circle" : "circle.circle.fill")
-                                .foregroundStyle(Color.black)
-                        }
+   
+                            Image(systemName: "circle.circle.fill")
+                            .foregroundStyle(Color.black.opacity(0.2))
+
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(6)
@@ -204,24 +204,6 @@ struct SelectFunctions: View {
                     .padding(6)
                 }
                 .padding()
-            }
-            .navigationBarBackButtonHidden(true)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        dismiss()
-                    } label: {
-                        Image(systemName: "arrow.left")
-                            .foregroundColor(.black)
-                            .font(.title2)
-                    }
-                }
-                
-                ToolbarItem(placement: .principal) {
-                    Text("Select Functions")
-                        .font(.system(size: 20))
-                        .bold()
-                }
             }
         }
     }

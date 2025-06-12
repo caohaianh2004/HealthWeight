@@ -26,6 +26,15 @@ struct BmiResult: View {
                     .bold()
                     .frame(maxWidth: .infinity)
                     .padding(.leading, -40)
+                
+                Button {
+                    
+                } label: {
+                    Image("information")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 30)
+                }
             }
             .padding()
             
@@ -105,6 +114,7 @@ struct BmiResult: View {
                     .foregroundColor(.black)
                     .bold()
             }
+
         }
         .padding()
     }

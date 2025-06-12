@@ -17,10 +17,10 @@ struct AddWeight: View {
             Spacer()
             
             VStack {
-                Image("Image3")
+                Image("Image6")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 200, height: 200)
+                    .frame( height: 300)
             
                 MeasureKg(selectionKg: $selectionKg)
             

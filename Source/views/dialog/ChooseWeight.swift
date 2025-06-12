@@ -17,17 +17,13 @@ struct ChooseWeight: View {
         ["1", "2", "3"],
         ["4", "5", "6"],
         ["7", "8", "9"],
-        ["0"]
+        ["0", "."]
     ]
 
     var body: some View {
         ZStack {
             if isShowDialog {
-                Color.clear.ignoresSafeArea() 
-
-//                    .onTapGesture {
-//                        close()
-//                    }
+                Color.clear.ignoresSafeArea()
 
                 VStack(spacing: 16) {
                     HStack {
@@ -50,7 +46,7 @@ struct ChooseWeight: View {
                         HStack(spacing: 10) {
                             ForEach(row, id: \.self) { number in
                                 Button {
-                                    if inputText.count < 5 {
+                                    if inputText.count < 6 {
                                         inputText.append(number)
                                     }
                                 } label: {

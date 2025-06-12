@@ -40,7 +40,7 @@ struct HamburgerMenuView: View {
                                 .background(Color.black)
                             
                             Button {
-                                /*Nhập nội dung*/
+                                route.navigateTo(.editProfile)
                             } label: {
                                 Image(systemName: "person.crop.circle")
                                 Text("Edit Profile")

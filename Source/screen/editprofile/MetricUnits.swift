@@ -16,13 +16,14 @@ struct MetricUnits: View {
         case none, weight, age, goal
     }
     @State private var selectionGenden: Gender = .man
-    @State private var heightCm: Double = 165.0
-    @State private var age = 25
-    @State private var weight = 70
-    @State private var weightgoal = 65
+    @Binding var heightCm: Double
+    @Binding var age: Int
+    @Binding var weight: Double
+    @Binding var weightgoal: Double
     @State private var isShowDialog = false
     @State private var input = ""
     @State private var editingField: EditingField = .none
+    @EnvironmentObject var userViewModel: UserViewModel
     
     var body: some View {
         VStack {
@@ -30,8 +31,8 @@ struct MetricUnits: View {
                 HStack {
                     Button {
                         selectionGenden = .man
-                        weight = 70
-                        weightgoal = 65
+                        weight = 72.1
+                        weightgoal = 65.2
                     } label: {
                         Image("man")
                             .renderingMode(.template)
@@ -48,8 +49,8 @@ struct MetricUnits: View {
                     
                     Button {
                         selectionGenden = .woden
-                        weight = 55
-                        weightgoal = 50
+                        weight = 50.5
+                        weightgoal = 50.4
                     } label: {
                         Image("woden")
                             .renderingMode(.template)
@@ -72,7 +73,7 @@ struct MetricUnits: View {
                             .padding(20)
                             .border(Color.black)
                         
-                        stepperBox(title: "Age", value: $age, field: .age)
+                        stepperBoxAge(title: "Age", value: $age, field: .age)
                             .padding(20)
                             .border(Color.black)
                     }
@@ -82,7 +83,7 @@ struct MetricUnits: View {
                             .bold()
                         HStack {
                             stepperButton("-", action: { weightgoal -= 1 })
-                            Text("\(weightgoal)")
+                            Text(String(format: "%.1f", weightgoal))
                                 .font(.title2)
                                 .frame(width: 50)
                                 .onTapGesture {
@@ -100,14 +101,15 @@ struct MetricUnits: View {
                 }
             }
         }
+        
         ChooseWeight(isShowDialog: $isShowDialog, input: $input)
             .onChange(of: isShowDialog) { newValue in
                 if !newValue {
-                    if let value = Int(input) {
+                    if let value = Double(input) {
                         switch editingField {
-                        case .weight: weight = value
-                        case .age: age = value
-                        case .goal: weightgoal = value
+                        case .weight: weight = Double(value)
+                        case .age: age = Int(value)
+                        case .goal: weightgoal = Double(value)
                         default: break
                         }
                     }
@@ -116,13 +118,31 @@ struct MetricUnits: View {
             }
     }
     
-    private func stepperBox(title: String, value: Binding<Int>, field: EditingField) -> some View {
+    private func stepperBox(title: String, value: Binding<Double>, field: EditingField) -> some View {
+        VStack {
+            Text(title).bold()
+            HStack {
+                stepperButton("-", action: { value.wrappedValue -= 1 })
+                Text(String(format: "%.1f", value.wrappedValue))
+                    .font(.title3)
+                    .frame(width: 50)
+                    .onTapGesture {
+                        input = "\(value.wrappedValue)"
+                        editingField = field
+                        isShowDialog = true
+                    }
+                stepperButton("+", action: { value.wrappedValue += 1 })
+            }
+        }
+    }
+    
+    private func stepperBoxAge(title: String, value: Binding<Int>, field: EditingField) -> some View {
         VStack {
             Text(title).bold()
             HStack {
                 stepperButton("-", action: { value.wrappedValue -= 1 })
                 Text("\(value.wrappedValue)")
-                    .font(.title2)
+                    .font(.title3)
                     .frame(width: 50)
                     .onTapGesture {
                         input = "\(value.wrappedValue)"
@@ -154,6 +174,6 @@ struct MetricUnits: View {
     
 }
 
-#Preview {
-    MetricUnits()
-}
+//#Preview {
+//    MetricUnits()
+//}

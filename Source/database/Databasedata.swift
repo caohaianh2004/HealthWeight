@@ -129,4 +129,16 @@ class Databasedata: ObservableObject {
 //            }
 //        }
 //    }
+    
+    func deleteData(id: Int){
+        let query = "DELETE FROM data WHERE id = ?"
+        databasequeue?.inDatabase { db in
+            do {
+                try db.executeUpdate(query, values: [id])
+                print("✅ Xoá dữ liệu thành công")
+            } catch {
+                print("🚨 Lỗi khi xoá dữ liệu: \(error.localizedDescription)")
+            }
+        }
+    }
 }

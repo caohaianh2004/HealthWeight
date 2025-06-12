@@ -23,20 +23,20 @@ class DatabasePeople: ObservableObject {
         databaseQueue?.inDatabase { db in
         let query = """
         CREATE TABLE IF NOT EXISTS people (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT,
-        image TEXT,
-        age INTEGER,
-        weightKg REAL,
-        weightLb REAL,
-        heightCm REAL,
-        heightFt REAL,
-        heightln REAL,
-        targetWeightKg REAL,
-        targetWeightLb REAL,
-        isMale INTEGER,
-        isUSUnit INTEGER
-       )
+           id INTEGER PRIMARY KEY AUTOINCREMENT,
+           name TEXT,
+           image TEXT,
+           age INTEGER,
+           weightKg REAL,
+           weightLb REAL,
+           heightCm REAL,
+           heightFt REAL,
+           heightln REAL,
+           targetWeightKg REAL,
+           targetWeightLb REAL,
+           isMale INTEGER,
+           isUSUnit INTEGER
+         )
        """
             do {
                 try db.executeUpdate(query, values: nil)
@@ -127,6 +127,39 @@ class DatabasePeople: ObservableObject {
                 print("✅ Thêm dữ liệu thành công")
             } catch {
                 print("🚨 Lỗi khi thêm dữ liệu: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func insertPartialPeople(image: String, heightcm: Double, weightKg: Double, age: Int, targetWeightLb: Double) {
+        let query = """
+        INSERT INTO people (image, heightCm, weightKg, age, targetWeightLb, name, weightLb, heightFt, heightln, targetWeightKg, isMale, isUSUnit)
+        VALUES (?, ?, ?, ?, ?, '', 0, 0, 0, 0, 0, 0)
+     """
+        databaseQueue?.inDatabase { db in
+            do {
+                try db.executeUpdate(query, values: [
+                   image,
+                   heightcm,
+                   weightKg,
+                   age,
+                   targetWeightLb
+                ])
+                print("✅ Thêm dữ liệu thành công")
+            } catch {
+                print("🚨 Lỗi khi thêm dữ liệu: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func deletepeople(id: Int) {
+    let query = "DELETE FROM people WHERE id = ?"
+        databaseQueue?.inDatabase { db in
+            do {
+                try db.executeUpdate(query, values: [id])
+                print("✅ Xoá dữ liệu thành công")
+            } catch {
+                print("🚨 Lỗi khi xoá dữ liệu: \(error.localizedDescription)")
             }
         }
     }
