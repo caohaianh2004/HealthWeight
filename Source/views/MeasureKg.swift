@@ -1,23 +1,29 @@
+////
+////  MeasureKg.swift
+////  Health_Weight
+////
+////  Created by Boss on 11/06/2025.
+////
 //
-//  MeasureKg.swift
-//  Health_Weight
-//
-//  Created by Boss on 11/06/2025.
-//
-
 import SwiftUI
-
+//
 struct MeasureKg: View {
     @EnvironmentObject var route: Router
+    @StateObject var userView: UserViewModel
     @Binding var selectionKg: Double
     let values: [Double] = stride(from: 0.0, through: 280.0, by: 0.1).map { $0.rounded(toPlaces: 1) }
     let tickSpacing: CGFloat = 8
     
     var body: some View {
         VStack {
-            Text(String(format: "Current Weight (%.1f kg)", selectionKg))
-                .foregroundStyle(Color.green)
-                .bold()
+            ForEach(userView.people) { person in
+                Text(String(format: "Current Weight: (\(person.weightKg)Kg)"))
+                    .foregroundStyle(Color.green)
+                    .bold()
+            }
+//            Text(String(format: "Current Weight (%.1f kg)", selectionKg))
+//                .foregroundStyle(Color.green)
+//                .bold()
             
             ZStack {
                 Rectangle()
@@ -229,3 +235,5 @@ extension Double {
 //#Preview {
 //    MeasureKg()
 //}
+
+

@@ -131,27 +131,6 @@ class DatabasePeople: ObservableObject {
         }
     }
     
-    func insertPartialPeople(image: String, heightcm: Double, weightKg: Double, age: Int, targetWeightLb: Double) {
-        let query = """
-        INSERT INTO people (image, heightCm, weightKg, age, targetWeightLb, name, weightLb, heightFt, heightln, targetWeightKg, isMale, isUSUnit)
-        VALUES (?, ?, ?, ?, ?, '', 0, 0, 0, 0, 0, 0)
-     """
-        databaseQueue?.inDatabase { db in
-            do {
-                try db.executeUpdate(query, values: [
-                   image,
-                   heightcm,
-                   weightKg,
-                   age,
-                   targetWeightLb
-                ])
-                print("✅ Thêm dữ liệu thành công")
-            } catch {
-                print("🚨 Lỗi khi thêm dữ liệu: \(error.localizedDescription)")
-            }
-        }
-    }
-    
     func deletepeople(id: Int) {
     let query = "DELETE FROM people WHERE id = ?"
         databaseQueue?.inDatabase { db in
@@ -163,4 +142,84 @@ class DatabasePeople: ObservableObject {
             }
         }
     }
+    
+    func getPerson() -> [Person] {
+        var person: [Person] = []
+        var query = "SELECT * FROM people ORDER BY id DESC LIMIT 1"
+        
+        databaseQueue?.inDatabase { db in
+            do {
+                let result = try db.executeQuery(query, values: nil)
+                if result.next() {
+                    let people = Person(
+                        image: result.string(forColumn: "image") ?? "",
+                        heightCm: Double(result.double(forColumn: "heightCm")),
+                        weightKg: Double(result.double(forColumn: "weightKg")),
+                        age: Int(result.int(forColumn: "age")),
+                        targetWeightLb: Double(result.double(forColumn: "targetWeightLb"))
+                    )
+                    person.append(people)
+                }
+            } catch {
+                print("🚨 Lỗi khi lấy dữ liệu: \(error.localizedDescription)")
+            }
+        }
+        return person
+    }
+    
+    func addPerson(_ person: Person) {
+        databaseQueue?.inDatabase { db in
+            do {
+                try db.executeUpdate("INSERT INTO people (image, heightCm, weightKg, age, targetWeightLb) VALUES (?, ?, ?, ?, ?)",
+                values: [person.image, person.heightCm, person.weightKg, person.age, person.targetWeightLb])
+                print("✅ Thêm thành công dữ liệu vào Database")
+            } catch {
+                print("🚨 lỗi khi thêm dữ liệu vào Database: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+//    func getPersonUnits() -> [PersonUnits] {
+//        var person: [PersonUnits] = []
+//        let query = "SELECT * FROM people ORDER BY id DESC LIMIT 1"
+//        databaseQueue?.inDatabase { db in
+//            do {
+//               let result = try db.executeQuery(query, values: nil)
+//                if result.next() {
+//                    let people = PersonUnits(
+//                        heightFt: Double(result.double(forColumn: "heightFt")),
+//                        heightln: Double(result.double(forColumn: "heightln")),
+//                        weightLb: Double(result.double(forColumn: "weightLb")),
+//                        age: Int(result.int(forColumn: "age")),
+//                        taregetWeightLb: Double(result.double(forColumn: "taregetWeightLb"))
+//                    )
+//                    person.append(people)
+//                }
+//            } catch {
+//                print("🚨Lỗi lấy dữ liệu từ Database: \(error.localizedDescription)")
+//            }
+//        }
+//        return person
+//    }
+//    
+//    func addPersonUnits(person: PersonUnits) {
+//        let query = """
+//      INSERT INTO people(heightFt, heightln, weightLb, age,taregetWeightLb)
+//      VALUES(?, ?, ?, ?, ?)
+//     """
+//        databaseQueue?.inDatabase { db in
+//            do {
+//                try db.executeUpdate(query, values: [
+//                    person.heightFt,
+//                    person.heightln,
+//                    person.weightLb,
+//                    person.age,
+//                    person.taregetWeightLb
+//                ])
+//                print("✅ Thêm dữ liệu thành công và Database")
+//            } catch {
+//                print("🚨 Lỗi khi thêm dữ liệu: \(error.localizedDescription)")
+//            }
+//        }
+//    }
 }

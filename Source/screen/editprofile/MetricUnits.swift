@@ -10,12 +10,12 @@ import SwiftUI
 struct MetricUnits: View {
     enum Gender {
         case man
-        case woden
+        case woman
     }
     enum EditingField {
         case none, weight, age, goal
     }
-    @State private var selectionGenden: Gender = .man
+    @State var selectionGenden: Gender = .man
     @Binding var heightCm: Double
     @Binding var age: Int
     @Binding var weight: Double
@@ -23,7 +23,8 @@ struct MetricUnits: View {
     @State private var isShowDialog = false
     @State private var input = ""
     @State private var editingField: EditingField = .none
-    @EnvironmentObject var userViewModel: UserViewModel
+    @Binding var image: String
+
     
     var body: some View {
         VStack {
@@ -31,6 +32,8 @@ struct MetricUnits: View {
                 HStack {
                     Button {
                         selectionGenden = .man
+                        image = "Image6"
+                        heightCm = 175.0
                         weight = 72.1
                         weightgoal = 65.2
                     } label: {
@@ -42,13 +45,15 @@ struct MetricUnits: View {
                             .foregroundColor(selectionGenden == .man ? .blue : .gray)
                     }
                     
-                    Image(selectionGenden == .man ? "Image6" : "Image7")
+                    Image(image)
                         .resizable()
                         .scaledToFit()
                         .frame(width: 200)
                     
                     Button {
-                        selectionGenden = .woden
+                        selectionGenden = .woman
+                        image = "Image7"
+                        heightCm = 165.0
                         weight = 50.5
                         weightgoal = 50.4
                     } label: {
@@ -57,7 +62,7 @@ struct MetricUnits: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width: 40)
-                            .foregroundColor(selectionGenden == .woden ? .pink : .gray)
+                            .foregroundColor(selectionGenden == .woman ? .pink : .gray)
                     }
                 }
                 VStack {
@@ -101,6 +106,17 @@ struct MetricUnits: View {
                 }
             }
         }
+        .onAppear {
+            DispatchQueue.main.async {
+                if image == "Image6" {
+                    selectionGenden = .man
+                } else if image == "Image7" {
+                    selectionGenden = .woman
+                }
+            }
+        }
+
+
         
         ChooseWeight(isShowDialog: $isShowDialog, input: $input)
             .onChange(of: isShowDialog) { newValue in

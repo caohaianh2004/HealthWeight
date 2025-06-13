@@ -10,7 +10,7 @@ import SwiftUI
 
 struct RouterView<Content: View>: View {
     @StateObject var router: Router = Router()
-    @StateObject var viewModelData: Databasedata = Databasedata()
+    @StateObject var viewModelData: DatabasePeople = DatabasePeople()
     @StateObject var viewModelPeople: DatabasePeople = DatabasePeople()
     
     private let content: Content

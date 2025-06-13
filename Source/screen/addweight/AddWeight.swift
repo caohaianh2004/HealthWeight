@@ -10,6 +10,7 @@ import SwiftUI
 struct AddWeight: View {
     @EnvironmentObject var route: Router
     @State private var selectionKg: Double = 10.0
+    @StateObject var viewModel = UserViewModel()
     
     var body: some View {
         VStack {
@@ -17,13 +18,16 @@ struct AddWeight: View {
             Spacer()
             
             VStack {
-                Image("Image6")
-                    .resizable()
-                    .scaledToFit()
-                    .frame( height: 300)
+                ForEach(viewModel.people) { person in
+                    Image(person.image)
+                        .resizable().scaledToFit()
+                        .frame(width: 200)
+                }
+                MeasureKg(userView: viewModel, selectionKg: $selectionKg)
             
-                MeasureKg(selectionKg: $selectionKg)
-            
+            }
+            .onAppear {
+                viewModel.fetchPeople()
             }
             Spacer()
         }

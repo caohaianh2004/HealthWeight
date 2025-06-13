@@ -10,16 +10,19 @@ import SwiftUI
 struct ManaEditProfileScreen: View {
     @EnvironmentObject var route: Router
     @State private var selectionTab = 0
-    @State private var gender = ""
+    @State private var image = ""
     @State private var weight = 60.1
     @State private var height = 170
     @State private var age = 25
-    @State private var heightCm: Double = 165.0
+    @State private var heightCm: Double = 175.0
     @State private var weightgoal = 65.4
     @State private var selectedHeight: Double = 4.0
     @State private var selectionValue: Double = 6.5
-    
+    @State private var selectionGender: MetricUnits.Gender = .man
+
+
     var body: some View {
+        VStack {
             HStack {
                 Button {
                     route.navigateBack()
@@ -29,7 +32,7 @@ struct ManaEditProfileScreen: View {
                         .foregroundColor(.black)
                 }
                 
-              Spacer()
+                Spacer()
                 
                 Text(localizedkey:"abc_create_your_profile")
                     .font(.system(size: 20))
@@ -38,9 +41,16 @@ struct ManaEditProfileScreen: View {
                     .padding(.leading, 40)
                 
                 Spacer()
-
+                
                 Button {
-                    
+                    let db = DatabasePeople()
+                    let person = Person(
+                        image: image,
+                        heightCm: heightCm,
+                        weightKg: weight,
+                        age: age,
+                        targetWeightLb: weightgoal)
+                    db.addPerson(person)
                     route.navigateTo(.home)
                 } label: {
                     Text(localizedkey: "abc_next")
@@ -56,7 +66,7 @@ struct ManaEditProfileScreen: View {
             HStack(spacing: 0) {
                 ForEach(["US Units", "Metric Units"], id: \.self) { title in
                     Button {
-                        selectionTab = title == "US Units" ? 0 : 1
+                        selectionTab = title == "Metric Units" ? 0 : 1
                     } label: {
                         Text(title)
                             .padding(5)
@@ -64,8 +74,8 @@ struct ManaEditProfileScreen: View {
                             .padding(.vertical, 8)
                             .font(.system(size: 13))
                             .bold()
-                            .background(selectionTab == (title == "US Units" ? 0 : 1) ? Color.green : Color.gray.opacity(0.2))
-                            .foregroundStyle(selectionTab == (title == "US Units" ? 0 : 1) ? Color.white : Color.black)
+                            .background(selectionTab == (title == "Metric Units" ? 0 : 1) ? Color.green : Color.gray.opacity(0.2))
+                            .foregroundStyle(selectionTab == (title == "Metric Units" ? 0 : 1) ? Color.white : Color.black)
                             .clipShape(RoundedRectangle(cornerRadius: 8))
                     }
                     .padding(5)
@@ -74,14 +84,29 @@ struct ManaEditProfileScreen: View {
             .padding()
             
             Group {
-                if selectionTab == 0 {
+                if selectionTab == 1 {
                     UsUnits(height: $height, age: $age, weight: $weight, weightgoal: $weightgoal, selectedHeight: $selectedHeight, selectionValue: $selectionValue)
                 } else {
-                    MetricUnits(heightCm: $heightCm, age: $age, weight: $weight, weightgoal: $weightgoal)
+                    MetricUnits(heightCm: $heightCm, age: $age, weight: $weight, weightgoal: $weightgoal, image: $image)
                 }
             }
         }
+        .onAppear {
+            let db = DatabasePeople()
+            let people = db.getPerson()
+            if let person = people.first {
+                image = person.image
+                heightCm = person.heightCm
+                weight = person.weightKg
+                age = person.age
+                weightgoal = person.targetWeightLb
+            print("✅ Đã cập nhật dữ liệu mới")
+            } else {
+            print("🚨 Dữ liệu cũ chưa được cập nhật")
+            }
+        }
     }
+}
 
 #Preview {
         ManaEditProfileScreen()
