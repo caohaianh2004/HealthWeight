@@ -40,6 +40,8 @@ class Router: ObservableObject {
         case selecfunctions
         case editProfile
         case add
+        case managebmicalcuator
+        case bmiresult
     }
     @Published var path: NavigationPath = NavigationPath()
     
@@ -58,6 +60,10 @@ class Router: ObservableObject {
             ManaEditProfileScreen().navigationBarBackButtonHidden()
         case .add:
             AddWeight().navigationBarBackButtonHidden()
+        case .managebmicalcuator:
+            ManageBMICalculator().navigationBarBackButtonHidden()
+        case .bmiresult:
+            BmiResult().navigationBarBackButtonHidden()
         }
     }
     

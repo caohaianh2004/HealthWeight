@@ -60,7 +60,7 @@ struct HealthWeight: View {
                     
                     LazyVGrid(columns: cloumns, content: {
                         Button {
-                            
+                            route.navigateTo(.managebmicalcuator)
                         } label: {
                             VStack {
                                 Image("fame")
@@ -139,6 +139,8 @@ struct HealthWeight: View {
 }
 
 struct dailyWeght: View {
+    @EnvironmentObject var route: Router
+    
     var body: some View {
         HStack {
             VStack {
@@ -154,17 +156,18 @@ struct dailyWeght: View {
                             .scaledToFit()
                             .frame(width: 20, height: 20)
                     }
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 
                 Button {
-                    
+                    route.navigateTo(.add)
                 } label: {
                     HStack {
                         Image("scales")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 20, height: 20)
-                        Text("Weight")
+                        Text(localizedkey: "abc_currentWeight")
                             .foregroundStyle(Color.black)
                             .font(.system(size: 15))
                         Text("62 kg")
@@ -186,7 +189,7 @@ struct dailyWeght: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width: 20, height: 20)
-                        Text("Goal")
+                        Text(localizedkey: "abc_taggetWeight")
                             .foregroundStyle(Color.black)
                             .font(.system(size: 15))
                         Text("68 kg")
@@ -207,7 +210,7 @@ struct dailyWeght: View {
                 Image("llustration")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 100, height: 100)
+                    .frame(width: 80, height: 100)
                 Spacer()
             }
         }

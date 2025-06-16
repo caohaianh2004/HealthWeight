@@ -25,3 +25,8 @@
 "abc_tryAgain" = "TRY AGAIN";
 "abc_home" = "HOME";
 "abc_selection" = "Selection Functions";
+"abc_bmiCalcuator" = "BMI Calcuator";
+"abc_weightkg" = "Weight(Kg)";
+"abc_calculate" = "CALCULATE";
+"abc_currentWeight" = "Current Weight";
+"abc_taggetWeight" = "Tagget Weight";

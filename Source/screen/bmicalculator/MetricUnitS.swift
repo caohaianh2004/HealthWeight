@@ -1,75 +1,73 @@
 //
-//  USUnits.swift
+//  MetricUnitS.swift
 //  Health_Weight
 //
-//  Created by Boss on 12/06/2025.
+//  Created by Boss on 16/06/2025.
 //
 
 import SwiftUI
 import SlidingRuler
 
-struct USUnits: View {
+struct MetricUnitS: View {
     enum Gender {
-     case man
-     case woden
+        case man
+        case woden
     }
     enum EditingField {
-        case none, weightpound, age
+       case none, weightKg, age
     }
-    @State private var selectionGender: Gender = .man
+    @State private var selectionGenden: Gender = .man
+    @State private var value: Double = .zero
     @State private var input = ""
     @State private var isShowDialog = false
-    @State private var weightlb = 196.2
-    @State private var age = 20
     @State private var editingField: EditingField = .none
-    @State private var valueft: Double = .zero
-    @State private var valuein: Double = .zero
+    @State private var age = 26
+    @State private  var weightKg = 19.5
+    @StateObject private var viewModel = UserViewModel()
     
     var body: some View {
         VStack {
             ScrollView {
                 HStack {
                     Button {
-                        selectionGender = .man
+                        selectionGenden = .man
                     } label: {
                         Image("man")
                             .renderingMode(.template)
                             .resizable()
                             .scaledToFit()
                             .frame(width: 40)
-                            .foregroundStyle(selectionGender == .man ? .blue : .gray)
+                            .foregroundColor(selectionGenden == .man ? .blue : .gray)
                     }
                     
-                    Image(selectionGender == .man ? "Image6" : "Image7")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 200)
+                    ForEach(viewModel.people) { person in
+                        Image(person.image)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 200)
+                    }
                     
                     Button {
-                        selectionGender = .woden
+                        selectionGenden = .woden
                     } label: {
                         Image("woden")
                             .renderingMode(.template)
                             .resizable()
                             .scaledToFit()
                             .frame(width: 40)
-                            .foregroundStyle(selectionGender == .woden ? .pink : .gray)
+                            .foregroundColor(selectionGenden == .woden ? .pink : .gray)
                     }
                 }
-                Text(String(format: "Height(165cm) (%.1f ft %.1f)", valueft, valuein))
+                .onAppear {
+                    viewModel.fetchPeople()
+                }
+                
+                Text(String(format: "Height(165cm) (%.1f cm)", value))
+                    .foregroundStyle(Color.green)
                 
                 SlidingRuler (
-                    value: $valueft,
-                    in: 1...7,
-                    step: 1,
-                    snap: .fraction,
-                    tick: .fraction
-                )
-                .padding()
-                
-                SlidingRuler (
-                    value: $valuein,
-                    in: 0...12,
+                    value: $value,
+                    in: 0...250,
                     step: 1,
                     snap: .fraction,
                     tick: .fraction
@@ -77,7 +75,7 @@ struct USUnits: View {
                 .padding()
                 
                 HStack(spacing: 20) {
-                    stepperBox(title: "Weight(lb)", value: $weightlb, field: .weightpound)
+                    stepperBox(title: "Weight(Kg)", value: $weightKg, field: .weightKg)
                         .padding(20)
                         .background(.gray.opacity(0.2))
                         .cornerRadius(12)
@@ -88,8 +86,9 @@ struct USUnits: View {
                         .cornerRadius(12)
                 }
             }
+            
             Button {
-                
+                /*Nhập nội dung*/
             } label: {
                 Text(localizedkey: "abc_calculate")
                     .padding()
@@ -109,7 +108,7 @@ struct USUnits: View {
                         DispatchQueue.main.async {
                             if let value = Double(input) {
                                 switch editingField {
-                                case .weightpound: weightlb = Double(value)
+                                case .weightKg: weightKg = Double(value)
                                 case .age: age = Int(value)
                                 default: break
                                 }
@@ -118,7 +117,7 @@ struct USUnits: View {
                         }
                     }
                 }
-        }
+          }
     
     private var formatter: NumberFormatter {
         let f = NumberFormatter()
@@ -174,5 +173,5 @@ struct USUnits: View {
 }
 
 #Preview {
-    USUnits()
+    MetricUnitS()
 }

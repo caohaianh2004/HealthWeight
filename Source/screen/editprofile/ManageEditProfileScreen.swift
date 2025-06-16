@@ -10,7 +10,7 @@ import SwiftUI
 struct ManaEditProfileScreen: View {
     @EnvironmentObject var route: Router
     @State private var selectionTab = 0
-    @State private var image = ""
+    @State private var image = "Image6"
     @State private var weight = 60.1
     @State private var height = 170
     @State private var age = 25

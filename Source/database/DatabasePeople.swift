@@ -145,7 +145,7 @@ class DatabasePeople: ObservableObject {
     
     func getPerson() -> [Person] {
         var person: [Person] = []
-        var query = "SELECT * FROM people ORDER BY id DESC LIMIT 1"
+        let query = "SELECT * FROM people ORDER BY id DESC LIMIT 1"
         
         databaseQueue?.inDatabase { db in
             do {
@@ -179,47 +179,15 @@ class DatabasePeople: ObservableObject {
         }
     }
     
-//    func getPersonUnits() -> [PersonUnits] {
-//        var person: [PersonUnits] = []
-//        let query = "SELECT * FROM people ORDER BY id DESC LIMIT 1"
-//        databaseQueue?.inDatabase { db in
-//            do {
-//               let result = try db.executeQuery(query, values: nil)
-//                if result.next() {
-//                    let people = PersonUnits(
-//                        heightFt: Double(result.double(forColumn: "heightFt")),
-//                        heightln: Double(result.double(forColumn: "heightln")),
-//                        weightLb: Double(result.double(forColumn: "weightLb")),
-//                        age: Int(result.int(forColumn: "age")),
-//                        taregetWeightLb: Double(result.double(forColumn: "taregetWeightLb"))
-//                    )
-//                    person.append(people)
-//                }
-//            } catch {
-//                print("🚨Lỗi lấy dữ liệu từ Database: \(error.localizedDescription)")
-//            }
-//        }
-//        return person
-//    }
-//    
-//    func addPersonUnits(person: PersonUnits) {
-//        let query = """
-//      INSERT INTO people(heightFt, heightln, weightLb, age,taregetWeightLb)
-//      VALUES(?, ?, ?, ?, ?)
-//     """
-//        databaseQueue?.inDatabase { db in
-//            do {
-//                try db.executeUpdate(query, values: [
-//                    person.heightFt,
-//                    person.heightln,
-//                    person.weightLb,
-//                    person.age,
-//                    person.taregetWeightLb
-//                ])
-//                print("✅ Thêm dữ liệu thành công và Database")
-//            } catch {
-//                print("🚨 Lỗi khi thêm dữ liệu: \(error.localizedDescription)")
-//            }
-//        }
-//    }
+    func updateWeight(for id: Int, newWeight: Double) {
+        let query = "UPDATE people SET weightKg = ? WHERE id = ?"
+        databaseQueue?.inDatabase { db in
+            do {
+                try db.executeUpdate(query, values: [newWeight, id])
+                print("Cập nhật cân nặng thành công")
+            } catch {
+                print("Lỗi cập nhật cân nặng: \(error.localizedDescription)")
+            }
+        }
+    }
 }

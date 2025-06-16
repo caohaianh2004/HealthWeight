@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SlidingRuler
 
 struct UsUnits: View {
     enum Gender {
@@ -13,7 +14,7 @@ struct UsUnits: View {
         case woden
     }
     enum EditingField {
-       case none, weight, age, goal
+        case none, weight, age, goal
     }
     @State private var selectionGenden: Gender = .man
     @Binding var height: Int
@@ -64,27 +65,36 @@ struct UsUnits: View {
                             .font(.system(size: 17))
                             .bold()
                             .foregroundColor(.green)
-
                         
-                        Measure(selectedValue: $selectedHeight)
-                        Text("Feet(ft)")
-                            .font(.system(size: 15))
-                            .padding(.top, -50)
+                        SlidingRuler (
+                            value: $selectedHeight,
+                            in: 1...7,
+                            step: 1,
+                            snap: .fraction,
+                            tick: .fraction
+                        )
+                        .padding()
                         
-                        MeasureInch(selectionValue: $selectionValue)
-                        Text("Inch(in)")
-                            .font(.system(size: 15))
-                            .padding(.top, -50)
+                        SlidingRuler (
+                            value: $selectionValue,
+                            in: 1...12,
+                            step: 1,
+                            snap: .fraction,
+                            tick: .fraction
+                        )
+                        .padding()
                     }
-                        
+                    
                     HStack(spacing: 20) {
                         stepperBox(title: "Weight(Ib)", value: $weight, field: .weight)
                             .padding(20)
-                            .border(Color.black)
+                            .background(.gray.opacity(0.2))
+                            .cornerRadius(12)
                         
                         stepperBoxAge(title: "Age", value: $age, field: .age)
                             .padding(20)
-                            .border(Color.black)
+                            .background(.gray.opacity(0.2))
+                            .cornerRadius(12)
                     }
                     
                     VStack {
@@ -105,27 +115,36 @@ struct UsUnits: View {
                     }
                     .padding(20)
                     .frame(maxWidth: .infinity)
-                    .border(Color.black)
+                    .background(.gray.opacity(0.2))
+                    .cornerRadius(12)
                     .padding(10)
                 }
             }
         }
-        
             ChooseWeight(isShowDialog: $isShowDialog, input: $input)
-                     .onChange(of: isShowDialog) { newValue in
-                         if !newValue {
-                             if let value = Double(input) {
-                                 switch editingField {
-                                 case .weight: weight = Double(value)
-                                 case .age: age = Int(value)
-                                 case .goal: weightgoal = Double(value)
-                                 default: break
-                                 }
-                             }
-                             editingField = .none
-                         }
-                     }
-}
+                .onChange(of: isShowDialog) { newValue in
+                    if !newValue {
+                        DispatchQueue.main.async {
+                            if let value = Double(input) {
+                                switch editingField {
+                                case .weight: weight = Double(value)
+                                case .age: age = Int(value)
+                                case .goal: weightgoal = Double(value)
+                                default: break
+                                }
+                            }
+                            editingField = .none
+                        }
+                    }
+                }
+        }
+    
+    private var formatter: NumberFormatter {
+        let f = NumberFormatter()
+        f.numberStyle = .percent
+        f.maximumFractionDigits = 0
+        return f
+    }
     
     private func stepperBox(title: String, value: Binding<Double>, field: EditingField) -> some View {
         VStack {
@@ -180,7 +199,9 @@ struct UsUnits: View {
             return String(format: "%.1f", value)
         }
     }
-
+    
 }
 
-
+//#Preview {
+//    USUnits()
+//}

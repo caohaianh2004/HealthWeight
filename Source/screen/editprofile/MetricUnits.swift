@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SlidingRuler
 
 struct MetricUnits: View {
     enum Gender {
@@ -70,17 +71,27 @@ struct MetricUnits: View {
                         .font(.system(size: 17))
                         .foregroundColor(.green)
                         .bold()
-                    MeasureHeight(selectionheight: $heightCm)
+                    
+                    SlidingRuler (
+                        value: $heightCm,
+                        in: 30...250,
+                        step: 1,
+                        snap: .fraction,
+                        tick: .fraction
+                    )
+                    .padding()
                        
                     
                     HStack(spacing: 20) {
                         stepperBox(title: "Weight(Kg)", value: $weight, field: .weight)
                             .padding(20)
-                            .border(Color.black)
+                            .background(.gray.opacity(0.2))
+                            .cornerRadius(12)
                         
                         stepperBoxAge(title: "Age", value: $age, field: .age)
                             .padding(20)
-                            .border(Color.black)
+                            .background(.gray.opacity(0.2))
+                            .cornerRadius(12)
                     }
                     
                     VStack {
@@ -101,7 +112,8 @@ struct MetricUnits: View {
                     }
                     .padding(20)
                     .frame(maxWidth: .infinity)
-                    .border(Color.black)
+                    .background(.gray.opacity(0.2))
+                    .cornerRadius(12)
                     .padding(10)
                 }
             }
@@ -115,23 +127,30 @@ struct MetricUnits: View {
                 }
             }
         }
-
-
         
         ChooseWeight(isShowDialog: $isShowDialog, input: $input)
             .onChange(of: isShowDialog) { newValue in
                 if !newValue {
-                    if let value = Double(input) {
-                        switch editingField {
-                        case .weight: weight = Double(value)
-                        case .age: age = Int(value)
-                        case .goal: weightgoal = Double(value)
-                        default: break
+                    DispatchQueue.main.async {
+                        if let value = Double(input) {
+                            switch editingField {
+                            case .weight: weight = Double(value)
+                            case .age: age = Int(value)
+                            case .goal: weightgoal = Double(value)
+                            default: break
+                            }
                         }
+                        editingField = .none
                     }
-                    editingField = .none
                 }
             }
+    }
+    
+    private var formatter: NumberFormatter {
+        let f = NumberFormatter()
+        f.numberStyle = .percent
+        f.maximumFractionDigits = 0
+        return f
     }
     
     private func stepperBox(title: String, value: Binding<Double>, field: EditingField) -> some View {
