@@ -156,7 +156,10 @@ class DatabasePeople: ObservableObject {
                         heightCm: Double(result.double(forColumn: "heightCm")),
                         weightKg: Double(result.double(forColumn: "weightKg")),
                         age: Int(result.int(forColumn: "age")),
-                        targetWeightLb: Double(result.double(forColumn: "targetWeightLb"))
+                        targetWeightLb: Double(result.double(forColumn: "targetWeightLb")),
+                        heightFt: Double(result.double(forColumn: "heightFt")),
+                        heightln: Double(result.double(forColumn: "heightln")),
+                        weightLb: Double(result.double(forColumn: "weightLb"))
                     )
                     person.append(people)
                 }
@@ -170,8 +173,8 @@ class DatabasePeople: ObservableObject {
     func addPerson(_ person: Person) {
         databaseQueue?.inDatabase { db in
             do {
-                try db.executeUpdate("INSERT INTO people (image, heightCm, weightKg, age, targetWeightLb) VALUES (?, ?, ?, ?, ?)",
-                values: [person.image, person.heightCm, person.weightKg, person.age, person.targetWeightLb])
+                try db.executeUpdate("INSERT INTO people (image, heightCm, weightKg, age, targetWeightLb, heightFt, heightln, weightLb) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                values: [person.image, person.heightCm, person.weightKg, person.age, person.targetWeightLb, person.heightFt, person.heightln, person.weightLb])
                 print("✅ Thêm thành công dữ liệu vào Database")
             } catch {
                 print("🚨 lỗi khi thêm dữ liệu vào Database: \(error.localizedDescription)")

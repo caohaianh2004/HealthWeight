@@ -41,7 +41,7 @@ class Router: ObservableObject {
         case editProfile
         case add
         case managebmicalcuator
-        case bmiresult
+        case bmiresult(bmi: Double, healthWeightRange: String)
     }
     @Published var path: NavigationPath = NavigationPath()
     
@@ -62,8 +62,8 @@ class Router: ObservableObject {
             AddWeight().navigationBarBackButtonHidden()
         case .managebmicalcuator:
             ManageBMICalculator().navigationBarBackButtonHidden()
-        case .bmiresult:
-            BmiResult().navigationBarBackButtonHidden()
+        case let .bmiresult(bmi, healthWeightRange):
+            BmiResult(bmi: bmi, healthyWeightRange: healthWeightRange).navigationBarBackButtonHidden()
         }
     }
     

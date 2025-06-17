@@ -9,6 +9,10 @@ import SwiftUI
 
 struct BmiResult: View {
     @EnvironmentObject var route: Router
+    @State private var aminatedBMI: Double = 0
+    @State private var showResult = false
+    let bmi: Double
+    let healthyWeightRange: String
     
     var body: some View {
         VStack {
@@ -41,15 +45,19 @@ struct BmiResult: View {
             ScrollView {
               ControlNeedle()
                     .padding()
-              Text("BMI = 23 kg/m2")
-                    .bold()
-              Text("(Normal)")
-                    .font(.headline)
-                    .foregroundStyle(Color.green)
+                
+                if showResult {
+                    Text(String(format: "BMI = %.1f kg/m2", bmi))
+                        .bold()
+                    let status = bmiStatus()
+                    Text("(\(status.text))")
+                        .font(.headline)
+                        .foregroundColor(status.color)
+                }
                 
               Text(localizedkey: "abc_bmiResult")
                    
-              Text("49,2kg - 66.4kg")
+              Text(healthyWeightRange)
                     .font(.system(size: 15))
                     .bold()
                 
@@ -66,12 +74,22 @@ struct BmiResult: View {
             }
             Buttontoobal()
         }
+        .onAppear {
+            withAnimation(.easeOut(duration: 2.5)) {
+            aminatedBMI = bmi
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.3) {
+             showResult = true
+            }
+        }
+        
     }
     
-    @ViewBuilder
     func ControlNeedle() -> some View {
-        VStack {
-            ZStack {
+        let angle = Angle(degrees: mapBMIToAngle(bmi: aminatedBMI))
+        
+        return ZStack {
                 Image("control")
                     .resizable()
                     .scaledToFit()
@@ -81,10 +99,18 @@ struct BmiResult: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 30)
-                    .padding(.top, 40)
+                    .rotationEffect(angle, anchor: .bottom)
+                    .padding(.top, 20)
+                    .offset(y: -10)
             }
-        }
     }
+    
+    func mapBMIToAngle(bmi: Double) -> Double {
+        let clampedBMI = max(min(bmi, 40), 10) // Giới hạn BMI từ 10 đến 40
+        let progress = (clampedBMI - 10) / 30  // Tiến trình từ 0.0 → 1.0
+        return progress * 180 - 90             // Map thành -90° → 90°
+    }
+
     
     @ViewBuilder
     func Buttontoobal() -> some View {
@@ -118,8 +144,31 @@ struct BmiResult: View {
         }
         .padding()
     }
+    
+    @ViewBuilder
+    func bmiStatus() -> (text: String, color: Color) {
+        switch bmi {
+        case ..<16.0:
+            return("Severe Thinness", .blue)
+        case 16.1..<17.0:
+            return("Moderate Thinness", .blue.opacity(0.5))
+        case 17.1..<18.4:
+            return("Overweight", .blue.opacity(0.3))
+        case 18.5..<25.1:
+            return("Normal", .green)
+        case 25.2..<30.0:
+            return("Overweight", .yellow)
+        case 30.1..<34.9:
+            return("Obese I", .orange)
+        case 35.0..<39.9:
+            return("Obese II", .red.opacity(0.7))
+        default:
+            return ("Obese III", .red)
+        }
+    }
 }
 
-#Preview {
-    BmiResult()
-}
+//#Preview {
+//    BmiResult(bmi: 1.0, healthyWeightRange: "39.2kg - 66.4kg")
+//}
+

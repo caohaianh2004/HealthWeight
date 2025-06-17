@@ -14,13 +14,20 @@ struct Person: Identifiable {
     var weightKg: Double
     var age: Int
     var targetWeightLb: Double
+    var heightFt: Double
+    var heightln: Double
+    var weightLb: Double
+  
     
-    init( image: String, heightCm: Double, weightKg: Double, age: Int, targetWeightLb: Double) {
-       
+    init(id: Int? = nil, image: String, heightCm: Double, weightKg: Double, age: Int, targetWeightLb: Double, heightFt: Double, heightln: Double, weightLb: Double) {
+        self.id = id
         self.image = image
         self.heightCm = heightCm
         self.weightKg = weightKg
         self.age = age
         self.targetWeightLb = targetWeightLb
+        self.heightFt = heightFt
+        self.heightln = heightln
+        self.weightLb = weightLb
     }
 }

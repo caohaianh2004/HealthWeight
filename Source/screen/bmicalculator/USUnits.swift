@@ -24,39 +24,43 @@ struct USUnits: View {
     @State private var editingField: EditingField = .none
     @State private var valueft: Double = .zero
     @State private var valuein: Double = .zero
+    @StateObject private var viewModel = UserViewModel()
+    @EnvironmentObject var route: Router
     
     var body: some View {
         VStack {
             ScrollView {
                 HStack {
-                    Button {
-                        selectionGender = .man
-                    } label: {
-                        Image("man")
-                            .renderingMode(.template)
+//                    Button {
+//                        selectionGender = .man
+//                    } label: {
+//                        Image("man")
+//                            .renderingMode(.template)
+//                            .resizable()
+//                            .scaledToFit()
+//                            .frame(width: 40)
+//                            .foregroundStyle(selectionGender == .man ? .blue : .gray)
+//                    }
+                    
+                    ForEach(viewModel.people) { person in
+                        Image(person.image)
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 40)
-                            .foregroundStyle(selectionGender == .man ? .blue : .gray)
+                            .frame(width: 200)
                     }
                     
-                    Image(selectionGender == .man ? "Image6" : "Image7")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 200)
-                    
-                    Button {
-                        selectionGender = .woden
-                    } label: {
-                        Image("woden")
-                            .renderingMode(.template)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 40)
-                            .foregroundStyle(selectionGender == .woden ? .pink : .gray)
-                    }
+//                    Button {
+//                        selectionGender = .woden
+//                    } label: {
+//                        Image("woden")
+//                            .renderingMode(.template)
+//                            .resizable()
+//                            .scaledToFit()
+//                            .frame(width: 40)
+//                            .foregroundStyle(selectionGender == .woden ? .pink : .gray)
+//                    }
                 }
-                Text(String(format: "Height(165cm) (%.1f ft %.1f)", valueft, valuein))
+                Text(String(format: "Height(165cm) (%.1f ft %.1f in)", valueft, valuein))
                 
                 SlidingRuler (
                     value: $valueft,
@@ -89,7 +93,11 @@ struct USUnits: View {
                 }
             }
             Button {
-                
+                let totalHeight = (valueft * 12) + valuein
+                let bmi = calculateBMI(weightLb: weightlb, heightInch: totalHeight)
+                let healthyRange = healthyWeightRange(ft: valueft, inch: valuein)
+                   
+                route.navigateTo(.bmiresult(bmi: bmi, healthWeightRange: healthyRange))
             } label: {
                 Text(localizedkey: "abc_calculate")
                     .padding()
@@ -102,6 +110,19 @@ struct USUnits: View {
                     .cornerRadius(14)
             }
             Spacer()
+        }
+        .onAppear {
+            viewModel.fetchPeople()
+        }
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                if let person = viewModel.people.first {
+                    valueft = person.heightFt
+                    valuein = person.heightln
+                    weightlb = person.weightLb
+                    age = person.age
+                }
+            }
         }
             ChooseWeight(isShowDialog: $isShowDialog, input: $input)
                 .onChange(of: isShowDialog) { newValue in
@@ -127,6 +148,18 @@ struct USUnits: View {
         return f
     }
     
+    func calculateBMI(weightLb: Double, heightInch: Double) -> Double {
+        guard heightInch > 0 else {return 0}
+        return (weightLb * 703) / (heightInch * heightInch)
+    }
+    
+    func healthyWeightRange(ft: Double, inch: Double) -> String {
+        let heightInInch = (ft * 12) + inch
+        let min = (18.5 * heightInInch * heightInInch) / 703
+        let max = (24.9 * heightInInch * heightInInch) / 703
+        return String(format: "%.1f lb - %.1f lb", min, max)
+    }
+
     private func stepperBox(title: String, value: Binding<Double>, field: EditingField) -> some View {
         VStack {
             Text(title).bold()

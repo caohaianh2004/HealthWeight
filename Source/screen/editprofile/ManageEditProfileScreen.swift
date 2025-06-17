@@ -44,12 +44,28 @@ struct ManaEditProfileScreen: View {
                 
                 Button {
                     let db = DatabasePeople()
+                    var heightToSave = heightCm
+                    var heightFt = 0.0
+                    var heightIn = 0.0
+                    
+                    if selectionTab == 1 {
+                    heightFt = selectedHeight
+                        heightIn = selectionValue
+                        heightToSave = (heightFt * 30.48) + (heightIn * 2.54)
+                    }
+                    
                     let person = Person(
                         image: image,
                         heightCm: heightCm,
                         weightKg: weight,
                         age: age,
-                        targetWeightLb: weightgoal)
+                        targetWeightLb: weightgoal,
+                        heightFt: heightFt,
+                        heightln: heightIn,
+                        weightLb: weight
+                    )
+                    
+                        
                     db.addPerson(person)
                     route.navigateTo(.home)
                 } label: {

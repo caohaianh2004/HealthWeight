@@ -14,7 +14,7 @@ struct MetricUnitS: View {
         case woden
     }
     enum EditingField {
-       case none, weightKg, age
+        case none, weightKg, age
     }
     @State private var selectionGenden: Gender = .man
     @State private var value: Double = .zero
@@ -24,21 +24,22 @@ struct MetricUnitS: View {
     @State private var age = 26
     @State private  var weightKg = 19.5
     @StateObject private var viewModel = UserViewModel()
+    @EnvironmentObject var route: Router
     
     var body: some View {
         VStack {
             ScrollView {
                 HStack {
-                    Button {
-                        selectionGenden = .man
-                    } label: {
-                        Image("man")
-                            .renderingMode(.template)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 40)
-                            .foregroundColor(selectionGenden == .man ? .blue : .gray)
-                    }
+                    //                    Button {
+                    //                        selectionGenden = .man
+                    //                    } label: {
+                    //                        Image("man")
+                    //                            .renderingMode(.template)
+                    //                            .resizable()
+                    //                            .scaledToFit()
+                    //                            .frame(width: 40)
+                    //                            .foregroundColor(selectionGenden == .man ? .blue : .gray)
+                    //                    }
                     
                     ForEach(viewModel.people) { person in
                         Image(person.image)
@@ -47,19 +48,16 @@ struct MetricUnitS: View {
                             .frame(width: 200)
                     }
                     
-                    Button {
-                        selectionGenden = .woden
-                    } label: {
-                        Image("woden")
-                            .renderingMode(.template)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 40)
-                            .foregroundColor(selectionGenden == .woden ? .pink : .gray)
-                    }
-                }
-                .onAppear {
-                    viewModel.fetchPeople()
+                    //                    Button {
+                    //                        selectionGenden = .woden
+                    //                    } label: {
+                    //                        Image("woden")
+                    //                            .renderingMode(.template)
+                    //                            .resizable()
+                    //                            .scaledToFit()
+                    //                            .frame(width: 40)
+                    //                            .foregroundColor(selectionGenden == .woden ? .pink : .gray)
+                    //                    }
                 }
                 
                 Text(String(format: "Height(165cm) (%.1f cm)", value))
@@ -88,7 +86,13 @@ struct MetricUnitS: View {
             }
             
             Button {
-                /*Nhập nội dung*/
+                let heightInMeters = value / 100
+                let bmi = weightKg / (heightInMeters * heightInMeters)
+                let minWeight = 18.5 * heightInMeters * heightInMeters
+                let maxWeight = 24.9 * heightInMeters * heightInMeters
+                let healthyRange = String(format: "%.1fkg - %.1fkg", minWeight, maxWeight)
+                let resultModel = BmiResult(bmi: bmi, healthyWeightRange: healthyRange)
+                route.navigateTo(.bmiresult(bmi: bmi, healthWeightRange: healthyRange))
             } label: {
                 Text(localizedkey: "abc_calculate")
                     .padding()
@@ -102,22 +106,35 @@ struct MetricUnitS: View {
             }
             Spacer()
         }
-            ChooseWeight(isShowDialog: $isShowDialog, input: $input)
-                .onChange(of: isShowDialog) { newValue in
-                    if !newValue {
-                        DispatchQueue.main.async {
-                            if let value = Double(input) {
-                                switch editingField {
-                                case .weightKg: weightKg = Double(value)
-                                case .age: age = Int(value)
-                                default: break
-                                }
+        .onAppear {
+            viewModel.fetchPeople()
+        }
+        .onAppear {
+            viewModel.fetchPeople()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                if let person = viewModel.people.first {
+                    value = person.heightCm
+                    weightKg = person.weightKg
+                    age = person.age
+                }
+            }
+        }
+        ChooseWeight(isShowDialog: $isShowDialog, input: $input)
+            .onChange(of: isShowDialog) { newValue in
+                if !newValue {
+                    DispatchQueue.main.async {
+                        if let value = Double(input) {
+                            switch editingField {
+                            case .weightKg: weightKg = Double(value)
+                            case .age: age = Int(value)
+                            default: break
                             }
-                            editingField = .none
                         }
+                        editingField = .none
                     }
                 }
-          }
+            }
+      }
     
     private var formatter: NumberFormatter {
         let f = NumberFormatter()
