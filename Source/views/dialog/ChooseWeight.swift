@@ -23,8 +23,14 @@ struct ChooseWeight: View {
     var body: some View {
         ZStack {
             if isShowDialog {
-                Color.clear.ignoresSafeArea()
-
+                Color.clear
+                    .ignoresSafeArea()
+                    .onTapGesture {
+                        close()
+                    }
+            }
+            
+            if isShowDialog {
                 VStack(spacing: 16) {
                     HStack {
                         Spacer()
@@ -53,7 +59,7 @@ struct ChooseWeight: View {
                                     Text(number)
                                         .font(.title)
                                         .frame(width: 70, height: 70)
-                                        .background(Color.gray.opacity(0.2))
+                                        .background(Color.gray.opacity(0.5))
                                         .cornerRadius(10)
                                         .foregroundColor(.gray)
                                 }
@@ -92,7 +98,7 @@ struct ChooseWeight: View {
                 .offset(y: offSet)
                 .onAppear {
                     inputText = input
-                    withAnimation(.spring) {
+                    withAnimation(.spring()) {
                         offSet = 0
                     }
                 }

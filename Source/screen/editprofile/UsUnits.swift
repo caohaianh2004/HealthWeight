@@ -28,99 +28,100 @@ struct UsUnits: View {
     @State private var editingField: EditingField = .none
     
     var body: some View {
-        VStack {
-            ScrollView {
-                HStack {
-                    Button {
-                        selectionGenden = .man
-                    } label: {
-                        Image("man")
-                            .renderingMode(.template)
+        ZStack {
+            VStack {
+                ScrollView {
+                    HStack {
+                        Button {
+                            selectionGenden = .man
+                        } label: {
+                            Image("man")
+                                .renderingMode(.template)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 40)
+                                .foregroundColor(selectionGenden == .man ? .blue : .gray)
+                        }
+                        
+                        Image(selectionGenden == .man ? "Image6" : "Image7")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 40)
-                            .foregroundColor(selectionGenden == .man ? .blue : .gray)
-                    }
-                    
-                    Image(selectionGenden == .man ? "Image6" : "Image7")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 200)
-                    
-                    Button {
-                        selectionGenden = .woden
-                    } label: {
-                        Image("woden")
-                            .renderingMode(.template)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 40)
-                            .foregroundColor(selectionGenden == .woden ? .pink : .gray)
-                    }
-                }
-                
-                VStack {
-                    VStack {
-                        Text("Height (\(height)) cm) (\(formattedValue(selectedHeight)) ft \(formattedValue(selectionValue)) in)")
-                            .font(.system(size: 17))
-                            .bold()
-                            .foregroundColor(.green)
+                            .frame(width: 200)
                         
-                        SlidingRuler (
-                            value: $selectedHeight,
-                            in: 1...7,
-                            step: 1,
-                            snap: .fraction,
-                            tick: .fraction
-                        )
-                        .padding()
-                        
-                        SlidingRuler (
-                            value: $selectionValue,
-                            in: 1...12,
-                            step: 1,
-                            snap: .fraction,
-                            tick: .fraction
-                        )
-                        .padding()
-                    }
-                    
-                    HStack(spacing: 20) {
-                        stepperBox(title: "Weight(Ib)", value: $weight, field: .weight)
-                            .padding(20)
-                            .background(.gray.opacity(0.2))
-                            .cornerRadius(12)
-                        
-                        stepperBoxAge(title: "Age", value: $age, field: .age)
-                            .padding(20)
-                            .background(.gray.opacity(0.2))
-                            .cornerRadius(12)
-                    }
-                    
-                    VStack {
-                        Text("Target Weight Loss (Ib)")
-                            .bold()
-                        HStack {
-                            stepperButton("-", action: { weightgoal -= 1 })
-                            Text(String(format: "%.1f", weightgoal))
-                                .font(.title3)
-                                .frame(width: 50)
-                                .onTapGesture {
-                                    input = "\(weightgoal)"
-                                    editingField = .goal
-                                    isShowDialog = true
-                                }
-                            stepperButton("+", action: { weightgoal += 1 })
+                        Button {
+                            selectionGenden = .woden
+                        } label: {
+                            Image("woden")
+                                .renderingMode(.template)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 40)
+                                .foregroundColor(selectionGenden == .woden ? .pink : .gray)
                         }
                     }
-                    .padding(20)
-                    .frame(maxWidth: .infinity)
-                    .background(.gray.opacity(0.2))
-                    .cornerRadius(12)
-                    .padding(10)
+                    
+                    VStack {
+                        VStack {
+                            Text("Height (\(height)) cm) (\(formattedValue(selectedHeight)) ft \(formattedValue(selectionValue)) in)")
+                                .font(.system(size: 17))
+                                .bold()
+                                .foregroundColor(.green)
+                            
+                            SlidingRuler (
+                                value: $selectedHeight,
+                                in: 1...7,
+                                step: 1,
+                                snap: .fraction,
+                                tick: .fraction
+                            )
+                            .padding()
+                            
+                            SlidingRuler (
+                                value: $selectionValue,
+                                in: 1...12,
+                                step: 1,
+                                snap: .fraction,
+                                tick: .fraction
+                            )
+                            .padding()
+                        }
+                        
+                        HStack(spacing: 20) {
+                            stepperBox(title: "Weight(Ib)", value: $weight, field: .weight)
+                                .padding(20)
+                                .background(.gray.opacity(0.2))
+                                .cornerRadius(12)
+                            
+                            stepperBoxAge(title: "Age", value: $age, field: .age)
+                                .padding(20)
+                                .background(.gray.opacity(0.2))
+                                .cornerRadius(12)
+                        }
+                        
+                        VStack {
+                            Text("Target Weight Loss (Ib)")
+                                .bold()
+                            HStack {
+                                stepperButton("-", action: { weightgoal -= 1 })
+                                Text(String(format: "%.1f", weightgoal))
+                                    .font(.title3)
+                                    .frame(width: 50)
+                                    .onTapGesture {
+                                        input = "\(weightgoal)"
+                                        editingField = .goal
+                                        isShowDialog = true
+                                    }
+                                stepperButton("+", action: { weightgoal += 1 })
+                            }
+                        }
+                        .padding(20)
+                        .frame(maxWidth: .infinity)
+                        .background(.gray.opacity(0.2))
+                        .cornerRadius(12)
+                        .padding(10)
+                    }
                 }
             }
-        }
             ChooseWeight(isShowDialog: $isShowDialog, input: $input)
                 .onChange(of: isShowDialog) { newValue in
                     if !newValue {
@@ -138,6 +139,7 @@ struct UsUnits: View {
                     }
                 }
         }
+    }
     
     private var formatter: NumberFormatter {
         let f = NumberFormatter()

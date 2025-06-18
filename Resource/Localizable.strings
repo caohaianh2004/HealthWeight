@@ -13,10 +13,10 @@
 "abc_welcome" = "Welcome back, \n Please take case of your body!";
 "abc_daily" = "Daily Weight Tracking";
 "abc_filtness" = "Fitness & Health Calculators";
-"abc_bmi" = "bmi \n calculator";
-"abc_calorice" = "calorie \n calculator";
-"abc_bmr" = "bmr \n calculator";
-"abc_body" = "body fat \n calculator";
+"abc_bmi" = "BMI \n CALCULATOR";
+"abc_calorice" = "CALORIE \n CALCULATOR";
+"abc_bmr" = "BMR \n CALCULATOR";
+"abc_body" = "BODY FAT \n CALCULATOR";
 "abc_weightToday" = "Enter Your Weight Today ";
 "abc_text" = "Slide your weight today to track";
 "abc_result" = "BMI Result";
@@ -30,3 +30,10 @@
 "abc_calculate" = "CALCULATE";
 "abc_currentWeight" = "Current Weight";
 "abc_taggetWeight" = "Tagget Weight";
+"abc_calorie" = "Calorie Calculator";
+"abc_activity" = "Activity";
+"abc_done" = "DONE";
+"abc_results" = "Result's Unit:";
+"abc_BMr" = "BMR estimation formula";
+"abc_bodyfat" = "Body Fat";
+"abc_more" = "More Setting";

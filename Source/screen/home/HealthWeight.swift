@@ -77,7 +77,7 @@ struct HealthWeight: View {
                         }
                         
                         Button {
-                            
+                            route.navigateTo(.caloriecalculator)
                         } label: {
                             VStack {
                                 Image("fame126")

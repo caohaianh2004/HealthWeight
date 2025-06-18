@@ -1,72 +1,56 @@
 //
-//  MetricUnitS.swift
+//  ViewUs.swift
 //  Health_Weight
 //
-//  Created by Boss on 16/06/2025.
+//  Created by Boss on 18/06/2025.
 //
 
 import SwiftUI
 import SlidingRuler
 
-struct MetricUnitS: View {
-    enum Gender {
-        case man
-        case woden
-    }
+struct ViewUs: View {
     enum EditingField {
-        case none, weightKg, age
+        case none, weightPound, age
     }
-    @State private var selectionGenden: Gender = .man
-    @State private var value: Double = .zero
-    @State private var input = ""
-    @State private var isShowDialog = false
     @State private var editingField: EditingField = .none
-    @State private var age = 26
-    @State private  var weightKg = 19.5
-    @StateObject private var viewModel = UserViewModel()
     @EnvironmentObject var route: Router
+    @StateObject private var viewModel = UserViewModel()
+    @State private var heightft: Double = .zero
+    @State private var heightln: Double = .zero
+    @State private var isShowDialog = false
+    @State private var input = ""
+    @State private var weightpound = 12.5
+    @State private var age = 35
+    @State private var showList = false
+    @State private var isShowMore = false
+    @State private var isShowList = false
+    @State private var seletedtext = "Basal Metabolic Rate (BMR)"
     
     var body: some View {
         ZStack {
             VStack {
                 ScrollView {
-                    HStack {
-                        //                    Button {
-                        //                        selectionGenden = .man
-                        //                    } label: {
-                        //                        Image("man")
-                        //                            .renderingMode(.template)
-                        //                            .resizable()
-                        //                            .scaledToFit()
-                        //                            .frame(width: 40)
-                        //                            .foregroundColor(selectionGenden == .man ? .blue : .gray)
-                        //                    }
-                        
-                        ForEach(viewModel.people) { person in
-                            Image(person.image)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 200)
-                        }
-                        
-                        //                    Button {
-                        //                        selectionGenden = .woden
-                        //                    } label: {
-                        //                        Image("woden")
-                        //                            .renderingMode(.template)
-                        //                            .resizable()
-                        //                            .scaledToFit()
-                        //                            .frame(width: 40)
-                        //                            .foregroundColor(selectionGenden == .woden ? .pink : .gray)
-                        //                    }
+                    ForEach(viewModel.people) { person in
+                        Image(person.image)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 200)
                     }
-                    
-                    Text(String(format: "Height(165cm) (%.1f cm)", value))
+                    Text(String(format: "Height(165cm) (%.1f ft %.1f in)", heightft, heightln))
                         .foregroundStyle(Color.green)
                     
                     SlidingRuler (
-                        value: $value,
-                        in: 0...250,
+                        value: $heightft,
+                        in: 1...7,
+                        step: 1,
+                        snap: .fraction,
+                        tick: .fraction
+                    )
+                    .padding()
+                    
+                    SlidingRuler (
+                        value: $heightln,
+                        in: 1...20,
                         step: 1,
                         snap: .fraction,
                         tick: .fraction
@@ -74,7 +58,7 @@ struct MetricUnitS: View {
                     .padding()
                     
                     HStack(spacing: 20) {
-                        stepperBox(title: "Weight(Kg)", value: $weightKg, field: .weightKg)
+                        stepperBox(title: "Weight(Kg)", value: $weightpound, field: .weightPound)
                             .padding(20)
                             .background(.gray.opacity(0.2))
                             .cornerRadius(12)
@@ -84,16 +68,22 @@ struct MetricUnitS: View {
                             .background(.gray.opacity(0.2))
                             .cornerRadius(12)
                     }
+                    
+                    VStack {
+                        Text(localizedkey: "abc_activity")
+                            .font(.title3)
+                        
+                        buttonBMR()
+                        
+                        buttonMore()
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                    .padding(5)
+                    
                 }
                 
                 Button {
-                    let heightInMeters = value / 100
-                    let bmi = weightKg / (heightInMeters * heightInMeters)
-                    let minWeight = 18.5 * heightInMeters * heightInMeters
-                    let maxWeight = 24.9 * heightInMeters * heightInMeters
-                    let healthyRange = String(format: "%.1fkg - %.1fkg", minWeight, maxWeight)
-                    let resultModel = BmiResult(bmi: bmi, healthyWeightRange: healthyRange)
-                    route.navigateTo(.bmiresult(bmi: bmi, healthWeightRange: healthyRange))
+                    
                 } label: {
                     Text(localizedkey: "abc_calculate")
                         .padding()
@@ -112,21 +102,22 @@ struct MetricUnitS: View {
             }
             .onAppear {
                 viewModel.fetchPeople()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                     if let person = viewModel.people.first {
-                        value = person.heightCm
-                        weightKg = person.weightKg
+                        heightft = person.heightFt
+                        heightln = person.heightln
                         age = person.age
                     }
                 }
             }
+            
             ChooseWeight(isShowDialog: $isShowDialog, input: $input)
                 .onChange(of: isShowDialog) { newValue in
                     if !newValue {
                         DispatchQueue.main.async {
                             if let value = Double(input) {
                                 switch editingField {
-                                case .weightKg: weightKg = Double(value)
+                                case .weightPound: weightpound = Double(value)
                                 case .age: age = Int(value)
                                 default: break
                                 }
@@ -135,6 +126,52 @@ struct MetricUnitS: View {
                         }
                     }
                 }
+            
+            if isShowList {
+                ChooseList(isPresentedtext: $seletedtext, iSShowList: $isShowList)
+            }
+            
+            if isShowMore {
+                MoreList(isShowMore: $isShowMore)
+            }
+        }
+    }
+    
+    func buttonBMR() -> some View {
+        ZStack {
+            Button {
+                isShowList = true
+            } label: {
+                HStack {
+                    Text(seletedtext)
+                        .foregroundStyle(Color.black)
+                    Spacer()
+                    Image(systemName: "arrowtriangle.down.fill")
+                        .foregroundColor(.black)
+                }
+                .padding()
+                .background(Color.gray.opacity(0.2))
+                .cornerRadius(12)
+                
+            }
+            .padding()
+        }
+    }
+    
+    func buttonMore() -> some View {
+        ZStack{
+            Button {
+                isShowMore = true
+            } label: {
+                HStack {
+                    Image(systemName: "plus.circle")
+                        .font(.title)
+                        .foregroundColor(.black)
+                    Text(localizedkey: "abc_more")
+                        .foregroundStyle(Color.black)
+                        .bold()
+                }
+            }
         }
     }
     
@@ -192,5 +229,5 @@ struct MetricUnitS: View {
 }
 
 #Preview {
-    MetricUnitS()
+    ViewUs()
 }

@@ -28,122 +28,124 @@ struct MetricUnits: View {
 
     
     var body: some View {
-        VStack {
-            ScrollView {
-                HStack {
-                    Button {
-                        selectionGenden = .man
-                        image = "Image6"
-                        heightCm = 175.0
-                        weight = 72.1
-                        weightgoal = 65.2
-                    } label: {
-                        Image("man")
-                            .renderingMode(.template)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 40)
-                            .foregroundColor(selectionGenden == .man ? .blue : .gray)
-                    }
-                    
-                    Image(image)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 200)
-                    
-                    Button {
-                        selectionGenden = .woman
-                        image = "Image7"
-                        heightCm = 165.0
-                        weight = 50.5
-                        weightgoal = 50.4
-                    } label: {
-                        Image("woden")
-                            .renderingMode(.template)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 40)
-                            .foregroundColor(selectionGenden == .woman ? .pink : .gray)
-                    }
-                }
-                VStack {
-                    Text("Height (\(formattedHeight(heightCm)) cm)")
-                        .font(.system(size: 17))
-                        .foregroundColor(.green)
-                        .bold()
-                    
-                    SlidingRuler (
-                        value: $heightCm,
-                        in: 30...250,
-                        step: 1,
-                        snap: .fraction,
-                        tick: .fraction
-                    )
-                    .padding()
-                       
-                    
-                    HStack(spacing: 20) {
-                        stepperBox(title: "Weight(Kg)", value: $weight, field: .weight)
-                            .padding(20)
-                            .background(.gray.opacity(0.2))
-                            .cornerRadius(12)
+        ZStack {
+            VStack {
+                ScrollView {
+                    HStack {
+                        Button {
+                            selectionGenden = .man
+                            image = "Image6"
+                            heightCm = 175.0
+                            weight = 72.1
+                            weightgoal = 65.2
+                        } label: {
+                            Image("man")
+                                .renderingMode(.template)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 40)
+                                .foregroundColor(selectionGenden == .man ? .blue : .gray)
+                        }
                         
-                        stepperBoxAge(title: "Age", value: $age, field: .age)
-                            .padding(20)
-                            .background(.gray.opacity(0.2))
-                            .cornerRadius(12)
-                    }
-                    
-                    VStack {
-                        Text("Target Weight Loss (Ib)")
-                            .bold()
-                        HStack {
-                            stepperButton("-", action: { weightgoal -= 1 })
-                            Text(String(format: "%.1f", weightgoal))
-                                .font(.title2)
-                                .frame(width: 50)
-                                .onTapGesture {
-                                    input = "\(weightgoal)"
-                                    editingField = .goal
-                                    isShowDialog = true
-                                }
-                            stepperButton("+", action: { weightgoal += 1 })
+                        Image(image)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 200)
+                        
+                        Button {
+                            selectionGenden = .woman
+                            image = "Image7"
+                            heightCm = 165.0
+                            weight = 50.5
+                            weightgoal = 50.4
+                        } label: {
+                            Image("woden")
+                                .renderingMode(.template)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 40)
+                                .foregroundColor(selectionGenden == .woman ? .pink : .gray)
                         }
                     }
-                    .padding(20)
-                    .frame(maxWidth: .infinity)
-                    .background(.gray.opacity(0.2))
-                    .cornerRadius(12)
-                    .padding(10)
-                }
-            }
-        }
-        .onAppear {
-            DispatchQueue.main.async {
-                if image == "Image6" {
-                    selectionGenden = .man
-                } else if image == "Image7" {
-                    selectionGenden = .woman
-                }
-            }
-        }
-        
-        ChooseWeight(isShowDialog: $isShowDialog, input: $input)
-            .onChange(of: isShowDialog) { newValue in
-                if !newValue {
-                    DispatchQueue.main.async {
-                        if let value = Double(input) {
-                            switch editingField {
-                            case .weight: weight = Double(value)
-                            case .age: age = Int(value)
-                            case .goal: weightgoal = Double(value)
-                            default: break
+                    VStack {
+                        Text("Height (\(formattedHeight(heightCm)) cm)")
+                            .font(.system(size: 17))
+                            .foregroundColor(.green)
+                            .bold()
+                        
+                        SlidingRuler (
+                            value: $heightCm,
+                            in: 30...250,
+                            step: 1,
+                            snap: .fraction,
+                            tick: .fraction
+                        )
+                        .padding()
+                        
+                        
+                        HStack(spacing: 20) {
+                            stepperBox(title: "Weight(Kg)", value: $weight, field: .weight)
+                                .padding(20)
+                                .background(.gray.opacity(0.2))
+                                .cornerRadius(12)
+                            
+                            stepperBoxAge(title: "Age", value: $age, field: .age)
+                                .padding(20)
+                                .background(.gray.opacity(0.2))
+                                .cornerRadius(12)
+                        }
+                        
+                        VStack {
+                            Text("Target Weight Loss (Ib)")
+                                .bold()
+                            HStack {
+                                stepperButton("-", action: { weightgoal -= 1 })
+                                Text(String(format: "%.1f", weightgoal))
+                                    .font(.title2)
+                                    .frame(width: 50)
+                                    .onTapGesture {
+                                        input = "\(weightgoal)"
+                                        editingField = .goal
+                                        isShowDialog = true
+                                    }
+                                stepperButton("+", action: { weightgoal += 1 })
                             }
                         }
-                        editingField = .none
+                        .padding(20)
+                        .frame(maxWidth: .infinity)
+                        .background(.gray.opacity(0.2))
+                        .cornerRadius(12)
+                        .padding(10)
                     }
                 }
             }
+            .onAppear {
+                DispatchQueue.main.async {
+                    if image == "Image6" {
+                        selectionGenden = .man
+                    } else if image == "Image7" {
+                        selectionGenden = .woman
+                    }
+                }
+            }
+            
+            ChooseWeight(isShowDialog: $isShowDialog, input: $input)
+                .onChange(of: isShowDialog) { newValue in
+                    if !newValue {
+                        DispatchQueue.main.async {
+                            if let value = Double(input) {
+                                switch editingField {
+                                case .weight: weight = Double(value)
+                                case .age: age = Int(value)
+                                case .goal: weightgoal = Double(value)
+                                default: break
+                                }
+                            }
+                            editingField = .none
+                        }
+                    }
+                }
+        }
     }
     
     private var formatter: NumberFormatter {

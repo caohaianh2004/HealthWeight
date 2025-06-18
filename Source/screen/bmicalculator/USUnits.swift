@@ -10,8 +10,8 @@ import SlidingRuler
 
 struct USUnits: View {
     enum Gender {
-     case man
-     case woden
+        case man
+        case woden
     }
     enum EditingField {
         case none, weightpound, age
@@ -28,102 +28,103 @@ struct USUnits: View {
     @EnvironmentObject var route: Router
     
     var body: some View {
-        VStack {
-            ScrollView {
-                HStack {
-//                    Button {
-//                        selectionGender = .man
-//                    } label: {
-//                        Image("man")
-//                            .renderingMode(.template)
-//                            .resizable()
-//                            .scaledToFit()
-//                            .frame(width: 40)
-//                            .foregroundStyle(selectionGender == .man ? .blue : .gray)
-//                    }
-                    
-                    ForEach(viewModel.people) { person in
-                        Image(person.image)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 200)
+        ZStack {
+            VStack {
+                ScrollView {
+                    HStack {
+                        //                    Button {
+                        //                        selectionGender = .man
+                        //                    } label: {
+                        //                        Image("man")
+                        //                            .renderingMode(.template)
+                        //                            .resizable()
+                        //                            .scaledToFit()
+                        //                            .frame(width: 40)
+                        //                            .foregroundStyle(selectionGender == .man ? .blue : .gray)
+                        //                    }
+                        
+                        ForEach(viewModel.people) { person in
+                            Image(person.image)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 200)
+                        }
+                        
+                        //                    Button {
+                        //                        selectionGender = .woden
+                        //                    } label: {
+                        //                        Image("woden")
+                        //                            .renderingMode(.template)
+                        //                            .resizable()
+                        //                            .scaledToFit()
+                        //                            .frame(width: 40)
+                        //                            .foregroundStyle(selectionGender == .woden ? .pink : .gray)
+                        //                    }
                     }
+                    Text(String(format: "Height(165cm) (%.1f ft %.1f in)", valueft, valuein))
                     
-//                    Button {
-//                        selectionGender = .woden
-//                    } label: {
-//                        Image("woden")
-//                            .renderingMode(.template)
-//                            .resizable()
-//                            .scaledToFit()
-//                            .frame(width: 40)
-//                            .foregroundStyle(selectionGender == .woden ? .pink : .gray)
-//                    }
-                }
-                Text(String(format: "Height(165cm) (%.1f ft %.1f in)", valueft, valuein))
-                
-                SlidingRuler (
-                    value: $valueft,
-                    in: 1...7,
-                    step: 1,
-                    snap: .fraction,
-                    tick: .fraction
-                )
-                .padding()
-                
-                SlidingRuler (
-                    value: $valuein,
-                    in: 0...12,
-                    step: 1,
-                    snap: .fraction,
-                    tick: .fraction
-                )
-                .padding()
-                
-                HStack(spacing: 20) {
-                    stepperBox(title: "Weight(lb)", value: $weightlb, field: .weightpound)
-                        .padding(20)
-                        .background(.gray.opacity(0.2))
-                        .cornerRadius(12)
-                    
-                    stepperBoxAge(title: "Age", value: $age, field: .age)
-                        .padding(20)
-                        .background(.gray.opacity(0.2))
-                        .cornerRadius(12)
-                }
-            }
-            Button {
-                let totalHeight = (valueft * 12) + valuein
-                let bmi = calculateBMI(weightLb: weightlb, heightInch: totalHeight)
-                let healthyRange = healthyWeightRange(ft: valueft, inch: valuein)
-                   
-                route.navigateTo(.bmiresult(bmi: bmi, healthWeightRange: healthyRange))
-            } label: {
-                Text(localizedkey: "abc_calculate")
+                    SlidingRuler (
+                        value: $valueft,
+                        in: 1...7,
+                        step: 1,
+                        snap: .fraction,
+                        tick: .fraction
+                    )
                     .padding()
-                    .frame(maxWidth: .infinity)
-                    .frame(width: 350)
-                    .background(Color.green)
-                    .font(.system(size: 18))
-                    .bold()
-                    .foregroundStyle(Color.white)
-                    .cornerRadius(14)
+                    
+                    SlidingRuler (
+                        value: $valuein,
+                        in: 0...12,
+                        step: 1,
+                        snap: .fraction,
+                        tick: .fraction
+                    )
+                    .padding()
+                    
+                    HStack(spacing: 20) {
+                        stepperBox(title: "Weight(lb)", value: $weightlb, field: .weightpound)
+                            .padding(20)
+                            .background(.gray.opacity(0.2))
+                            .cornerRadius(12)
+                        
+                        stepperBoxAge(title: "Age", value: $age, field: .age)
+                            .padding(20)
+                            .background(.gray.opacity(0.2))
+                            .cornerRadius(12)
+                    }
+                }
+                Button {
+                    let totalHeight = (valueft * 12) + valuein
+                    let bmi = calculateBMI(weightLb: weightlb, heightInch: totalHeight)
+                    let healthyRange = healthyWeightRange(ft: valueft, inch: valuein)
+                    
+                    route.navigateTo(.bmiresult(bmi: bmi, healthWeightRange: healthyRange))
+                } label: {
+                    Text(localizedkey: "abc_calculate")
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .frame(width: 350)
+                        .background(Color.green)
+                        .font(.system(size: 18))
+                        .bold()
+                        .foregroundStyle(Color.white)
+                        .cornerRadius(14)
+                }
+                Spacer()
             }
-            Spacer()
-        }
-        .onAppear {
-            viewModel.fetchPeople()
-        }
-        .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                if let person = viewModel.people.first {
-                    valueft = person.heightFt
-                    valuein = person.heightln
-                    weightlb = person.weightLb
-                    age = person.age
+            .onAppear {
+                viewModel.fetchPeople()
+            }
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    if let person = viewModel.people.first {
+                        valueft = person.heightFt
+                        valuein = person.heightln
+                        weightlb = person.weightLb
+                        age = person.age
+                    }
                 }
             }
-        }
             ChooseWeight(isShowDialog: $isShowDialog, input: $input)
                 .onChange(of: isShowDialog) { newValue in
                     if !newValue {
@@ -140,6 +141,7 @@ struct USUnits: View {
                     }
                 }
         }
+    }
     
     private var formatter: NumberFormatter {
         let f = NumberFormatter()
@@ -159,7 +161,7 @@ struct USUnits: View {
         let max = (24.9 * heightInInch * heightInInch) / 703
         return String(format: "%.1f lb - %.1f lb", min, max)
     }
-
+    
     private func stepperBox(title: String, value: Binding<Double>, field: EditingField) -> some View {
         VStack {
             Text(title).bold()
