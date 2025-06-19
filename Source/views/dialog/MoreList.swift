@@ -13,6 +13,9 @@ struct MoreList: View {
     @State private var selectionButtonone: Int? = nil
     @State private var selectionButtontwo: Int? = nil
     @State private var inputText = ""
+    @Binding var selectedUnit: String
+    @Binding var selectedFormula: String
+    @Binding var bodyFat: Double
     let moreListone = [
         1: "Calories",
         2: "Kilojoules",
@@ -112,6 +115,7 @@ struct MoreList: View {
             withAnimation {
                 selectionButtonone = index
                 inputText = moreListone[index] ?? ""
+                selectedUnit = moreListone[index] ?? ""
             }
         } label: {
             Image(systemName: selectionButtonone == index ? "circle.circle.fill" : "circle.circle")
@@ -126,6 +130,7 @@ struct MoreList: View {
             withAnimation {
                 selectionButtontwo = index
                 inputText = moreListtwo[index] ?? ""
+                selectedFormula = moreListtwo[index] ?? ""
             }
         } label: {
             Image(systemName: selectionButtontwo == index ? "circle.circle.fill" : "circle.circle")

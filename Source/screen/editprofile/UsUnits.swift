@@ -26,6 +26,7 @@ struct UsUnits: View {
     @State private var isShowDialog = false
     @State private var input = ""
     @State private var editingField: EditingField = .none
+    @Binding var image: String
     
     var body: some View {
         ZStack {
@@ -34,6 +35,7 @@ struct UsUnits: View {
                     HStack {
                         Button {
                             selectionGenden = .man
+                            image = "Image6"
                         } label: {
                             Image("man")
                                 .renderingMode(.template)
@@ -43,13 +45,14 @@ struct UsUnits: View {
                                 .foregroundColor(selectionGenden == .man ? .blue : .gray)
                         }
                         
-                        Image(selectionGenden == .man ? "Image6" : "Image7")
+                        Image(image)
                             .resizable()
                             .scaledToFit()
                             .frame(width: 200)
                         
                         Button {
                             selectionGenden = .woden
+                            image = "Image7"
                         } label: {
                             Image("woden")
                                 .renderingMode(.template)
@@ -119,6 +122,15 @@ struct UsUnits: View {
                         .background(.gray.opacity(0.2))
                         .cornerRadius(12)
                         .padding(10)
+                    }
+                }
+            }
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    if image == "Image6" {
+                        selectionGenden = .man
+                    } else if image == "Image7" {
+                        selectionGenden = .woden
                     }
                 }
             }

@@ -12,6 +12,7 @@ struct ChooseList: View {
     @Binding var iSShowList: Bool
     @State private var offSet: CGFloat = 1000
     @State private var selectedButton: Int? = nil
+    @Binding var activityFactor: Double
     let textList = [
         1: "Basal Metabolic Rate (BMR)",
         2: "Sedentary: little or no exercise",
@@ -35,6 +36,7 @@ struct ChooseList: View {
                         buttonText(index)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(5)
+                        
                     }
                     
                     Button {
@@ -73,6 +75,16 @@ struct ChooseList: View {
             withAnimation {
                 selectedButton = index
                 isPresentedtext = textList[index] ?? ""
+                switch index {
+                    case 2: activityFactor = 1.2
+                    case 3: activityFactor = 1.375
+                    case 4: activityFactor = 1.55
+                    case 5: activityFactor = 1.725
+                    case 6: activityFactor = 1.9
+                    case 7: activityFactor = 2.0
+                    default: activityFactor = 1.2
+                }
+
             }
         } label: {
             HStack {

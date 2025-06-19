@@ -16,13 +16,19 @@ struct ViewMetric: View {
     @StateObject private var viewModel = UserViewModel()
     @State private var heightcm: Double = 175.6
     @State private var weightKg: Double = 13.6
-    @State private var age: Int = 24
+    @State private var age: Int = 25
     @State private var editingField: EditingField = .none
     @State private var input: String = ""
     @State private var isShowDialog: Bool = false
     @State private var isShowList = false
     @State private var seletedtext = "Basal Metabolic Rate (BMR)"
     @State private var isShowMore = false
+    
+    @State private var selectedUnit: String = "Calories" // or Kilojoules
+    @State private var selectedFormula: String = "Mifflin St Joer"
+    @State private var selectedActivityFactor: Double = 1.2
+    @State private var bodyFatPercentage: Double = 0.2 // giả định ban đầu 20%
+
     
     var body: some View {
         ZStack {
@@ -78,9 +84,6 @@ struct ViewMetric: View {
             
             .onAppear {
                 viewModel.fetchPeople()
-            }
-            .onAppear {
-                viewModel.fetchPeople()
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                     if let person = viewModel.people.first {
                         heightcm = person.heightCm
@@ -108,11 +111,11 @@ struct ViewMetric: View {
                 }
              
             if isShowList {
-                ChooseList(isPresentedtext: $seletedtext, iSShowList: $isShowList)
+                ChooseList(isPresentedtext: $seletedtext, iSShowList: $isShowList, activityFactor: $selectedActivityFactor)
             }
             
             if isShowMore {
-                MoreList(isShowMore: $isShowMore)
+                MoreList(isShowMore: $isShowMore, selectedUnit: $selectedUnit, selectedFormula: $selectedFormula, bodyFat: $bodyFatPercentage)
             }
         }
     }
@@ -149,7 +152,6 @@ struct ViewMetric: View {
                         .foregroundColor(.black)
                     Text(localizedkey: "abc_more")
                         .foregroundStyle(Color.black)
-                        .bold()
                 }
             }
         }
@@ -158,7 +160,19 @@ struct ViewMetric: View {
     func buttonCalculate() -> some View {
         VStack {
             Button {
+                let bmr = calculateBMR(
+                    formula: selectedFormula,
+                    gender: "male",
+                    weight: weightKg,
+                    height: heightcm,
+                    age: age,
+                    bodyFat: bodyFatPercentage,
+                    unit: selectedUnit
+                )
+                let tdee = bmr * selectedActivityFactor
                 
+                route.navigateTo(.calorieresult(bmr: bmr, tdee: tdee, unit: selectedUnit))
+
             } label: {
                 Text(localizedkey: "abc_calculate")
                     .padding()
@@ -224,6 +238,38 @@ struct ViewMetric: View {
                 .cornerRadius(8)
         }
     }
+    
+    func calculateBMR(
+        formula: String,
+        gender: String,
+        weight: Double,
+        height: Double,
+        age: Int,
+        bodyFat: Double,
+        unit: String
+    ) -> Double {
+        var bmr: Double = 0
+
+        switch formula {
+        case "Mifflin St Joer":
+            bmr = 10 * weight + 6.25 * height - 5 * Double(age) + (gender == "male" ? 5 : -161)
+        case "Revised Harris-Benedict":
+            bmr = gender == "male"
+                ? 13.397 * weight + 4.799 * height - 5.677 * Double(age) + 88.362
+                : 9.247 * weight + 3.098 * height - 4.330 * Double(age) + 447.593
+        case "Katch-McArdle":
+            let leanMass = (1 - bodyFat) * weight
+            bmr = 370 + 21.6 * leanMass
+        default:
+            break
+        }
+
+        if unit == "Kilojoules" {
+            return bmr * 4.184
+        }
+        return bmr
+    }
+
 }
 
 #Preview {

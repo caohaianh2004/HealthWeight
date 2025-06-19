@@ -20,11 +20,16 @@ struct ViewUs: View {
     @State private var isShowDialog = false
     @State private var input = ""
     @State private var weightpound = 12.5
-    @State private var age = 35
+    @State private var age = 25
     @State private var showList = false
     @State private var isShowMore = false
     @State private var isShowList = false
     @State private var seletedtext = "Basal Metabolic Rate (BMR)"
+    
+    @State private var selectedUnit: String = "Calories" // or Kilojoules
+    @State private var selectedFormula: String = "Mifflin St Joer"
+    @State private var selectedActivityFactor: Double = 1.2
+    @State private var bodyFatPercentage: Double = 0.2 // giả định ban đầu 20%
     
     var body: some View {
         ZStack {
@@ -97,15 +102,14 @@ struct ViewUs: View {
                 }
                 Spacer()
             }
-            .onAppear {
-                viewModel.fetchPeople()
-            }
+
             .onAppear {
                 viewModel.fetchPeople()
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                     if let person = viewModel.people.first {
                         heightft = person.heightFt
                         heightln = person.heightln
+                        weightpound = person.weightLb
                         age = person.age
                     }
                 }
@@ -128,11 +132,11 @@ struct ViewUs: View {
                 }
             
             if isShowList {
-                ChooseList(isPresentedtext: $seletedtext, iSShowList: $isShowList)
+                ChooseList(isPresentedtext: $seletedtext, iSShowList: $isShowList, activityFactor: $selectedActivityFactor)
             }
             
             if isShowMore {
-                MoreList(isShowMore: $isShowMore)
+                MoreList(isShowMore: $isShowMore, selectedUnit: $selectedUnit, selectedFormula: $selectedFormula, bodyFat: $bodyFatPercentage)
             }
         }
     }

@@ -10,9 +10,10 @@ import SlidingRuler
 
 struct AddWeight: View {
     @EnvironmentObject var route: Router
-    @State private var selectionKg: Double = 10.0
+    @State private var selectionKg: Double = 73.2
     @StateObject var viewModel = UserViewModel()
-    
+    @State private var selectedTab = 1
+
     var body: some View {
         VStack {
             addWeightTopbar()
@@ -38,8 +39,14 @@ struct AddWeight: View {
                 .padding()
                 
                 if let person = viewModel.people.first {
-                       Measuringmachine(weight: selectionKg, height: person.heightCm)
-                   }
+                    MeasuringmachineUpdated(
+                        weight: selectionKg,
+                        heightCm: person.heightCm,
+                        heightFt: person.heightFt,
+                        heightIn: person.heightln,
+                        selectedTab: selectedTab
+                    )
+                }
             }
             .onAppear {
                 viewModel.fetchPeople()
@@ -47,11 +54,21 @@ struct AddWeight: View {
             Spacer()
         }
         .onAppear {
+            selectedTab = UserDefaults.standard.integer(forKey: "selectedTab")
+        }
+        .onAppear {
             viewModel.fetchPeople()
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 if let person = viewModel.people.first {
-                    selectionKg = person.weightKg
+                    MeasuringmachineUpdated(
+                        weight: selectionKg,
+                        heightCm: person.heightCm,
+                        heightFt: person.heightFt,
+                        heightIn: person.heightln,
+                        selectedTab: selectedTab
+                    )
                 }
+
             }
         }
         .onChange(of: selectionKg) { newValue in
@@ -103,17 +120,25 @@ struct AddWeight: View {
 
 }
 
-struct Measuringmachine: View {
-    var weight: Double     // kg
-    var height: Double     // cm
+struct MeasuringmachineUpdated: View {
+    var weight: Double     // kg hoặc lb
+    var heightCm: Double   // dùng cho Metric
+    var heightFt: Double   // dùng cho US
+    var heightIn: Double   // dùng cho US
+    var selectedTab: Int   // 0 = US Units, 1 = Metric
 
-    // BMI = weight (kg) / height^2 (m)
     var currentBMI: Double {
-        let heightInMeter = height / 100
-        return heightInMeter > 0 ? weight / (heightInMeter * heightInMeter) : 0
+        if selectedTab == 0 {
+            // US Units: BMI = (lb * 703) / (in * in)
+            let totalInch = (heightFt * 12) + heightIn
+            return totalInch > 0 ? (weight * 703) / (totalInch * totalInch) : 0
+        } else {
+            // Metric: BMI = kg / (m * m)
+            let heightInMeter = heightCm / 100
+            return heightInMeter > 0 ? weight / (heightInMeter * heightInMeter) : 0
+        }
     }
 
-    // Vùng chỉ số BMI
     let bmiZones: [(range: ClosedRange<Double>, label: String, color: Color)] = [
         (0...16.0, "Severe Thinness", .blue),
         (16.1...17.0, "Moderate Thinness", .blue.opacity(0.5)),
@@ -133,14 +158,12 @@ struct Measuringmachine: View {
         bmiZones.first(where: { $0.range.contains(currentBMI) })?.color ?? .gray
     }
 
-    // Góc quay của kim đo (ví dụ từ -92 đến +92 độ)
     let minAngle: Double = -97
     let maxAngle: Double = 97
     let minBMI: Double = 0
     let maxBMI: Double = 60
 
     var needleAngle: Double {
-        // Clamp BMI vào khoảng cho phép
         let clampedBMI = min(max(currentBMI, minBMI), maxBMI)
         let ratio = (clampedBMI - minBMI) / (maxBMI - minBMI)
         return minAngle + ratio * (maxAngle - minAngle)
@@ -163,7 +186,7 @@ struct Measuringmachine: View {
                     .offset(y: -10)
             }
 
-            Text(String(format: "BMI = %.1f kg/m2", currentBMI))
+            Text(String(format: "BMI = %.1f %@", currentBMI, selectedTab == 0 ? "lb/in²" : "kg/m²"))
                 .font(.title3)
                 .bold()
 
@@ -175,6 +198,7 @@ struct Measuringmachine: View {
         .animation(.easeInOut(duration: 0.4), value: currentBMI)
     }
 }
+
 
 #Preview {
     AddWeight()

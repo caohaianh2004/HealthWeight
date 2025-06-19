@@ -36,8 +36,8 @@ struct MetricUnits: View {
                             selectionGenden = .man
                             image = "Image6"
                             heightCm = 175.0
-                            weight = 72.1
-                            weightgoal = 65.2
+                            weight = 90.0
+                            weightgoal = 74.2
                         } label: {
                             Image("man")
                                 .renderingMode(.template)

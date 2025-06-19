@@ -43,6 +43,7 @@ class Router: ObservableObject {
         case managebmicalcuator
         case bmiresult(bmi: Double, healthWeightRange: String)
         case caloriecalculator
+        case calorieresult(bmr: Double, tdee: Double, unit: String)
     }
     @Published var path: NavigationPath = NavigationPath()
     
@@ -67,6 +68,8 @@ class Router: ObservableObject {
             BmiResult(bmi: bmi, healthyWeightRange: healthWeightRange).navigationBarBackButtonHidden()
         case .caloriecalculator:
             ManageCalorieCalculator().navigationBarBackButtonHidden()
+        case let .calorieresult(bmr, tdee, unit):
+            CalorieResult(bmr: bmr, tdee: tdee, unit: unit).navigationBarBackButtonHidden()
         }
     }
     

@@ -45,7 +45,7 @@ struct ManageBMICalculator: View {
             HStack {
                 ForEach(["US Units", "Metric Units"], id: \.self) { tab in
                     Button {
-                        selectionTab = tab == "Metric Units" ? 0 : 1
+                        selectionTab = tab == "US Units" ? 0 : 1
                     } label: {
                         Text(tab)
                             .padding(5)
@@ -53,8 +53,8 @@ struct ManageBMICalculator: View {
                             .padding(.vertical, 8)
                             .font(.system(size: 13))
                             .bold()
-                            .background(selectionTab == (tab == "Metric Units" ? 0 : 1) ? Color.green : Color.gray.opacity(0.3))
-                            .foregroundColor(selectionTab == (tab == "Metric Units" ? 0 : 1) ? Color.white : Color.black)
+                            .background(selectionTab == (tab == "US Units" ? 0 : 1) ? Color.green : Color.gray.opacity(0.3))
+                            .foregroundColor(selectionTab == (tab == "US Units" ? 0 : 1) ? Color.white : Color.black)
                             .clipShape(RoundedRectangle(cornerRadius: 8))
                     }
                     .padding(5)
@@ -62,12 +62,15 @@ struct ManageBMICalculator: View {
             }
             
             Group {
-                if selectionTab == 1 {
+                if selectionTab == 0 {
                     USUnits()
                 } else {
                     MetricUnitS()
                 }
             }
+        }
+        .onAppear {
+            selectionTab = UserDefaults.standard.integer(forKey: "selectedTab")
         }
     }
 }
