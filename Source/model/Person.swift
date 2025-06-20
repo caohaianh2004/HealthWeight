@@ -12,12 +12,11 @@ struct Person: Identifiable {
     var image: String
     var heightCm: Double
     var weightKg: Double
+    var weightLb: Double
     var age: Int
     var targetWeightLb: Double
     var heightFt: Double
     var heightln: Double
-    var weightLb: Double
-  
     
     init(id: Int? = nil, image: String, heightCm: Double, weightKg: Double, age: Int, targetWeightLb: Double, heightFt: Double, heightln: Double, weightLb: Double) {
         self.id = id

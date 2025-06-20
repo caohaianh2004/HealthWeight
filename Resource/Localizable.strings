@@ -47,3 +47,6 @@
 "abc_midweightcan" = "Mid Weight Gain \n 0.25 kg/ week";
 "abc_weightGain" = "Weight Gain \n 0.5 kg/ week";
 "abc_extremeWeightgain" = "Extreme Weight Gain \n 1 kg/ week";
+"abc_ft" = "Feet(ft)";
+"abc_in" = "Inch(in)";
+"abc_bmr" = "BMR Calculator";

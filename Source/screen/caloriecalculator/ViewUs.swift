@@ -41,7 +41,7 @@ struct ViewUs: View {
                             .scaledToFit()
                             .frame(width: 200)
                     }
-                    Text(String(format: "Height(165cm) (%.1f ft %.1f in)", heightft, heightln))
+                    Text(String(format: "Height (%.1f ft %.1f in)", heightft, heightln))
                         .foregroundStyle(Color.green)
                     
                     SlidingRuler (
@@ -51,19 +51,23 @@ struct ViewUs: View {
                         snap: .fraction,
                         tick: .fraction
                     )
-                    .padding()
+                    .padding(10)
+                    
+                    Text(localizedkey: "abc_ft")
                     
                     SlidingRuler (
                         value: $heightln,
-                        in: 1...20,
+                        in: 0...12,
                         step: 1,
                         snap: .fraction,
                         tick: .fraction
                     )
-                    .padding()
+                    .padding(10)
+                    
+                    Text(localizedkey: "abc_in")
                     
                     HStack(spacing: 20) {
-                        stepperBox(title: "Weight(Kg)", value: $weightpound, field: .weightPound)
+                        stepperBox(title: "Weight(pound)", value: $weightpound, field: .weightPound)
                             .padding(20)
                             .background(.gray.opacity(0.2))
                             .cornerRadius(12)
@@ -87,20 +91,7 @@ struct ViewUs: View {
                     
                 }
                 
-                Button {
-                    
-                } label: {
-                    Text(localizedkey: "abc_calculate")
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .frame(width: 350)
-                        .background(Color.green)
-                        .font(.system(size: 18))
-                        .bold()
-                        .foregroundStyle(Color.white)
-                        .cornerRadius(14)
-                }
-                Spacer()
+               buttonCalculate()
             }
 
             .onAppear {
@@ -192,7 +183,7 @@ struct ViewUs: View {
             HStack {
                 stepperButton("-", action: { value.wrappedValue -= 1 })
                 Text(String(format: "%.1f", value.wrappedValue))
-                    .font(.title3)
+                    .font(.system(size: 18))
                     .frame(width: 50)
                     .onTapGesture {
                         input = "\(value.wrappedValue)"
@@ -210,7 +201,7 @@ struct ViewUs: View {
             HStack {
                 stepperButton("-", action: { value.wrappedValue -= 1 })
                 Text("\(value.wrappedValue)")
-                    .font(.title3)
+                    .font(.system(size: 18))
                     .frame(width: 50)
                     .onTapGesture {
                         input = "\(value.wrappedValue)"
@@ -230,6 +221,82 @@ struct ViewUs: View {
                 .cornerRadius(8)
         }
     }
+    
+    func buttonCalculate() -> some View {
+          VStack {
+              Button {
+                  let bmr = calculateBMR(
+                      formula: selectedFormula,
+                      gender: "male",
+                      weight: weightpound,
+                      heightft: heightft,
+                      heightin: heightln,
+                      age: age,
+                      bodyFat: bodyFatPercentage,
+                      unit: selectedUnit
+                  )
+                  let tdee = bmr * selectedActivityFactor
+                  
+                  if seletedtext == "Basal Metabolic Rate (BMR)" {
+                      route.navigateTo(.result(bmr: bmr, tdee: tdee, unit: seletedtext))
+                  } else {
+                      route.navigateTo(.calorieresult(bmr: bmr, tdee: tdee, unit: selectedUnit))
+                  }
+
+              } label: {
+                  Text(localizedkey: "abc_calculate")
+                      .padding()
+                      .frame(maxWidth: .infinity)
+                      .frame(width: 350)
+                      .background(Color.green)
+                      .font(.system(size: 18))
+                      .bold()
+                      .foregroundStyle(Color.white)
+                      .cornerRadius(14)
+              }
+          }
+      }
+    
+    func calculateBMR(
+        formula: String,
+        gender: String,
+        weight: Double,
+        heightft: Double,
+        heightin: Double,
+        age: Int,
+        bodyFat: Double,
+        unit: String
+    ) -> Double {
+        // Chuyển từ feet + inch sang cm
+        let heightCm = (heightft * 30.48) + (heightin * 2.54)
+        
+        var bmr: Double = 0
+
+        switch formula {
+        case "Mifflin St Joer":
+            bmr = 10 * weight + 6.25 * heightCm - 5 * Double(age) + (gender == "male" ? 5 : -161)
+            
+        case "Revised Harris-Benedict":
+            bmr = gender == "male"
+                ? 13.397 * weight + 4.799 * heightCm - 5.677 * Double(age) + 88.362
+                : 9.247 * weight + 3.098 * heightCm - 4.330 * Double(age) + 447.593
+            
+        case "Katch-McArdle":
+            let leanMass = (1 - bodyFat) * weight
+            bmr = 370 + 21.6 * leanMass
+            
+        default:
+            break
+        }
+
+        // Đổi sang kilojoules nếu được chọn
+        if unit == "Kilojoules" {
+            return bmr * 4.184
+        }
+        
+        return bmr
+    }
+
 }
 
 #Preview {

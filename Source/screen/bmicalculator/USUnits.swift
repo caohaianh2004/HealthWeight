@@ -62,6 +62,7 @@ struct USUnits: View {
                         //                    }
                     }
                     Text(String(format: "Height(165cm) (%.1f ft %.1f in)", valueft, valuein))
+                        .foregroundStyle(Color.green)
                     
                     SlidingRuler (
                         value: $valueft,
@@ -70,7 +71,9 @@ struct USUnits: View {
                         snap: .fraction,
                         tick: .fraction
                     )
-                    .padding()
+                    .padding(10)
+                    
+                    Text(localizedkey: "abc_ft")
                     
                     SlidingRuler (
                         value: $valuein,
@@ -79,7 +82,9 @@ struct USUnits: View {
                         snap: .fraction,
                         tick: .fraction
                     )
-                    .padding()
+                    .padding(10)
+                    
+                    Text(localizedkey: "abc_in")
                     
                     HStack(spacing: 20) {
                         stepperBox(title: "Weight(lb)", value: $weightlb, field: .weightpound)

@@ -54,34 +54,6 @@ struct Result: View {
             }
         }
         Spacer()
-        
-        HStack {
-            Button {
-                route.navigateBack()
-            } label: {
-                Text(localizedkey: "abc_tryAgain")
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.green)
-                    .foregroundStyle(.white)
-                    .cornerRadius(10)
-                    .bold()
-            }
-            
-            
-            Button {
-                route.navigateTo(.home)
-            } label: {
-                Text(localizedkey: "abc_home")
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.green)
-                    .foregroundStyle(.black)
-                    .cornerRadius(10)
-                    .bold()
-            }
-        }
-        .padding()
     }
 }
 

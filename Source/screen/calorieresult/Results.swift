@@ -1,30 +1,24 @@
 //
-//  CalorieResult.swift
+//  Results.swift
 //  Health_Weight
 //
-//  Created by Boss on 19/06/2025.
+//  Created by Boss on 20/06/2025.
 //
 
 import SwiftUI
 
-struct CalorieResult: View {
+struct Results: View {
     @EnvironmentObject var route: Router
     let bmr: Double
-    let tdee: Double
     let unit: String
+    let tdee: Double
     @State private var animatedBMR: Int = 0
-    @State private var animatedTDEE: Int = 0
     @State private var timer: Timer?
     
     var body: some View {
         let formatUnit = unit == "Kilojoules" ? "kJ/day" : "Calorie/day"
         let maintain = tdee
         let mildLoss = tdee - 200
-        let loss = tdee - 500
-        let extremeLoss = tdee - 800
-        let mildGain = tdee + 250
-        let gain = tdee + 500
-        let extremeGain = tdee + 1000
         
         VStack {
             HStack {
@@ -46,28 +40,13 @@ struct CalorieResult: View {
                 
                 Spacer()
             }
+            Text(localizedkey: "abc_textresult")
+                .font(.system(size: 15))
+                .padding(5)
             
-            ScrollView {
-                VStack(spacing: 15) {
-                    Text(localizedkey: "abc_textresult")
-                        .font(.system(size: 15))
-                        .padding(.top, 10)
-                    
-                    calorieRow(titleKey: "abc_maintain", offset: 0, color: .blue.opacity(0.7))
-                    calorieRow(titleKey: "abc_maid", offset: -200, color: .orange.opacity(0.7))
-                    calorieRow(titleKey: "abc_weightLoss", offset: -500, color: .orange.opacity(0.4))
-                    calorieRow(titleKey: "abc_extrame", offset: -800, color: .pink.opacity(0.6))
-                    
-                    Text(localizedkey: "abc_textn")
-                        .font(.system(size: 15))
-                        .padding(.top, 10)
-                    
-                    calorieRow(titleKey: "abc_midweightcan", offset: 250, color: .yellow.opacity(0.6))
-                    calorieRow(titleKey: "abc_weightGain", offset: 500, color: .red.opacity(0.6))
-                    calorieRow(titleKey: "abc_extremeWeightgain", offset: 1000, color: .pink.opacity(0.6))
-                }
-                .padding()
-            }
+            calorieRow(titleKey: "abc_maintain", offset: 0, color: .blue.opacity(0.7))
+            
+            Spacer()
             
             HStack {
                 Button {
@@ -95,7 +74,6 @@ struct CalorieResult: View {
                 }
             }
             .padding()
-            Spacer()
         }
         .onAppear {
             startAnimation()
@@ -103,29 +81,31 @@ struct CalorieResult: View {
         .onDisappear {
             timer?.invalidate()
         }
+
+        
+        Spacer()
+        
     }
     
     func startAnimation() {
-        let duration: Double = 1.5 // giây
-        let stepTime: Double = 0.02 // mỗi bước 20ms
+        let duration: Double = 1.5
+        let stepTime: Double = 0.02
         let totalSteps = Int(duration / stepTime)
-        
         var currentStep = 0
+
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: stepTime, repeats: true) { timer in
             if currentStep >= totalSteps {
                 animatedBMR = Int(bmr)
-                animatedTDEE = Int(tdee)
                 timer.invalidate()
             } else {
                 let progress = Double(currentStep) / Double(totalSteps)
-                animatedBMR = Int(Double(bmr) * progress)
-                animatedTDEE = Int(Double(tdee) * progress)
+                animatedBMR = Int(bmr * progress)
                 currentStep += 1
             }
         }
     }
-    
+
     
     @ViewBuilder
     func calorieRow(titleKey: String, offset: Double, color: Color) -> some View {
@@ -140,10 +120,10 @@ struct CalorieResult: View {
                 .frame(maxWidth: .infinity)
             
             VStack {
-                Text(String(format: "%.1f", max(Double(animatedTDEE) + offset, 0)))
+                Text(String(format: "%.1f", max(Double(animatedBMR) + offset, 0)))
                     .font(.system(size: 20))
                     .bold()
-                    .animation(.easeOut(duration: 0.2), value: animatedTDEE)
+                    .animation(.easeOut(duration: 0.2), value: animatedBMR)
                 
                 Text(unit == "Kilojoules" ? "Kilojoules/ day" : "Calorie/ day")
                     .font(.system(size: 14))
@@ -153,5 +133,6 @@ struct CalorieResult: View {
     }
 }
 
-
-
+//#Preview {
+//    Results()
+//}

@@ -19,7 +19,7 @@ struct ManaEditProfileScreen: View {
     @State private var selectedHeight: Double = 4.0
     @State private var selectionValue: Double = 6.5
     @State private var selectionGender: MetricUnits.Gender = .man
-
+    @State private var weightlb = 200.4
 
     var body: some View {
         VStack {
@@ -64,7 +64,7 @@ struct ManaEditProfileScreen: View {
                         targetWeightLb: weightgoal,
                         heightFt: heightFt,
                         heightln: heightIn,
-                        weightLb: weight
+                        weightLb: weightlb
                     )
 
                     db.addPerson(person)
@@ -102,7 +102,7 @@ struct ManaEditProfileScreen: View {
             
             Group {
                 if selectionTab == 0 {
-                    UsUnits(height: $height, age: $age, weight: $weight, weightgoal: $weightgoal, selectedHeight: $selectedHeight, selectionValue: $selectionValue, image: $image)
+                    UsUnits(height: $height, age: $age, weightlb: $weightlb, weightgoal: $weightgoal, selectedHeight: $selectedHeight, selectionValue: $selectionValue, image: $image)
                 } else {
                     MetricUnits(heightCm: $heightCm, age: $age, weight: $weight, weightgoal: $weightgoal, image: $image)
                 }
@@ -118,6 +118,7 @@ struct ManaEditProfileScreen: View {
                 image = person.image
                 heightCm = person.heightCm
                 weight = person.weightKg
+                weightlb = person.weightLb
                 age = person.age
                 weightgoal = person.targetWeightLb
             print("✅ Đã cập nhật dữ liệu mới")

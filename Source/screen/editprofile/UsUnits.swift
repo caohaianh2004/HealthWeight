@@ -14,12 +14,12 @@ struct UsUnits: View {
         case woden
     }
     enum EditingField {
-        case none, weight, age, goal
+        case none, weightlb, age, goal
     }
     @State private var selectionGenden: Gender = .man
     @Binding var height: Int
     @Binding var age: Int
-    @Binding var weight: Double
+    @Binding var weightlb: Double
     @Binding var weightgoal: Double
     @Binding var selectedHeight: Double
     @Binding var selectionValue: Double
@@ -90,7 +90,7 @@ struct UsUnits: View {
                         }
                         
                         HStack(spacing: 20) {
-                            stepperBox(title: "Weight(Ib)", value: $weight, field: .weight)
+                            stepperBox(title: "Weight(Ib)", value: $weightlb, field: .weightlb)
                                 .padding(20)
                                 .background(.gray.opacity(0.2))
                                 .cornerRadius(12)
@@ -140,7 +140,7 @@ struct UsUnits: View {
                         DispatchQueue.main.async {
                             if let value = Double(input) {
                                 switch editingField {
-                                case .weight: weight = Double(value)
+                                case .weightlb: weightlb = Double(value)
                                 case .age: age = Int(value)
                                 case .goal: weightgoal = Double(value)
                                 default: break
@@ -166,7 +166,7 @@ struct UsUnits: View {
             HStack {
                 stepperButton("-", action: { value.wrappedValue -= 1 })
                 Text(String(format: "%.1f", value.wrappedValue))
-                    .font(.title3)
+                    .font(.system(size: 18))
                     .frame(width: 50)
                     .onTapGesture {
                         input = "\(value.wrappedValue)"
@@ -184,7 +184,7 @@ struct UsUnits: View {
             HStack {
                 stepperButton("-", action: { value.wrappedValue -= 1 })
                 Text("\(value.wrappedValue)")
-                    .font(.title3)
+                    .font(.system(size: 18))
                     .frame(width: 50)
                     .onTapGesture {
                         input = "\(value.wrappedValue)"
