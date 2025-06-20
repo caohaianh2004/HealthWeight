@@ -8,15 +8,20 @@
 import SwiftUI
 
 struct ManageBMRCalculator: View {
+    @EnvironmentObject var route: Router
     @State private var selectiontab = 0
     @State private var selectedText = ""
     
     var body: some View {
         VStack {
             HStack {
-                Image(systemName: "arrow.backward")
-                    .foregroundColor(.black)
-                    .font(.title)
+                Button {
+                    route.navigateBack()
+                } label: {
+                    Image(systemName: "arrow.backward")
+                        .foregroundColor(.black)
+                        .font(.title)
+                }
                 Spacer()
                 
                 Text(localizedkey: "abc_bmr")
@@ -24,10 +29,14 @@ struct ManageBMRCalculator: View {
                     .bold()
                 Spacer()
                 
-                Image("information")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 30)
+                Button {
+                    
+                } label: {
+                    Image("information")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 30)
+                }
             }
             .padding()
             
@@ -40,21 +49,24 @@ struct ManageBMRCalculator: View {
                             .frame(maxWidth: .infinity)
                             .padding()
                             .font(.system(size: 15))
-                            .background(selectiontab == (tab == "US Units" ? 0 : 1) ? Color.green : Color.gray)
+                            .background(selectiontab == (tab == "US Units" ? 0 : 1) ? Color.green : Color.gray.opacity(0.5))
                             .foregroundStyle(selectiontab == (tab == "US Units" ? 0 : 1) ? Color.white : Color.black)
-                            .cornerRadius(13)
+                            .cornerRadius(12)
                     }
                     .padding(5)
                 }
             }
-            
+    
             Group {
-                if selectiontab == 1 {
+                if selectiontab == 0 {
                     BmrUs()
                 } else {
                     BmrMetric()
                 }
             }
+        }
+        .onAppear {
+            selectiontab = UserDefaults.standard.integer(forKey: "selectedTab")
         }
     }
 }

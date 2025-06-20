@@ -94,7 +94,7 @@ struct HealthWeight: View {
                         .cornerRadius(13)
                         
                         Button {
-                            
+                            route.navigateTo(.managebmrcalcuator)
                         } label: {
                             VStack {
                                 Image("fame135")

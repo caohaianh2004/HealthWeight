@@ -11,14 +11,11 @@ struct Results: View {
     @EnvironmentObject var route: Router
     let bmr: Double
     let unit: String
-    let tdee: Double
     @State private var animatedBMR: Int = 0
     @State private var timer: Timer?
     
     var body: some View {
         let formatUnit = unit == "Kilojoules" ? "kJ/day" : "Calorie/day"
-        let maintain = tdee
-        let mildLoss = tdee - 200
         
         VStack {
             HStack {

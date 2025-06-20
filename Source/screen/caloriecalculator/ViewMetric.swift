@@ -172,7 +172,7 @@ struct ViewMetric: View {
                 let tdee = bmr * selectedActivityFactor
                 
                 if seletedtext == "Basal Metabolic Rate (BMR)" {
-                    route.navigateTo(.result(bmr: bmr, tdee: tdee, unit: selectedUnit))
+                    route.navigateTo(.result(bmr: bmr, unit: selectedUnit))
                 } else {
                     route.navigateTo(.calorieresult(bmr: bmr, tdee: tdee, unit: selectedUnit))
                 }
