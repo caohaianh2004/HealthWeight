@@ -74,10 +74,22 @@ struct BmrResult: View {
     
     func bmrResult() -> some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text(String(format: "BMR: %.1f %@", Double(animatedBMR), unit == "Kilojoules" ? "Kj/day" : "Calo/day"))
-                .font(.title2)
-                .bold()
-                .frame(maxWidth: .infinity, alignment: .center)
+            HStack(spacing: 4) {
+                Text("BMR:")
+                    .font(.title2)
+                    .bold()
+                
+                Text(String(format: "%.1f", Double(animatedBMR)))
+                    .font(.title2)
+                    .bold()
+                    .foregroundColor(.green)
+                
+                Text(unit == "Kilojoules" ? "kJ/day" : "Calo/day")
+                    .font(.title2)
+                    .bold()
+            }
+            .frame(maxWidth: .infinity, alignment: .center)
+
 
             Text(localizedkey: "abc_textbmr")
                 .frame(maxWidth: .infinity, alignment: .leading)
