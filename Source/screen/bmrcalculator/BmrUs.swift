@@ -114,7 +114,19 @@ struct BmrUs: View {
     
     func buttonResult() -> some View {
         Button {
+            let bmr = calculateBMR(
+                formula: selectedFormula,
+                gender: "male",
+                weight: weightpound,
+                heightft: heightft,
+                heightin: heightin,
+                age: age,
+                bodyFat: bodyFatPercentage,
+                unit: selectedUnit
+            )
             
+            let tdee = bmr * selectedActivityFactor
+            route.navigateTo(.bmrresult(bmr: bmr, tdee: tdee, unit: selectedUnit))
         } label: {
             Text(localizedkey: "abc_calculate")
                 .padding()
@@ -196,6 +208,45 @@ struct BmrUs: View {
            }
        }
     
+    func calculateBMR(
+        formula: String,
+        gender: String,
+        weight: Double,
+        heightft: Double,
+        heightin: Double,
+        age: Int,
+        bodyFat: Double,
+        unit: String
+    ) -> Double {
+        // Chuyển từ feet + inch sang cm
+        let heightCm = (heightft * 30.48) + (heightin * 2.54)
+        
+        var bmr: Double = 0
+
+        switch formula {
+        case "Mifflin St Joer":
+            bmr = 10 * weight + 6.25 * heightCm - 5 * Double(age) + (gender == "male" ? 5 : -161)
+            
+        case "Revised Harris-Benedict":
+            bmr = gender == "male"
+                ? 13.397 * weight + 4.799 * heightCm - 5.677 * Double(age) + 88.362
+                : 9.247 * weight + 3.098 * heightCm - 4.330 * Double(age) + 447.593
+            
+        case "Katch-McArdle":
+            let leanMass = (1 - bodyFat) * weight
+            bmr = 370 + 21.6 * leanMass
+            
+        default:
+            break
+        }
+
+        // Đổi sang kilojoules nếu được chọn
+        if unit == "Kilojoules" {
+            return bmr * 4.184
+        }
+        
+        return bmr
+    }
 }
 
 #Preview {

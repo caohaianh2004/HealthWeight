@@ -104,7 +104,18 @@ struct BmrMetric: View {
     func buttonCalculate() -> some View {
         VStack {
             Button {
+                let bmr = calculateBMR(
+                    formula: selectedFormula,
+                    gender: "male",
+                    weight: weightKg, 
+                    height: heightcm,
+                    age: age,
+                    bodyFat: bodyFatPercentage,
+                    unit: selectedUnit
+                )
+                let tdee = bmr * selectedActivityFactor
                 
+                route.navigateTo(.bmrresult(bmr: bmr, tdee: tdee, unit: selectedUnit))
             } label: {
                 Text(localizedkey: "abc_calculate")
                     .frame(maxWidth: .infinity)
@@ -184,6 +195,38 @@ struct BmrMetric: View {
                 .cornerRadius(8)
         }
     }
+    
+    func calculateBMR(
+        formula: String,
+        gender: String,
+        weight: Double,
+        height: Double,
+        age: Int,
+        bodyFat: Double,
+        unit: String
+    ) -> Double {
+        var bmr: Double = 0
+
+        switch formula {
+        case "Mifflin St Joer":
+            bmr = 10 * weight + 6.25 * height - 5 * Double(age) + (gender == "male" ? 5 : -161)
+        case "Revised Harris-Benedict":
+            bmr = gender == "male"
+                ? 13.397 * weight + 4.799 * height - 5.677 * Double(age) + 88.362
+                : 9.247 * weight + 3.098 * height - 4.330 * Double(age) + 447.593
+        case "Katch-McArdle":
+            let leanMass = (1 - bodyFat) * weight
+            bmr = 370 + 21.6 * leanMass
+        default:
+            break
+        }
+
+        if unit == "Kilojoules" {
+            return bmr * 4.184
+        }
+        return bmr
+    }
+
 }
 
 #Preview {
