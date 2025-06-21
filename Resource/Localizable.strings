@@ -51,3 +51,10 @@
 "abc_in" = "Inch(in)";
 "abc_bmr" = "BMR Calculator";
 "abc_bmrresult" = "BMR Result";
+"abc_textbmr" = "Daily calorie needs based on activity level";
+"abc_textexercise" = "Exercise:";
+"abc_exercise" = "15-30 minutes of elevated heart rate activity";
+"abc_textIntense" = "Intense exercise:";
+"abc_Intense" = "45-120 minutes of elevated heart rate activity";
+"abc_very" = "Very intense exercise:";
+ "abc_verintense" = "2+ hours of elevated heart rate activity.";
