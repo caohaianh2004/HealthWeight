@@ -9,14 +9,11 @@ import SwiftUI
 import SlidingRuler
 
 struct MetricUnits: View {
-    enum Gender {
-        case man
-        case woman
-    }
+
     enum EditingField {
         case none, weight, age, goal
     }
-    @State var selectionGenden: Gender = .man
+    @Binding var gender: Gender
     @Binding var heightCm: Double
     @Binding var age: Int
     @Binding var weight: Double
@@ -33,7 +30,7 @@ struct MetricUnits: View {
                 ScrollView {
                     HStack {
                         Button {
-                            selectionGenden = .man
+                            gender = .man
                             image = "Image6"
                             heightCm = 175.0
                             weight = 90.0
@@ -44,7 +41,7 @@ struct MetricUnits: View {
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 40)
-                                .foregroundColor(selectionGenden == .man ? .blue : .gray)
+                                .foregroundColor(gender == .man ? .blue : .gray)
                         }
                         
                         Image(image)
@@ -53,7 +50,7 @@ struct MetricUnits: View {
                             .frame(width: 200)
                         
                         Button {
-                            selectionGenden = .woman
+                            gender = .woman
                             image = "Image7"
                             heightCm = 165.0
                             weight = 50.5
@@ -64,7 +61,7 @@ struct MetricUnits: View {
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 40)
-                                .foregroundColor(selectionGenden == .woman ? .pink : .gray)
+                                .foregroundColor(gender == .woman ? .pink : .gray)
                         }
                     }
                     VStack {
@@ -122,9 +119,9 @@ struct MetricUnits: View {
             .onAppear {
                 DispatchQueue.main.async {
                     if image == "Image6" {
-                        selectionGenden = .man
+                        gender = .man
                     } else if image == "Image7" {
-                        selectionGenden = .woman
+                        gender = .woman
                     }
                 }
             }

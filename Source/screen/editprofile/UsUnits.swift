@@ -9,14 +9,11 @@ import SwiftUI
 import SlidingRuler
 
 struct UsUnits: View {
-    enum Gender {
-        case man
-        case woden
-    }
+    
     enum EditingField {
         case none, weightlb, age, goal
     }
-    @State private var selectionGenden: Gender = .man
+    @Binding var gender: Gender
     @Binding var height: Int
     @Binding var age: Int
     @Binding var weightlb: Double
@@ -34,7 +31,7 @@ struct UsUnits: View {
                 ScrollView {
                     HStack {
                         Button {
-                            selectionGenden = .man
+                            gender = .man
                             image = "Image6"
                         } label: {
                             Image("man")
@@ -42,7 +39,7 @@ struct UsUnits: View {
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 40)
-                                .foregroundColor(selectionGenden == .man ? .blue : .gray)
+                                .foregroundColor(gender == .man ? .blue : .gray)
                         }
                         
                         Image(image)
@@ -51,7 +48,7 @@ struct UsUnits: View {
                             .frame(width: 200)
                         
                         Button {
-                            selectionGenden = .woden
+                            gender = .woman
                             image = "Image7"
                         } label: {
                             Image("woden")
@@ -59,7 +56,7 @@ struct UsUnits: View {
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 40)
-                                .foregroundColor(selectionGenden == .woden ? .pink : .gray)
+                                .foregroundColor(gender == .woman ? .pink : .gray)
                         }
                     }
                     
@@ -128,9 +125,9 @@ struct UsUnits: View {
             .onAppear {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                     if image == "Image6" {
-                        selectionGenden = .man
+                        gender = .man
                     } else if image == "Image7" {
-                        selectionGenden = .woden
+                        gender = .woman
                     }
                 }
             }

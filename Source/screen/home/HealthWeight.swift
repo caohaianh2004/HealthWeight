@@ -111,7 +111,7 @@ struct HealthWeight: View {
                         }
                         
                         Button {
-                            
+                            route.navigateTo(.managrboyfat)
                         } label: {
                             VStack {
                                 Image("fame221")

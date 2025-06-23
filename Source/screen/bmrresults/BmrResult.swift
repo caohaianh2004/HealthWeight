@@ -95,6 +95,7 @@ struct BmrResult: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .font(.system(size: 16))
                 .padding(.horizontal)
+                .bold()
 
             Group {
                 HStack {

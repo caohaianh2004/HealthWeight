@@ -18,7 +18,7 @@ struct ManaEditProfileScreen: View {
     @State private var weightgoal = 65.4
     @State private var selectedHeight: Double = 4.0
     @State private var selectionValue: Double = 6.5
-    @State private var selectionGender: MetricUnits.Gender = .man
+    @State private var selectionGender: Gender = .man
     @State private var weightlb = 200.4
 
     var body: some View {
@@ -102,9 +102,9 @@ struct ManaEditProfileScreen: View {
             
             Group {
                 if selectionTab == 0 {
-                    UsUnits(height: $height, age: $age, weightlb: $weightlb, weightgoal: $weightgoal, selectedHeight: $selectedHeight, selectionValue: $selectionValue, image: $image)
+                    UsUnits(gender: $selectionGender, height: $height, age: $age, weightlb: $weightlb, weightgoal: $weightgoal, selectedHeight: $selectedHeight, selectionValue: $selectionValue, image: $image)
                 } else {
-                    MetricUnits(heightCm: $heightCm, age: $age, weight: $weight, weightgoal: $weightgoal, image: $image)
+                    MetricUnits(gender: $selectionGender,heightCm: $heightCm, age: $age, weight: $weight, weightgoal: $weightgoal, image: $image)
                 }
             }
         }
