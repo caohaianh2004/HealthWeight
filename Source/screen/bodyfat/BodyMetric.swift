@@ -26,6 +26,8 @@ struct BodyMetric: View {
     @State private var gender = "man"
     
     var body: some View {
+        
+        
         ZStack {
             VStack {
                 ScrollView {
@@ -86,6 +88,7 @@ struct BodyMetric: View {
             .onAppear {
                 viewModel.fetchPeople()
                 if let person = viewModel.people.first {
+                    heightCm = person.heightCm
                     weightkg = person.weightKg
                     age = person.age
                     
@@ -112,7 +115,7 @@ struct BodyMetric: View {
                                 case .waist:
                                     waist = Double(value)
                                 case .hip:
-                                    hip = Double(hip)
+                                    hip = Double(value)
                                 default: break
                                 }
                             }
@@ -125,10 +128,10 @@ struct BodyMetric: View {
     
     func buttonCalculate() -> some View {
         Button {
+            // Tính phần trăm mỡ
             let result: Double
-            
             if gender == "woman" {
-                result = calculateBoyFat (
+                result = calculateBoyFat(
                     gender: "woman",
                     heightCm: heightCm,
                     nekCm: neck,
@@ -136,14 +139,48 @@ struct BodyMetric: View {
                     hipCm: hip
                 )
             } else {
-                result = calculateBoyFat (
+                result = calculateBoyFat(
                     gender: "man",
                     heightCm: heightCm,
                     nekCm: neck,
                     waistCm: waist
                 )
             }
+
+            // Tính các thông số khối lượng
+            let fatMass = weightkg * result / 100
+            let leanMass = weightkg - fatMass
+            let idealFat = idealBodyFat(for: age, gender: gender)
+            let idealFatMass = weightkg * idealFat / 100
+            let fatToLose = max(fatMass - idealFatMass, 0)
+
+            // Tính BMI và mỡ theo công thức BMI
+            let heightInMeters = heightCm / 100
+            let bmi = weightkg / (heightInMeters * heightInMeters)
             
+            let bmiMethodFat: Double
+            if gender == "man" {
+                bmiMethodFat = 1.20 * bmi + 0.23 * Double(age) - 16.2
+            } else {
+                bmiMethodFat = 1.20 * bmi + 0.23 * Double(age) - 5.4
+            }
+
+            // Loại mỡ
+            let category = bodyFatCategory(for: result, gender: gender)
+
+            // Chuyển màn hình
+            route.navigateTo(.boyfatresult(
+                bodyFatPercentage: result,
+                fatMass: fatMass,
+                leanMass: leanMass,
+                idealFatPercent: idealFat,
+                fatToLose: fatToLose,
+                bmiMethodFat: bmiMethodFat,
+                category: category,
+                gender: gender,
+                unit: "kg" // 🟢 nếu muốn thêm đơn vị
+            ))
+
         } label: {
             Text(localizedkey: "abc_calculate")
                 .padding()
@@ -156,16 +193,27 @@ struct BodyMetric: View {
                 .cornerRadius(14)
         }
     }
+
+
     
     func calculateBoyFat(gender: String, heightCm: Double, nekCm: Double, waistCm: Double, hipCm: Double? = nil) -> Double {
-        if gender == "male" {
-            return 495 / (1.0324 - 0.19077 * log10(waistCm - nekCm) + 0.15456 * log10(heightCm)) - 450
+        if heightCm <= 0 {
+            return 0
+        }
+
+        if gender == "man" {
+            let diff = waistCm - nekCm
+            guard diff > 0 else { return 0 }
+            return 86.010 * log10(diff) - 70.041 * log10(heightCm) + 36.76
         } else {
             guard let hip = hipCm else { return 0 }
-            return 495 / (1.29579 - 0.35004 * log10(waistCm + hip - nekCm) + 0.22100 * log10(heightCm)) - 450
+            let sum = waistCm + hip - nekCm
+            guard sum > 0 else { return 0 }
+            return 163.205 * log10(sum) - 97.684 * log10(heightCm) - 78.387
         }
     }
-    
+
+
     private func stepperBox(title: String, value: Binding<Double>, field: EditingField) -> some View {
         VStack {
             Text(title).bold()
@@ -211,9 +259,49 @@ struct BodyMetric: View {
         }
     }
     
-    
+    func idealBodyFat(for age: Int, gender: String) -> Double {
+        switch age {
+        case 20..<30: return gender == "man" ? 16.5 : 22.7
+        case 30..<40: return gender == "man" ? 18.9 : 24.5
+        case 40..<50: return gender == "man" ? 21.5 : 27.1
+        case 50..<60: return gender == "man" ? 22.7 : 29.7
+        default:      return gender == "man" ? 23.2 : 30.9
+        }
+    }
+
+    func bodyFatCategory(for value: Double, gender: String) -> String {
+        let ranges: [(Double, String)] = gender == "man"
+        ? [(2, "Essential Fat"), (6, "Athletes"), (14, "Fitness"), (18, "Average"), (25, "Obese")]
+            : [(10, "Essential Fat"), (14, "Athletes"), (21, "Fitness"), (25, "Average"), (32, "Obese")]
+
+        // Nếu nhỏ hơn mức thấp nhất → trả về "Less than Essential Fat"
+        if value < ranges.first!.0 {
+            return "Less than Essential Fat"
+        }
+
+        // Duyệt các mốc để xác định phân loại
+        for (threshold, label) in ranges.reversed() {
+            if value >= threshold {
+                return label
+            }
+        }
+
+        return "Unknown"
+    }
 }
 
 #Preview {
     BodyMetric()
+}
+
+
+struct BodyFatData: Hashable {
+    let percentage: Double
+    let fatMass: Double
+    let leanMass: Double
+    let idealPercentage: Double
+    let idealFatMass: Double
+    let fatToLose: Double
+    let bmiFatMass: Double
+    let category: String
 }

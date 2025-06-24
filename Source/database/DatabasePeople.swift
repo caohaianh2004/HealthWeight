@@ -187,9 +187,9 @@ class DatabasePeople: ObservableObject {
         databaseQueue?.inDatabase { db in
             do {
                 try db.executeUpdate(query, values: [newWeight, id])
-                print("Cập nhật cân nặng thành công")
+                print("✅ Cập nhật cân nặng thành công")
             } catch {
-                print("Lỗi cập nhật cân nặng: \(error.localizedDescription)")
+                print("🚨 Lỗi cập nhật cân nặng: \(error.localizedDescription)")
             }
         }
     }

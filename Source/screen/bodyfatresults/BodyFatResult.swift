@@ -9,14 +9,25 @@ import SwiftUI
 
 struct BodyFatResult: View {
     @EnvironmentObject var route: Router
-    let bmr: Double
-    let tdee: Double
+    let bodyFatPercentage: Double
+    let fatMass: Double
+    let leanMass: Double
+    let idealFatPercent: Double
+    let fatToLose: Double
+    let bmiMethodFat: Double
+    let category: String
+    let gender: String
     let unit: String
-    @State private var animatedBMR: Int = 0
-    @State private var animatedTDEE: Int = 0
-    @State private var timer: Timer?
+    @State private var animatedFat: Double = 0.0
+    @State private var animatedFatMass: Double = 0.0
+    @State private var animatedLeanMass: Double = 0.0
+    @State private var animatedIdealPercent: Double = 0.0
+    @State private var animatedFatToLose: Double = 0.0
+    @State private var animatedBmiMethod: Double = 0.0
+    @State private var input = ""
     
     var body: some View {
+        
         VStack {
             HStack {
                 Button {
@@ -42,145 +53,157 @@ struct BodyFatResult: View {
             VStack {
                 ScrollView {
                     HStack {
-                        Text("2%")
+                        Text(input == "man" ? "2%" : "10%")
                             .padding(.top, 40)
-                        Image("yellow")
+                        Image(gender == "man" ? "yellow" : "woman")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 22)
-                        Text("6%")
+                        Text(input == "man" ? "6%" : "14%")
                             .padding(.top, 40)
-                        Image("green")
+                        Image(gender == "man" ? "green" : "woman2")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 22)
-                        Text("14%")
+                        Text(input == "man" ? "14%" : "21%")
                             .padding(.top, 40)
-                        Image("green1")
+                        Image(gender == "man" ? "green1" : "woman3")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 20)
-                        Text("18%")
+                        Text(input == "man" ? "18%" : "25%")
                             .padding(.top, 40)
-                        Image("orange")
+                        Image(gender == "man" ? "orange" : "woman4")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 20)
-                        Text("25%")
+                        Text(input == "man" ? "25%" : "32%")
                             .padding(.top, 40)
-                        Image("red")
+                        Image(gender == "man" ? "red" : "woman5")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 22)
                     }
-                    Rectangle()
-                        .fill(
-                            LinearGradient(
-                                gradient: Gradient(colors: [.red, .yellow, .green.opacity(0.3), .green, .orange, .red]),
-                                startPoint: /*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/,
-                                endPoint: /*@START_MENU_TOKEN@*/.trailing/*@END_MENU_TOKEN@*/)
-                        )
-                        .frame(height: 20)
-                        .padding()
-                        .padding(.top, -30)
-                    
-                    
+                    ZStack(alignment: .leading) {
+                        Rectangle()
+                            .fill(
+                                LinearGradient(
+                                    gradient: Gradient(colors: [.red, .yellow, .green.opacity(0.3), .green, .orange, .red]),
+                                    startPoint: .leading,
+                                    endPoint: .trailing
+                                )
+                            )
+                            .frame(height: 20)
+
+                        // MARKER
+                        GeometryReader { geo in
+                            let markerPosition = max(0, min(bodyFatPercentage / 40.0, 1)) * geo.size.width // 40 là max %
+                            Rectangle()
+                                .fill(Color.black)
+                                .frame(width: 2, height: 30)
+                                .offset(x: markerPosition - 1, y: -5) // -1 để căn giữa
+                        }
+                    }
+                    .frame(height: 30)
+                    .padding()
+                    .padding(.top, -30)
+
                     HStack {
-                        Text("Essential \nFat")
+                        Text(localizedkey: "abc_Essential")
                             .font(.system(size: 12))
                             .padding(.top, -23)
                             .padding(.leading, 20)
                         
-                        Text("Athletes")
+                        Text(localizedkey: "abc_Athletes")
                             .font(.system(size: 12))
                             .padding(.top, -23)
                             .padding(.leading, 30)
                         
-                        Text("Fitness")
+                        Text(localizedkey: "abc_Fitness")
                             .font(.system(size: 12))
                             .padding(.top, -23)
                             .padding(.leading, 13)
                         
-                        Text("Average")
+                        Text(localizedkey: "abc_Average")
                             .font(.system(size: 12))
                             .padding(.top, -23)
                             .padding(.leading, 10)
                         
-                        Text("Obese")
+                        Text(localizedkey: "abc_Obese")
                             .font(.system(size: 12))
                             .padding(.top, -23)
                             .padding(.leading, 30)
                     }
                     
                     VStack {
-                        Text("Boy Fat: 18.3%")
+                        Text(String(format: "Body Fat: %.1f%%", animatedFat))
                             .font(.title2)
                             .bold()
                             .padding(5)
-                        Text("(Average)")
+                        Text(category)
                             .padding(.top, -13)
                             .foregroundColor(.yellow)
                             .font(.title3)
                             .bold()
                         
                         HStack {
-                            Text("Body Fat (U.S. Navy Method)")
+                            Text(localizedkey: "abc_bodyfat")
                                 .frame(width: 250)
                                 .padding()
                                 .background(Color.gray.opacity(0.3))
                                 .cornerRadius(13)
                             
-                            Text("18.3%")
+                            Text(String(format: "%.1f%%", animatedFatMass))
                                 .padding()
                                 .background(Color.gray.opacity(0.3))
                                 .cornerRadius(13)
                         }
                         
                         HStack {
-                            Text("Body Fat category")
+                            Text(localizedkey: "abc_BodyFatcategory")
                                 .frame(width: 250)
                                 .padding()
                                 .background(Color.gray.opacity(0.3))
                                 .cornerRadius(13)
                             
-                            Text("Avarage")
+                            Text("(\(category))")
                                 .padding()
                                 .background(Color.gray.opacity(0.3))
                                 .cornerRadius(13)
                         }
                         HStack {
-                            Text("Body Fat Mass")
+                            Text(localizedkey: "abc_BodyFatMass")
                                 .frame(width: 250)
                                 .padding()
                                 .background(Color.gray.opacity(0.3))
                                 .cornerRadius(13)
                             
-                            Text("9.7 kgs")
+                            Text(String(format: "%.1f %@", animatedFatMass, unit))
                                 .padding()
                                 .background(Color.gray.opacity(0.3))
                                 .cornerRadius(13)
                         }
                         HStack {
-                            Text("Leab Body Mass")
+                            Text(localizedkey: "abc_LeanBodyMass")
                                 .frame(width: 250)
                                 .padding()
                                 .background(Color.gray.opacity(0.3))
                                 .cornerRadius(13)
                             
-                            Text("43.3 kgs")
+                            Text(String(format: "%.1f %@", animatedLeanMass, unit))
                                 .padding()
                                 .background(Color.gray.opacity(0.3))
                                 .cornerRadius(13)
                         }
                         
                         HStack {
-                            Text("Ideal Body Fat for Given Age \n (Jackson & Pollard")
+                            Text(localizedkey: "abc_IdealBody")
                                 .frame(width: 250)
                                 .padding()
                                 .background(Color.gray.opacity(0.3))
                                 .cornerRadius(13)
                             
-                            Text("11.4%")
+                            Text(String(format: "%.1f% %", animatedIdealPercent))
                                 .frame(height: 40)
                                 .padding()
                                 .background(Color.gray.opacity(0.3))
@@ -188,26 +211,26 @@ struct BodyFatResult: View {
                         }
                         
                         HStack {
-                            Text("Body Fat to Lose to Reach Ideal")
+                            Text(localizedkey: "abc_BodyFatto")
                                 .frame(width: 250)
                                 .padding()
                                 .background(Color.gray.opacity(0.3))
                                 .cornerRadius(13)
                             
-                            Text("3.6 kgs")
+                            Text(String(format: "%.1f %@", animatedFatToLose, unit))
                                 .padding()
                                 .background(Color.gray.opacity(0.3))
                                 .cornerRadius(13)
                         }
                         
                         HStack {
-                            Text("Body Fat (BMI method)")
+                            Text(localizedkey: "abc_BMImethod")
                                 .frame(width: 250)
                                 .padding()
                                 .background(Color.gray.opacity(0.3))
                                 .cornerRadius(13)
                             
-                            Text("13.9 kgs")
+                            Text(String(format: "%.1f%%", animatedBmiMethod))
                                 .padding()
                                 .background(Color.gray.opacity(0.3))
                                 .cornerRadius(13)
@@ -243,57 +266,30 @@ struct BodyFatResult: View {
                 .padding()
                 Spacer()
             }
-        }   
-        .onAppear {
-            startAnimation()
         }
-        .onDisappear {
-            timer?.invalidate()
+        .onAppear {
+            animateAllValues()
         }
     }
     
-    func startAnimation() {
-        let duration: Double = 1.5 // giây
-        let stepTime: Double = 0.02 // mỗi bước 20ms
-        let totalSteps = Int(duration / stepTime)
-        
-        var currentStep = 0
-        timer?.invalidate()
-        timer = Timer.scheduledTimer(withTimeInterval: stepTime, repeats: true) { timer in
-            if currentStep >= totalSteps {
-                animatedBMR = Int(bmr)
-                animatedTDEE = Int(tdee)
+    func animateAllValues() {
+        startAnimation($animatedFat, to: bodyFatPercentage)
+        startAnimation($animatedFatMass, to: fatMass)
+        startAnimation($animatedLeanMass, to: leanMass)
+        startAnimation($animatedIdealPercent, to: idealFatPercent)
+        startAnimation($animatedFatToLose, to: fatToLose)
+        startAnimation($animatedBmiMethod, to: bmiMethodFat)
+    }
+
+
+    func startAnimation(_ value: Binding<Double>, to target: Double) {
+        value.wrappedValue = 0.0
+        Timer.scheduledTimer(withTimeInterval: 0.02, repeats: true) { timer in
+            if value.wrappedValue >= target {
+                value.wrappedValue = target
                 timer.invalidate()
             } else {
-                let progress = Double(currentStep) / Double(totalSteps)
-                animatedBMR = Int(Double(bmr) * progress)
-                animatedTDEE = Int(Double(tdee) * progress)
-                currentStep += 1
-            }
-        }
-    }
-    
-    @ViewBuilder
-    func calorieRow(titleKey: String, offset: Double, color: Color) -> some View {
-        HStack {
-            Text(localizedkey: titleKey)
-                .frame(width: 200, height: 45)
-                .padding()
-                .multilineTextAlignment(.center)
-                .background(color)
-                .cornerRadius(10)
-                .font(.system(size: 15))
-                .frame(maxWidth: .infinity)
-            
-            VStack {
-                Text(String(format: "%.1f", max(Double(animatedTDEE) + offset, 0)))
-                    .font(.system(size: 20))
-                    .bold()
-                    .animation(.easeOut(duration: 0.2), value: animatedTDEE)
-                
-                Text(unit == "Kilojoules" ? "Kilojoules/ day" : "Calorie/ day")
-                    .font(.system(size: 14))
-                    .frame(width: 120)
+                value.wrappedValue += max(target / 50, 0.1)
             }
         }
     }

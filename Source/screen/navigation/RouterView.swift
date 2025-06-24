@@ -48,7 +48,8 @@ class Router: ObservableObject {
         case managebmrcalcuator
         case bmrresult(bmr: Double,tdee: Double, unit: String)
         case managrboyfat
-        case boyfatresult(bmr: Double, tdee: Double, unit: String)
+        case boyfatresult(bodyFatPercentage: Double, fatMass: Double, leanMass: Double, idealFatPercent: Double, fatToLose: Double, bmiMethodFat: Double, category: String, gender: String, unit: String)
+
     }
     @Published var path: NavigationPath = NavigationPath()
     
@@ -83,8 +84,8 @@ class Router: ObservableObject {
             BmrResult(bmr: bmr, tdee: tdee, unit: unit).navigationBarBackButtonHidden()
         case .managrboyfat:
             ManageBodyFat().navigationBarBackButtonHidden()
-        case let .boyfatresult(bmr, tdee, unit):
-            BodyFatResult(bmr: bmr, tdee: tdee, unit: unit).navigationBarBackButtonHidden()
+        case let .boyfatresult(bodyFatPercentage, fatMass, leanMass, idealFatPercent, fatToLose, bmiMethodFat, category, gender, unit):
+            BodyFatResult(bodyFatPercentage: bodyFatPercentage, fatMass: fatMass, leanMass: leanMass, idealFatPercent: idealFatPercent, fatToLose: fatToLose, bmiMethodFat: bmiMethodFat, category: category, gender: gender, unit: "kg").navigationBarBackButtonHidden()
         }
     }
     

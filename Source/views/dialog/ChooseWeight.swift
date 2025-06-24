@@ -68,26 +68,30 @@ struct ChooseWeight: View {
                     }
 
                     HStack(spacing: 10) {
-                        Button("Xoá") {
+                        Button {
                             if !inputText.isEmpty {
                                 inputText.removeLast()
                             }
+                        } label: {
+                            Image(systemName: "xmark.shield.fill")
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color.red)
+                            .foregroundColor(.white)
+                            .cornerRadius(8)
                         }
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.red)
-                        .foregroundColor(.white)
-                        .cornerRadius(8)
 
-                        Button("Xác nhận") {
+                        Button {
                             input = inputText
                             isShowDialog = false
+                        } label: {
+                            Image(systemName: "checkmark.shield.fill")
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color.green)
+                            .foregroundColor(.white)
+                            .cornerRadius(8)
                         }
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.green)
-                        .foregroundColor(.white)
-                        .cornerRadius(8)
                     }
                 }
                 .padding()

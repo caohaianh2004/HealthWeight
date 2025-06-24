@@ -60,3 +60,15 @@
 "abc_verintense" = "2+ hours of elevated heart rate activity.";
 "abc_bodyFat" = "Body Fat Calculator";
 "abc_bodyFatresult" = "Body Fat Result";
+"abc_bodyfat" = "Body Fat (U.S. Navy Method)";
+"abc_Essential" = "Essential \nFat";
+"abc_Athletes" = "Athletes";
+"abc_Fitness" = "Fitness";
+"abc_Average" = "Average";
+"abc_Obese" = "Obese";
+"abc_BodyFatcategory" = "Body Fat category";
+"abc_BodyFatMass" = "Body Fat Mass";
+"abc_LeanBodyMass" = "Lean Body Mass";
+"abc_IdealBody" = "Ideal Body Fat for Given Age \n (Jackson & Pollard)";
+"abc_BodyFatto" = "Body Fat to Lose to Reach Ideal";
+"abc_BMImethod" = "Body Fat (BMI method)";
