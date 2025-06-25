@@ -22,14 +22,13 @@ struct BmiResult: View {
                 } label: {
                     Image(systemName: "arrow.left")
                         .foregroundColor(.black)
-                        .font(.title)
+                        .font(.title2)
                 }
-                Spacer()
+                
                 Text(localizedkey: "abc_result")
-                    .font(.title2)
+                    .font(.system(size: 18))
                     .bold()
                     .frame(maxWidth: .infinity)
-                    .padding(.leading, -40)
                 
                 Button {
                     
@@ -37,7 +36,7 @@ struct BmiResult: View {
                     Image("information")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 30)
+                        .frame(width: 20)
                 }
             }
             .padding()

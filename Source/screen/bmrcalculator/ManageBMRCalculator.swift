@@ -20,14 +20,13 @@ struct ManageBMRCalculator: View {
                 } label: {
                     Image(systemName: "arrow.backward")
                         .foregroundColor(.black)
-                        .font(.title)
+                        .font(.title2)
                 }
-                Spacer()
                 
                 Text(localizedkey: "abc_bmr")
-                    .font(.system(size: 20))
+                    .frame(maxWidth: .infinity)
+                    .font(.system(size: 18))
                     .bold()
-                Spacer()
                 
                 Button {
                     
@@ -35,7 +34,7 @@ struct ManageBMRCalculator: View {
                     Image("information")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 30)
+                        .frame(width: 20)
                 }
             }
             .padding()

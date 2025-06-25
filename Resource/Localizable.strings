@@ -37,7 +37,7 @@
 "abc_BMr" = "BMR estimation formula";
 "abc_bodyfat" = "Body Fat";
 "abc_more" = "More Settings";
-"abc_calorie" = "Calorie Result";
+"abc_caloriee" = "Calorie Result";
 "abc_textresult" = "The result show a number of daily calorie estimates that can be used as a guideline for how many calories to consume each day to maintain,lose, or gain weight at a chosen rate.";
 "abc_maintain" = "Maintain Weight";
 "abc_maid" = "Mid Weight Loss \n 0.25 kg/ week";
@@ -72,3 +72,18 @@
 "abc_IdealBody" = "Ideal Body Fat for Given Age \n (Jackson & Pollard)";
 "abc_BodyFatto" = "Body Fat to Lose to Reach Ideal";
 "abc_BMImethod" = "Body Fat (BMI method)";
+"abc_ideal" = "Ideal Weight Calculator";
+"abc_idealweight" = "IDEAL WEIGHT";
+"abc_leanbody" = "LEAN BODY MASS";
+"abc_health" = "HEALTHY WEIGHT";
+"abc_army" = "ARMY BODY FAT";
+"abc_calorie" = "CALORIES BURNED";
+"abc_idelresult" = "Ideal Weight Result";
+"abc_textideal" = "The ideal weight based on popular formulas:";
+"abc_formula" = "Formulas";
+"abc_idelWeight" = "Ideal Weight";
+"abc_robinson" = "Robinson (1983)";
+"abc_miller" = "Miller (1983)";
+"abc_devine" = "Devine (1974)";
+"abc_hamwi" = "Hamwi (1964)";
+"abc_healthybmi" = "Healthy BMI Range";

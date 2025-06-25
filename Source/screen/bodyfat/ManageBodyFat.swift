@@ -18,19 +18,19 @@ struct ManageBodyFat: View {
                     route.navigateBack()
                 } label: {
                     Image(systemName: "arrow.left")
-                        .font(.title)
+                        .font(.title2)
                         .foregroundColor(.black)
                 }
                 Spacer()
                 
                 Text(localizedkey: "abc_bodyFat")
-                    .font(.system(size: 20))
+                    .font(.system(size: 18))
                     .bold()
                 Spacer()
                 Image("information")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 30)
+                    .frame(width: 20)
             }
             .padding()
             

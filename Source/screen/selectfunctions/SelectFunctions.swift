@@ -22,27 +22,27 @@ struct SelectFunctions: View {
                     route.navigateBack()
                 } label: {
                     Image(systemName: "arrow.left")
-                        .font(.title)
+                        .font(.title2)
                         .foregroundColor(.black)
                 }
                 Spacer()
                 
                 Text(localizedkey: "abc_selection")
-                    .font(.title3)
+                    .font(.system(size: 18))
                     .bold()
                     .frame(maxWidth: .infinity)
                     .padding(.leading, -30)
             }
             .padding(10)
-            ScrollView{
+     
                 VStack {
                     HStack {
                         Image("fame")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 30)
+                            .frame(width: 25)
                         Text("bmi calculator").textCase(.uppercase)
-                            .font(.system(size: 15))
+                            .font(.system(size: 13))
                         
                         Spacer()
                         
@@ -57,9 +57,9 @@ struct SelectFunctions: View {
                         Image("fame126")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 30)
+                            .frame(width: 25)
                         Text("calorie calculator").textCase(.uppercase)
-                            .font(.system(size: 15))
+                            .font(.system(size: 13))
                         
                         Spacer()
 
@@ -74,9 +74,9 @@ struct SelectFunctions: View {
                         Image("fame7")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 30)
+                            .frame(width: 25)
                         Text("bmr calculator").textCase(.uppercase)
-                            .font(.system(size: 15))
+                            .font(.system(size: 13))
                         
                         Spacer()
           
@@ -90,9 +90,9 @@ struct SelectFunctions: View {
                         Image("fame221")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 30)
+                            .frame(width: 25)
                         Text("body fat calculator").textCase(.uppercase)
-                            .font(.system(size: 15))
+                            .font(.system(size: 13))
                         
                         Spacer()
    
@@ -107,9 +107,9 @@ struct SelectFunctions: View {
                         Image("fame2")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 30)
+                            .frame(width: 25)
                         Text("ideal weight").textCase(.uppercase)
-                            .font(.system(size: 15))
+                            .font(.system(size: 13))
                         
                         Spacer()
                         
@@ -127,9 +127,9 @@ struct SelectFunctions: View {
                         Image("fame3")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 30)
+                            .frame(width: 25)
                         Text("lean body mass").textCase(.uppercase)
-                            .font(.system(size: 15))
+                            .font(.system(size: 13))
                         
                         Spacer()
                         
@@ -147,9 +147,9 @@ struct SelectFunctions: View {
                         Image("fame4")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 30)
+                            .frame(width: 25)
                         Text("healthy weight").textCase(.uppercase)
-                            .font(.system(size: 15))
+                            .font(.system(size: 13))
                         
                         Spacer()
                         
@@ -167,9 +167,9 @@ struct SelectFunctions: View {
                         Image("fame5")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 30)
+                            .frame(width: 25)
                         Text("army body fat").textCase(.uppercase)
-                            .font(.system(size: 15))
+                            .font(.system(size: 13))
                         
                         Spacer()
                         
@@ -187,9 +187,9 @@ struct SelectFunctions: View {
                         Image("fame6")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 30)
+                            .frame(width: 25)
                         Text("calories burned").textCase(.uppercase)
-                            .font(.system(size: 15))
+                            .font(.system(size: 13))
                         
                         Spacer()
                         
@@ -204,8 +204,8 @@ struct SelectFunctions: View {
                     .padding(6)
                 }
                 .padding()
-            }
         }
+        Spacer()
     }
 }
 

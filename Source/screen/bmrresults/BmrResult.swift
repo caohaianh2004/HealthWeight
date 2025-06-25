@@ -57,17 +57,19 @@ struct BmrResult: View {
                 route.navigateBack()
             } label: {
                 Image(systemName: "arrow.left")
-                    .font(.title)
+                    .font(.title2)
                     .foregroundColor(.black)
             }
-            Spacer()
             
             Text(localizedkey: "abc_bmrresult")
-                .foregroundStyle(Color.black)
-                .font(.title2)
                 .frame(maxWidth: .infinity)
+                .font(.system(size: 18))
                 .bold()
-                .padding(.leading, -42)
+            
+            Image("information")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 20)
         }
         .padding()
     }

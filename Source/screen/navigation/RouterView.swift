@@ -49,7 +49,8 @@ class Router: ObservableObject {
         case bmrresult(bmr: Double,tdee: Double, unit: String)
         case managrboyfat
         case boyfatresult(bodyFatPercentage: Double, fatMass: Double, leanMass: Double, idealFatPercent: Double, fatToLose: Double, bmiMethodFat: Double, category: String, gender: String, unit: String)
-
+        case manageidealweight
+        case idealWeightResult( robinson: Double, miller: Double, devine: Double, hamwi: Double, healthyMin: Double, healthyMax: Double, unit: String)
     }
     @Published var path: NavigationPath = NavigationPath()
     
@@ -85,7 +86,11 @@ class Router: ObservableObject {
         case .managrboyfat:
             ManageBodyFat().navigationBarBackButtonHidden()
         case let .boyfatresult(bodyFatPercentage, fatMass, leanMass, idealFatPercent, fatToLose, bmiMethodFat, category, gender, unit):
-            BodyFatResult(bodyFatPercentage: bodyFatPercentage, fatMass: fatMass, leanMass: leanMass, idealFatPercent: idealFatPercent, fatToLose: fatToLose, bmiMethodFat: bmiMethodFat, category: category, gender: gender, unit: "kg").navigationBarBackButtonHidden()
+            BodyFatResult(bodyFatPercentage: bodyFatPercentage, fatMass: fatMass, leanMass: leanMass, idealFatPercent: idealFatPercent, fatToLose: fatToLose, bmiMethodFat: bmiMethodFat, category: category, gender: gender, unit: unit).navigationBarBackButtonHidden()
+        case .manageidealweight:
+            ManageIdealWeight().navigationBarBackButtonHidden()
+        case let .idealWeightResult(robinson, miller, devine, hamwi, healthyMin, healthyMax, unit):
+            IdealWeightResult(robinson: robinson, miller: miller, devine: devine, hamwi: hamwi, healthyMin: healthyMin, healthyMax: healthyMax, unit: unit).navigationBarBackButtonHidden()
         }
     }
     

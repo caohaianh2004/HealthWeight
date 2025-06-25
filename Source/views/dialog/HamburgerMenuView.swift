@@ -23,7 +23,7 @@ struct HamburgerMenuView: View {
                         Image("Image5")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 250, height: 250)
+                            .frame(width: 200, height: 200)
                             .padding(.top, 20)
                         
                         Group {
@@ -31,9 +31,13 @@ struct HamburgerMenuView: View {
                                 route.navigateTo(.selecfunctions)
                             } label: {
                                 Image(systemName: "list.clipboard.fill")
+                                    .font(.system(size: 15))
+                                
                                 Text("Select Functions")
+                                    .font(.system(size: 16))
                                 Spacer()
                                 Image(systemName: "chevron.forward")
+                                    .font(.system(size: 15))
                             }
                             
                             Divider()
@@ -43,9 +47,13 @@ struct HamburgerMenuView: View {
                                 route.navigateTo(.editProfile)
                             } label: {
                                 Image(systemName: "person.crop.circle")
+                                    .font(.system(size: 15))
+                                
                                 Text("Edit Profile")
+                                    .font(.system(size: 16))
                                 Spacer()
                                 Image(systemName: "chevron.forward")
+                                    .font(.system(size: 15))
                             }
                             Divider()
                                 .background(Color.black)
@@ -54,7 +62,10 @@ struct HamburgerMenuView: View {
                                 /*Nhập nội dung*/
                             } label: {
                                 Image(systemName: "text.bubble.fill")
+                                    .font(.system(size: 15))
+                                
                                 Text("Feedback")
+                                    .font(.system(size: 16))
                             }
                             Divider()
                                 .background(Color.black)
@@ -63,7 +74,10 @@ struct HamburgerMenuView: View {
                                 /*Nhập nội dung*/
                             } label: {
                                 Image(systemName: "square.grid.2x2.fill")
+                                    .font(.system(size: 15))
+                                
                                 Text("Other Apps")
+                                    .font(.system(size: 16))
                             }
                             Divider()
                                 .background(Color.black)
@@ -72,7 +86,10 @@ struct HamburgerMenuView: View {
                                 /*Nhập nội dung*/
                             } label: {
                                 Image(systemName: "star.fill")
+                                    .font(.system(size: 15))
+                                
                                 Text("Rate App")
+                                    .font(.system(size: 16))
                             }
                             Divider()
                                 .background(Color.black)
@@ -86,7 +103,7 @@ struct HamburgerMenuView: View {
                         
                         Spacer()
                     }
-                    .padding(40)
+                    .padding(5)
                     .padding(.horizontal, 20)
                     .frame( maxHeight: .infinity)
                     .frame(width: 300)

@@ -28,19 +28,16 @@ struct ManaEditProfileScreen: View {
                     route.navigateBack()
                 } label: {
                     Image(systemName: "arrow.left")
-                        .font(.title)
+                        .font(.title2)
                         .foregroundColor(.black)
                 }
                 
-                Spacer()
                 
                 Text(localizedkey:"abc_create_your_profile")
-                    .font(.system(size: 20))
+                    .font(.system(size: 18))
                     .bold()
                     .frame(maxWidth: .infinity)
-                    .padding(.leading, 40)
-                
-                Spacer()
+                    .padding(.leading, 30)
                 
                 Button {
                     UserDefaults.standard.set(selectionTab, forKey: "selectedTab")
@@ -71,7 +68,7 @@ struct ManaEditProfileScreen: View {
                     route.navigateTo(.home)
                 } label: {
                     Text(localizedkey: "abc_next")
-                        .frame(width: 80, height: 40)
+                        .frame(width: 50, height: 40)
                         .foregroundColor(.white)
                         .bold()
                         .background(Color.green)

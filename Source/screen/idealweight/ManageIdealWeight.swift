@@ -1,15 +1,15 @@
 //
-//  ManageCalorieCalculator.swift
+//  ManageIdealWeight.swift
 //  Health_Weight
 //
-//  Created by Boss on 17/06/2025.
+//  Created by Boss on 25/06/2025.
 //
 
 import SwiftUI
 
-struct ManageCalorieCalculator: View {
+struct ManageIdealWeight: View {
     @EnvironmentObject var route: Router
-    @State private var selectionTab = 0
+    @State private var seletionTab = 0
     
     var body: some View {
         VStack {
@@ -17,16 +17,17 @@ struct ManageCalorieCalculator: View {
                 Button {
                     route.navigateBack()
                 } label: {
-                    Image(systemName: "arrow.backward")
+                    Image(systemName: "arrow.left")
                         .font(.title2)
                         .foregroundColor(.black)
                 }
+                Spacer()
                 
-                
-                Text(localizedkey: "abc_caloriee")
-                    .frame(maxWidth: .infinity)
+                Text(localizedkey: "abc_ideal")
                     .font(.system(size: 18))
                     .bold()
+                
+                Spacer()
                 
                 Button {
                     
@@ -38,20 +39,18 @@ struct ManageCalorieCalculator: View {
                 }
             }
             .padding()
-            
             HStack {
                 ForEach(["US Units", "Metric Units"], id: \.self) { tab in
                     Button {
-                        selectionTab = tab == "US Units" ? 0 : 1
+                        seletionTab = tab == "US Units" ? 0 : 1
                     } label: {
                         Text(tab)
                             .padding(5)
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 8)
                             .font(.system(size: 13))
-                            .bold()
-                            .background(selectionTab == (tab == "US Units" ? 0 : 1) ? .green : .gray.opacity(0.3))
-                            .foregroundStyle(selectionTab == (tab == "US Units" ? 0 : 1) ? .white : .black)
+                            .background(seletionTab == (tab == "US Units" ? 0 : 1) ? Color.green : Color.gray.opacity(0.3))
+                            .foregroundStyle(seletionTab == (tab == "US Units" ? 0 : 1) ? Color.white : Color.black)
                             .clipShape(RoundedRectangle(cornerRadius: 8))
                     }
                     .padding(5)
@@ -59,19 +58,19 @@ struct ManageCalorieCalculator: View {
             }
             
             Group {
-                if selectionTab == 0 {
-                    ViewUs()
+                if seletionTab == 0 {
+                    IdealWeightUS()
                 } else {
-                  ViewMetric()
+                    IdealWeightMetric()
                 }
             }
         }
         .onAppear {
-            selectionTab = UserDefaults.standard.integer(forKey: "selectedTab")
+            seletionTab = UserDefaults.standard.integer(forKey: "selectedTab")
         }
     }
 }
 
 #Preview {
-    ManageCalorieCalculator()
+    ManageIdealWeight()
 }

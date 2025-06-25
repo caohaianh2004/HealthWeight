@@ -28,8 +28,8 @@ struct StandbyScreen: View {
             }
             .frame(maxHeight: .infinity, alignment: .center)
             .onAppear {
-                withAnimation(.easeInOut(duration: 5)) {
-                    isShowtext = 0.5
+                withAnimation(.easeInOut(duration: 2)) {
+                    isShowtext = 0.9
                 }
             }
             
@@ -49,11 +49,11 @@ struct StandbyScreen: View {
     }
     
     private func animateTextAndNavigate() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             withAnimation(.easeIn(duration: 1)) {
                 isTextVisible = true
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 let isFirstLaunch = UserDefaults.standard.bool(forKey: KEY_FIRST_APP)
                 if isFirstLaunch {
                     self.route.navigateTo(.onboard)

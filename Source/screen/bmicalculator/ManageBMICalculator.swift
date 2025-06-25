@@ -18,14 +18,13 @@ struct ManageBMICalculator: View {
                     route.navigateBack()
                 } label: {
                     Image(systemName: "arrow.backward")
-                        .font(.title)
+                        .font(.title2)
                         .foregroundColor(.black)
                 }
                 
-                Spacer()
-                
                 Text(localizedkey: "abc_bmiCalcuator")
-                    .font(.title3)
+                    .frame(maxWidth: .infinity)
+                    .font(.system(size: 18))
                     .bold()
                 
                 Spacer()
@@ -36,7 +35,7 @@ struct ManageBMICalculator: View {
                     Image("information")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 25)
+                        .frame(width: 20)
                 }
             }
             

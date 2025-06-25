@@ -24,7 +24,7 @@ struct OnBoandingScreen: View {
                             .foregroundStyle(.black)
                             .multilineTextAlignment(.center)
                             .bold()
-                            .font(.system(size: 16))
+                            .font(.system(size: 15))
                     }
                     .tag(0)
 
@@ -37,7 +37,7 @@ struct OnBoandingScreen: View {
                             .foregroundStyle(.black)
                             .multilineTextAlignment(.center)
                             .bold()
-                            .font(.system(size: 16))
+                            .font(.system(size: 15))
                     }
                     .tag(1)
 
@@ -50,7 +50,7 @@ struct OnBoandingScreen: View {
                             .foregroundStyle(.black)
                             .multilineTextAlignment(.center)
                             .bold()
-                            .font(.system(size: 16))
+                            .font(.system(size: 15))
                     }
                     .tag(2)
                 }

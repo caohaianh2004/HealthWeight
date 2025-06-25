@@ -32,20 +32,26 @@ struct CalorieResult: View {
                     route.navigateBack()
                 } label: {
                     Image(systemName: "arrow.backward")
-                        .font(.title)
+                        .font(.title2)
                         .foregroundColor(.black)
                 }
-                .padding()
-                Spacer()
                 
                 Text(localizedkey: "abc_calorie")
-                    .font(.title2)
+                    .font(.system(size: 18))
                     .bold()
                     .frame(maxWidth: .infinity)
-                    .padding(.leading, -54)
-                
-                Spacer()
+                   
+                Button {
+                    
+                } label: {
+                    Image("information")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 20)
+                }
+    
             }
+            .padding()
             
             ScrollView {
                 VStack(spacing: 15) {

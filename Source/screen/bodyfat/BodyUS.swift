@@ -197,7 +197,7 @@ struct BodyUS: View {
                 bmiMethodFat: bmiMethodFat,
                 category: category,
                 gender: gender,
-                unit: "kg"
+                unit: "lbs"
             ))
             
         } label: {

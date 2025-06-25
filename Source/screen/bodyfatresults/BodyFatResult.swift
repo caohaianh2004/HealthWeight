@@ -34,19 +34,19 @@ struct BodyFatResult: View {
                     route.navigateBack()
                 } label: {
                     Image(systemName: "arrow.left")
-                        .font(.title)
+                        .font(.title2)
                         .foregroundColor(.black)
                 }
                 
                 Text(localizedkey: "abc_bodyFatresult")
                     .frame(maxWidth: .infinity)
-                    .font(.system(size: 20))
+                    .font(.system(size: 18))
                     .bold()
                 
                 Image("information")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 30)
+                    .frame(width: 20)
             }
             .padding()
             

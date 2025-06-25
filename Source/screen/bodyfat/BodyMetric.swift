@@ -178,7 +178,7 @@ struct BodyMetric: View {
                 bmiMethodFat: bmiMethodFat,
                 category: category,
                 gender: gender,
-                unit: "kg" // 🟢 nếu muốn thêm đơn vị
+                unit: "kg"
             ))
 
         } label: {
