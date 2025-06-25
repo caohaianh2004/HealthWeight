@@ -9,14 +9,9 @@ import SwiftUI
 import SlidingRuler
 
 struct MetricUnitS: View {
-    enum Gender {
-        case man
-        case woden
-    }
     enum EditingField {
         case none, weightKg, age
     }
-    @State private var selectionGenden: Gender = .man
     @State private var value: Double = .zero
     @State private var input = ""
     @State private var isShowDialog = false
@@ -31,34 +26,12 @@ struct MetricUnitS: View {
             VStack {
                 ScrollView {
                     HStack {
-                        //                    Button {
-                        //                        selectionGenden = .man
-                        //                    } label: {
-                        //                        Image("man")
-                        //                            .renderingMode(.template)
-                        //                            .resizable()
-                        //                            .scaledToFit()
-                        //                            .frame(width: 40)
-                        //                            .foregroundColor(selectionGenden == .man ? .blue : .gray)
-                        //                    }
-                        
                         ForEach(viewModel.people) { person in
                             Image(person.image)
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 200)
                         }
-                        
-                        //                    Button {
-                        //                        selectionGenden = .woden
-                        //                    } label: {
-                        //                        Image("woden")
-                        //                            .renderingMode(.template)
-                        //                            .resizable()
-                        //                            .scaledToFit()
-                        //                            .frame(width: 40)
-                        //                            .foregroundColor(selectionGenden == .woden ? .pink : .gray)
-                        //                    }
                     }
                     
                     Text(String(format: "Height(165cm) (%.1f cm)", value))
@@ -106,9 +79,6 @@ struct MetricUnitS: View {
                         .cornerRadius(14)
                 }
                 Spacer()
-            }
-            .onAppear {
-                viewModel.fetchPeople()
             }
             .onAppear {
                 viewModel.fetchPeople()
