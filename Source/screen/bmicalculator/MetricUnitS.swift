@@ -162,5 +162,5 @@ struct MetricUnitS: View {
 }
 
 #Preview {
-    MetricUnitS()
+  MetricUnitS()
 }

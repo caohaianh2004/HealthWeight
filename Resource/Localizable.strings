@@ -80,7 +80,7 @@
 "abc_calorie" = "CALORIES BURNED";
 "abc_idelresult" = "Ideal Weight Result";
 "abc_textideal" = "The ideal weight based on popular formulas:";
-"abc_formula" = "Formulas";
+"abc_formula" = "Formula";
 "abc_idelWeight" = "Ideal Weight";
 "abc_robinson" = "Robinson (1983)";
 "abc_miller" = "Miller (1983)";
@@ -89,3 +89,12 @@
 "abc_healthybmi" = "Healthy BMI Range";
 "abc_leanbodyy" = "Lean Body Mass Calculator";
 "abc_textlean" = "Lean Body Mass Result";
+"abc_textresultlean" = "The lean body mass based on diferent formulas:";
+"abc_leanbodymass" = "Lean Body Mass";
+"abc_bodyfatt" = "Body Fat";
+"abc_boe" = "Boer^1";
+"abc_James" = "James^2";
+"abc_hume" = "Hume^3";
+"abc_healthyweight" = "Healthy Weight Calculator";
+"abc_healthweightresult" = "Healthy Weight Result";
+"abc_texthwr" = "The healthy weight range for the height is";

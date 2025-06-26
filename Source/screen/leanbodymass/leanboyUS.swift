@@ -109,7 +109,25 @@ struct leanboyUS: View {
     
     func buttonCalculate() -> some View {
         Button {
-            
+            let heightInTotal = heightft * 12 + heightin
+
+                  let boer = lbmBoerLbs(weightLb: weightpound, heightIn: heightInTotal, gender: gender)
+                  let james = lbmJamesLbs(weightLb: weightpound, heightIn: heightInTotal, gender: gender)
+                  let hume = lbmHumeLbs(weightLb: weightpound, heightIn: heightInTotal, gender: gender)
+
+                  let boerFat = 100 - (boer / weightpound * 100)
+                  let jamesFat = 100 - (james / weightpound * 100)
+                  let humeFat = 100 - (hume / weightpound * 100)
+
+                  route.navigateTo(.leanbodyresult(
+                      boerlean: boer,
+                      boerbody: boerFat,
+                      jameslean: james,
+                      jmmesbody: jamesFat,
+                      humelean: hume,
+                      humebody: humeFat,
+                      unit: "lbs"
+                  ))
         } label: {
             Text(localizedkey: "abc_calculate")
                 .padding()
@@ -123,6 +141,31 @@ struct leanboyUS: View {
         }
         
     }
+    
+    func lbmBoerLbs(weightLb: Double, heightIn: Double, gender: String) -> Double {
+        if gender == "man" {
+            return 0.407 * weightLb + 0.267 * heightIn - 19.2
+        } else {
+            return 0.252 * weightLb + 0.473 * heightIn - 48.3
+        }
+    }
+
+    func lbmJamesLbs(weightLb: Double, heightIn: Double, gender: String) -> Double {
+        if gender == "man" {
+            return 1.1 * weightLb - 128 * pow(weightLb, 2) / pow(heightIn, 2)
+        } else {
+            return 1.07 * weightLb - 148 * pow(weightLb, 2) / pow(heightIn, 2)
+        }
+    }
+
+    func lbmHumeLbs(weightLb: Double, heightIn: Double, gender: String) -> Double {
+        if gender == "man" {
+            return 0.32810 * weightLb + 0.33929 * heightIn - 29.5336
+        } else {
+            return 0.29569 * weightLb + 0.41813 * heightIn - 43.2933
+        }
+    }
+
     
     private func stepperBox(title: String, value: Binding<Double>, field: EditingField) -> some View {
         VStack {

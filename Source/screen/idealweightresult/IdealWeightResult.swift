@@ -9,7 +9,7 @@ import SwiftUI
 
 struct IdealWeightResult: View {
     @EnvironmentObject var route: Router
-    let robinson: Double
+       let robinson: Double
        let miller: Double
        let devine: Double
        let hamwi: Double
