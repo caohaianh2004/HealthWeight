@@ -38,22 +38,7 @@ struct ManageHealthyWeight: View {
             }
             .padding()
             
-            HStack {
-                ForEach(["US Units", "Metric Units"], id: \.self) { tab in
-                    Button {
-                        selectionTab = tab == "US Units" ? 0 : 1
-                    } label: {
-                        Text(tab)
-                            .padding(10)
-                            .frame(maxWidth: .infinity)
-                            .font(.system(size: 15))
-                            .foregroundStyle(selectionTab == (tab == "US Units" ? 0 : 1) ? Color.white : Color.black)
-                            .background(selectionTab == (tab == "US Units" ? 0 : 1) ? Color.green : Color.gray.opacity(0.3))
-                            .cornerRadius(10)
-                    }
-                    .padding(10)
-                }
-            }
+            buttonUsMetric(selectionTab: $selectionTab)
             
             Group {
                if selectionTab == 0 {
@@ -65,6 +50,29 @@ struct ManageHealthyWeight: View {
         }
         .onAppear {
             selectionTab = UserDefaults.standard.integer(forKey: "selectedTab")
+        }
+    }
+}
+
+struct buttonUsMetric: View {
+    @Binding var selectionTab: Int
+    
+    var body: some View {
+        HStack {
+            ForEach(["US Units", "Metric Units"], id: \.self) { tab in
+                Button {
+                    selectionTab = tab == "US Units" ? 0 : 1
+                } label: {
+                    Text(tab)
+                        .padding(10)
+                        .frame(maxWidth: .infinity)
+                        .font(.system(size: 15))
+                        .foregroundStyle(selectionTab == (tab == "US Units" ? 0 : 1) ? Color.white : Color.black)
+                        .background(selectionTab == (tab == "US Units" ? 0 : 1) ? Color.green : Color.gray.opacity(0.3))
+                        .cornerRadius(10)
+                }
+                .padding(10)
+            }
         }
     }
 }

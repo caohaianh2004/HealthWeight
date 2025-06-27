@@ -55,6 +55,8 @@ class Router: ObservableObject {
         case leanbodyresult(boerlean: Double, boerbody: Double, jameslean: Double, jmmesbody: Double, humelean: Double, humebody: Double, unit: String)
         case manageHealthyWeight
         case healthyweightresult(minWeight: Double, maxWeight: Double, unit: String)
+        case managearmybodyfat
+        case resultarmbody(resultarm: Double)
     }
     @Published var path: NavigationPath = NavigationPath()
     
@@ -103,6 +105,10 @@ class Router: ObservableObject {
             ManageHealthyWeight().navigationBarBackButtonHidden()
         case let .healthyweightresult(minWeight, maxWeght, unit):
             HealthyWeightResult(minWeight: minWeight, maxWeight: maxWeght,  unit: unit).navigationBarBackButtonHidden()
+        case .managearmybodyfat:
+            ManageArmyBodyFat().navigationBarBackButtonHidden()
+        case let .resultarmbody(resultarm):
+            ResultArmBodyFat(resultarm: resultarm).navigationBarBackButtonHidden()
         }
     }
     

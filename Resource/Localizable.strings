@@ -98,3 +98,7 @@
 "abc_healthyweight" = "Healthy Weight Calculator";
 "abc_healthweightresult" = "Healthy Weight Result";
 "abc_texthwr" = "The healthy weight range for the height is";
+"abc_army" = "Army Body Fat Calculator";
+"abc_resultarmy" = "Army Body Fat Result";
+"abc_textarmy" = "Maximum Allowable Body Fat Percentage to Join*";
+"abc_armytext" = "Maximum Body Fat Percentage Standard after Entry*";

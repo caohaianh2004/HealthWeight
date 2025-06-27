@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HealthyWeightResult: View {
     let minWeight: Double
-     let maxWeight: Double
+    let maxWeight: Double
     let unit: String
     @EnvironmentObject var route: Router
     let sections: [(color: Color, label: String)] = [
@@ -21,7 +21,6 @@ struct HealthyWeightResult: View {
         (.orange, "Very Poor"),
         (.red, "Dangerously High")
     ]
-    
     @State private var animatedMin: Double = 0.0
     @State private var animatedMax: Double = 0.0
     
@@ -57,7 +56,19 @@ struct HealthyWeightResult: View {
                 .scaledToFit()
                 .frame(width: 300)
             
-            VStack {
+            VStack(spacing: 4) {
+                // Số chia đều theo đoạn màu
+                HStack(spacing: 0) {
+                    ForEach(0..<sections.count + 1, id: \.self) { index in
+                        let step = (maxWeight - minWeight) / Double(sections.count)
+                        let value = minWeight + (Double(index) * step)
+                        Text(String(format: "%.0f", value))
+                            .font(.caption2)
+                            .frame(maxWidth: .infinity)
+                    }
+                }
+
+                // Thanh màu
                 HStack(spacing: 0) {
                     ForEach(sections, id: \.label) { section in
                         Rectangle()
@@ -71,6 +82,7 @@ struct HealthyWeightResult: View {
                 }
                 .frame(height: 30)
                 
+                // Label của từng đoạn
                 HStack(spacing: 0) {
                     ForEach(sections, id: \.label) { section in
                         Text(section.label)
@@ -81,13 +93,14 @@ struct HealthyWeightResult: View {
                     }
                 }
             }
-            .padding()
+            .padding(.horizontal)
+
             
             Text(localizedkey: "abc_texthwr")
                 .font(.system(size: 15))
                 .bold()
             
-            Text(String(format: "%.1f %@ - %.1f %@", minWeight, unit, maxWeight, unit))
+            Text(String(format: "%.1f %@ - %.1f %@", animatedMin, unit, animatedMax, unit))
                 .font(.title2)
                 .bold()
                 .foregroundStyle(Color.green)

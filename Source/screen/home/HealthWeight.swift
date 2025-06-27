@@ -189,7 +189,7 @@ struct HealthWeight: View {
                     
                     HStack {
                         Button {
-                            
+                            route.navigateTo(.managearmybodyfat)
                         } label: {
                             VStack {
                                 Image("fame5")

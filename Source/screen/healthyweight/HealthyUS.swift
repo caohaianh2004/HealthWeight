@@ -69,7 +69,12 @@ struct HealthyUS: View {
     
     func buttoncalculate() -> some View {
         Button {
-            
+            let(minHeight, maxHeight) = healthyWeightRangeLB(feet: heightft, inches: heightin)
+            route.navigateTo(.healthyweightresult(
+                minWeight: minHeight,
+                maxWeight: maxHeight,
+                unit: "lbs"
+            ))
         } label: {
             Text(localizedkey: "abc_calculate")
                 .padding()
@@ -82,6 +87,20 @@ struct HealthyUS: View {
                 .padding()
         }
     }
+    
+    func healthyWeightRangeLB(feet: Double, inches: Double) -> (min: Double, max: Double) {
+        let totalInches = feet * 12 + inches
+        let heightMeters = totalInches * 0.0254 // 1 inch = 0.0254 m
+        
+        let minKg = 18.5 * pow(heightMeters, 2)
+        let maxKg = 24.9 * pow(heightMeters, 2)
+        
+        let minLb = minKg * 2.20462
+        let maxLb = maxKg * 2.20462
+        
+        return (minLb, maxLb)
+    }
+
 }
 
 #Preview {
