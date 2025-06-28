@@ -124,13 +124,13 @@ struct ArmyBodyFatMetric: View {
     
     func buttonCalculate() -> some View {
         Button {
-            let result: Double
-                  if gender == "man" {
-                      result = armyBodyFatMaleCM(waist: waist, neck: neck, height: heightCm)
-                  } else {
-                      result = armyBodyFatFemaleCM(waist: waist, hip: hip, neck: neck, height: heightCm)
-                  }
-
+            let result: Double = armyBodyFatPercent(
+                gender: gender,
+                height: heightCm,
+                neck: neck,
+                waist: waist,
+                hip: hip
+            )
             route.navigateTo(.resultarmbody(resultarm: result))
         } label: {
             Text(localizedkey: "abc_calculate")
@@ -144,14 +144,20 @@ struct ArmyBodyFatMetric: View {
         .padding()
     }
     
-    func armyBodyFatMaleCM(waist: Double, neck: Double, height: Double) -> Double {
-        return 86.010 * log10(waist - neck) - 70.041 * log10(height) + 36.76
+    
+    func armyBodyFatPercent(gender: String, height: Double, neck: Double, waist: Double, hip: Double = 0.0) -> Double {
+        if gender == "man" {
+            // Công thức cho nam
+            let bodyFat = 86.010 * log10(waist - neck) - 70.041 * log10(height) + 36.76
+            return round(bodyFat * 10) / 10
+        } else {
+            // Công thức cho nữ
+            let bodyFat = 163.205 * log10(waist + hip - neck) - 97.684 * log10(height) - 78.387
+            return round(bodyFat * 10) / 10
+        }
     }
-
-    func armyBodyFatFemaleCM(waist: Double, hip: Double, neck: Double, height: Double) -> Double {
-        return 163.205 * log10(waist + hip - neck) - 97.684 * log10(height) - 78.387
-    }
-
+    
+    
     private func stepperBox(title: String, value: Binding<Double>, field: EditingField) -> some View {
         VStack {
             Text(title).bold()
