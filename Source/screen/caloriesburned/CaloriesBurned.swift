@@ -244,8 +244,10 @@ struct CaloriesBurned: View {
         }
     }
     
-    
     func calculateCalories() {
+        // Reset lại kết quả trước
+        result = nil
+
         // Kiểm tra đã chọn nhóm hoạt động
         if selectedText == "Select One" {
             alertMessage = "Please select an activity group."
@@ -268,14 +270,23 @@ struct CaloriesBurned: View {
         }
 
         // Kiểm tra giới hạn cân nặng
-        if kp == "pounds" && (bodykg < 80 || bodykg > 350) {
-            alertMessage = "Weight must be between 80 and 350 pounds."
-            showAlert = true
-            return
+        if kp == "pounds" {
+            if bodykg < 80 || bodykg > 350 {
+                alertMessage = "Weight must be between 80 and 350 pounds."
+                showAlert = true
+                return
+            }
+        } else if kp == "Kilograms" {
+            if bodykg < 35 || bodykg > 160 {
+                alertMessage = "Weight must be between 35 and 160 kilograms."
+                showAlert = true
+                return
+            }
         }
-
-        if kp == "Kilograms" && (bodykg < 35 || bodykg > 160) {
-            alertMessage = "Weight must be between 35 and 160 kilograms."
+        
+        // Kiểm tra giới hạn hours
+        if hours <= 0 || hours > 24 {
+            alertMessage = "Hours must be greater than 0 and not exceed 24."
             showAlert = true
             return
         }
@@ -287,11 +298,10 @@ struct CaloriesBurned: View {
             return
         }
 
-        // Chuyển cân nặng về kg nếu cần
+        // Tính toán
         let weightKg = kp == "pounds" ? bodykg * 0.453592 : bodykg
         let totalHours = hours + Double(minutes) / 60.0
 
-        // Xác định MET
         let metValue: Double
         switch selectedText {
         case "Walking, Running, Cycling, Swimming":
@@ -308,10 +318,11 @@ struct CaloriesBurned: View {
             metValue = 1.0
         }
 
-        // Tính calories
-        let calories = metValue * weightKg * totalHours
-        result = calories
+        // Gán kết quả
+        result = metValue * weightKg * totalHours
     }
+
+
 
     
     private func stepperBoxhours(title: String, valueft: Binding<Double>, field: EditingField) -> some View {
