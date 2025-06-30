@@ -102,3 +102,7 @@
 "abc_resultarmy" = "Army Body Fat Result";
 "abc_textarmy" = "Maximum Allowable Body Fat Percentage to Join*";
 "abc_armytext" = "Maximum Body Fat Percentage Standard after Entry*";
+"abc_caloriesBurned" = "Calories Burned Calculator";
+"abc_caloriesResult" = "Calories Burned Result";
+"abc_textkcal" = "Walking at a pace of 10.0 kilometers per hour for Kilometers Will burm around";
+"abc_textk" = "It will take around 30.0 minutes.";
