@@ -32,34 +32,12 @@ struct USUnits: View {
             VStack {
                 ScrollView {
                     HStack {
-                        //                    Button {
-                        //                        selectionGender = .man
-                        //                    } label: {
-                        //                        Image("man")
-                        //                            .renderingMode(.template)
-                        //                            .resizable()
-                        //                            .scaledToFit()
-                        //                            .frame(width: 40)
-                        //                            .foregroundStyle(selectionGender == .man ? .blue : .gray)
-                        //                    }
-                        
                         ForEach(viewModel.people) { person in
                             Image(person.image)
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 200)
                         }
-                        
-                        //                    Button {
-                        //                        selectionGender = .woden
-                        //                    } label: {
-                        //                        Image("woden")
-                        //                            .renderingMode(.template)
-                        //                            .resizable()
-                        //                            .scaledToFit()
-                        //                            .frame(width: 40)
-                        //                            .foregroundStyle(selectionGender == .woden ? .pink : .gray)
-                        //                    }
                     }
                     Text(String(format: "Height(165cm) (%.1f ft %.1f in)", valueft, valuein))
                         .foregroundStyle(Color.green)

@@ -11,7 +11,6 @@ struct CaloriesBurned: View {
     let bodyweight = [
         "Kilograms", "pounds"
     ]
-    
     enum EditingField {
         case none, hours, minutes, body
     }
@@ -27,7 +26,7 @@ struct CaloriesBurned: View {
     @State private var isShowHome = false
     
     @State private var selectedActivity = ""
-    @State private var hours: Double = .zero
+    @State private var hours: Double = 5.0
     @State private var minutes: Int = 45
     @State private var bodykg: Double = 70.0
     @State private var editingField: EditingField = .none
@@ -218,7 +217,6 @@ struct CaloriesBurned: View {
         }
     }
     
-    
     func buttnCalculate() -> some View {
         Button {
             calculateCalories()
@@ -247,28 +245,28 @@ struct CaloriesBurned: View {
     func calculateCalories() {
         // Reset lại kết quả trước
         result = nil
-
+        
         // Kiểm tra đã chọn nhóm hoạt động
         if selectedText == "Select One" {
             alertMessage = "Please select an activity group."
             showAlert = true
             return
         }
-
+        
         // Kiểm tra đã chọn hoạt động cụ thể
         if selectedActivity.isEmpty || selectedActivity == "Select Activity" {
             alertMessage = "Please select a specific activity."
             showAlert = true
             return
         }
-
+        
         // Kiểm tra đã chọn đơn vị cân nặng
         if kp.isEmpty {
             alertMessage = "Please select a weight unit (Kilograms or pounds)."
             showAlert = true
             return
         }
-
+        
         // Kiểm tra giới hạn cân nặng
         if kp == "pounds" {
             if bodykg < 80 || bodykg > 350 {
@@ -284,24 +282,31 @@ struct CaloriesBurned: View {
             }
         }
         
+        //Kiểm tra giới hạn minutes
+        if minutes <= 0 || minutes > 60 {
+            alertMessage = "Minutes exceeds 60 and must be greater than 0!"
+            showAlert = true
+            return
+        }
+        
         // Kiểm tra giới hạn hours
         if hours <= 0 || hours > 24 {
             alertMessage = "Hours must be greater than 0 and not exceed 24."
             showAlert = true
             return
         }
-
+        
         // Kiểm tra thời gian
         if hours <= 0 && minutes <= 0 {
             alertMessage = "Please enter the duration of activity."
             showAlert = true
             return
         }
-
+        
         // Tính toán
         let weightKg = kp == "pounds" ? bodykg * 0.453592 : bodykg
         let totalHours = hours + Double(minutes) / 60.0
-
+        
         let metValue: Double
         switch selectedText {
         case "Walking, Running, Cycling, Swimming":
@@ -317,13 +322,11 @@ struct CaloriesBurned: View {
         default:
             metValue = 1.0
         }
-
+        
         // Gán kết quả
         result = metValue * weightKg * totalHours
     }
-
-
-
+    
     
     private func stepperBoxhours(title: String, valueft: Binding<Double>, field: EditingField) -> some View {
         HStack {

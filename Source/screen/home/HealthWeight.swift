@@ -10,6 +10,10 @@ import SwiftUI
 struct HealthWeight: View {
     @EnvironmentObject var route: Router
     @State private var showMenu = false
+    let columns = [
+        GridItem(.flexible()),
+        GridItem(.flexible())
+    ]
     
     var body: some View {
         ZStack {
@@ -49,7 +53,7 @@ struct HealthWeight: View {
                         .bold()
                         .padding(.top, -42)
                     
-                   dailyWeght()
+                    dailyWeght()
                     
                     Text(localizedkey: "abc_filtness")
                         .font(.system(size: 17))
@@ -57,176 +61,52 @@ struct HealthWeight: View {
                         .padding()
                         .padding(.top, -30)
                     
-                    HStack {
-                        Button {
+                    LazyVGrid(columns: columns, spacing: 10) {
+                        
+                        gridButton(image: "fame", text: localizedkey("abc_bmi")) {
                             route.navigateTo(.managebmicalcuator)
-                        } label: {
-                            VStack {
-                                Image("fame")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 130, height: 40)
-                                Text(localizedkey: "abc_bmi")
-                                    .font(.system(size: 13))
-                                    .foregroundColor(.black)
-                            }
-                            .padding()
-                            .background(Color.white.opacity(0.3))
-                            .cornerRadius(13)
                         }
                         
-                        Button {
+                        gridButton(image: "fame126", text: localizedkey("abc_calorice")) {
                             route.navigateTo(.caloriecalculator)
-                        } label: {
-                            VStack {
-                                Image("fame126")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 130, height: 40)
-                                Text(localizedkey: "abc_calorice")
-                                    .font(.system(size: 13))
-                                    .foregroundColor(.black)
-                            }
                         }
-                        .padding()
-                        .background(Color.white.opacity(0.3))
-                        .cornerRadius(13)
-                    }
                         
-                    HStack {
-                        Button {
+                        gridButton(image: "fame135", text: localizedkey("abc_bmrr")) {
                             route.navigateTo(.managebmrcalcuator)
-                        } label: {
-                            VStack {
-                                Image("fame135")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 130, height: 30)
-                                Text(localizedkey: "abc_bmr")
-                                    .font(.system(size: 13))
-                                    .foregroundColor(.black)
-                                    .frame(width: 65)
-                            }
-                            .padding()
-                            .background(Color.white.opacity(0.3))
-                            .cornerRadius(13)
                         }
                         
-                        Button {
+                        gridButton(image: "fame221", text: localizedkey("abc_body")) {
                             route.navigateTo(.managrboyfat)
-                        } label: {
-                            VStack {
-                                Image("fame221")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 130, height: 30)
-                                Text(localizedkey: "abc_body")
-                                    .font(.system(size: 13))
-                                    .foregroundColor(.black)
-                                
-                            }
-                            .padding()
-                            .background(Color.white.opacity(0.3))
-                            .cornerRadius(13)
                         }
+                        
                     }
+                    .padding(.horizontal)
                     
-                    HStack {
-                        Button {
+                    HStack(spacing: 16) {
+                        smallGridButton(image: "fame2", text: localizedkey("abc_idealweight")) {
                             route.navigateTo(.manageidealweight)
-                        } label: {
-                            VStack {
-                                Image("fame2")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 30)
-                                Text(localizedkey: "abc_idealweight")
-                                    .font(.system(size: 12))
-                                    .foregroundColor(.black)
-                                    .frame(width: 70)
-                            }
-                            .padding(10)
-                            .background(Color.white.opacity(0.3))
-                            .cornerRadius(13)
                         }
                         
-                        Button {
+                        smallGridButton(image: "fame3", text: localizedkey("abc_leanbody")) {
                             route.navigateTo(.manageleanboy)
-                        } label: {
-                            VStack {
-                                Image("fame3")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 30)
-                                Text(localizedkey: "abc_leanbody")
-                                    .font(.system(size: 12))
-                                    .foregroundColor(.black)
-                                    .frame(width: 70)
-                            }
-                            .padding(10)
-                            .background(Color.white.opacity(0.3))
-                            .cornerRadius(13)
                         }
                         
-                        Button {
+                        smallGridButton(image: "fame4", text: localizedkey("abc_health")) {
                             route.navigateTo(.manageHealthyWeight)
-                        } label: {
-                            VStack {
-                                Image("fame4")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 30)
-                                Text(localizedkey: "abc_health")
-                                    .font(.system(size: 12))
-                                    .foregroundColor(.black)
-                                    .frame(width: 70)
-                            }
-                            .padding(10)
-                            .background(Color.white.opacity(0.3))
-                            .cornerRadius(13)
                         }
                     }
                     
-                    HStack {
-                        Button {
+                    HStack(spacing: 16) {
+                        smallGridButton(image: "fame5", text: localizedkey("abc_army")) {
                             route.navigateTo(.managearmybodyfat)
-                        } label: {
-                            VStack {
-                                Image("fame5")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 30)
-                                Text(localizedkey: "abc_army")
-                                    .font(.system(size: 12))
-                                    .foregroundColor(.black)
-                                    .frame(width: 70)
-                            }
-                            .padding(10)
-                            .background(Color.white.opacity(0.3))
-                            .cornerRadius(13)
                         }
                         
-                        Button {
+                        smallGridButton(image: "fame6", text: localizedkey("abc_calorie")) {
                             route.navigateTo(.managecaloriesburned)
-                        } label: {
-                            VStack {
-                                Image("fame6")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 30)
-                                Text(localizedkey: "abc_calorie")
-                                    .font(.system(size: 12))
-                                    .foregroundColor(.black)
-                                    .frame(width: 70)
-                            }
-                            .padding(10)
-                            .background(Color.white.opacity(0.3))
-                            .cornerRadius(13)
-                        }
-                    }
-                        
+                        }       
                     }
                 }
+            }
             
             HamburgerMenuView(showMenu: $showMenu)
             
@@ -234,6 +114,49 @@ struct HealthWeight: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
                 .padding()
         }
+    }
+}
+
+func localizedkey(_ key: String) -> String {
+    NSLocalizedString(key, comment: "")
+}
+
+func gridButton(image: String, text: String, action: @escaping () -> Void) -> some View {
+    Button(action: action) {
+        VStack {
+            Image(image)
+                .resizable()
+                .scaledToFit()
+                .frame(height: 30)
+            Text(text)
+                .font(.system(size: 12))
+                .foregroundColor(.black)
+                .multilineTextAlignment(.center)
+        }
+        .frame(maxWidth: .infinity)
+        .padding()
+        .background(Color.white.opacity(0.3))
+        .cornerRadius(13)
+    }
+}
+
+func smallGridButton(image: String, text: String, action: @escaping () -> Void) -> some View {
+    Button(action: action) {
+        VStack(spacing: 4) {
+            Image(image)
+                .resizable()
+                .scaledToFit()
+                .frame(height: 20)
+            
+            Text(text)
+                .font(.system(size: 10))
+                .foregroundColor(.black)
+                .multilineTextAlignment(.center)
+                .frame(height: 30)
+        }
+        .frame(width: 100, height: 80)
+        .background(Color.white.opacity(0.3))
+        .cornerRadius(12)
     }
 }
 

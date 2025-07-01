@@ -52,7 +52,7 @@ struct ChooseWeight: View {
                         HStack(spacing: 10) {
                             ForEach(row, id: \.self) { number in
                                 Button {
-                                    if inputText.count < 6 {
+                                    if inputText.count < 4 {
                                         inputText.append(number)
                                     }
                                 } label: {
@@ -101,7 +101,7 @@ struct ChooseWeight: View {
                 .shadow(radius: 8)
                 .offset(y: offSet)
                 .onAppear {
-                    inputText = input
+                    inputText = ""
                     withAnimation(.spring()) {
                         offSet = 0
                     }

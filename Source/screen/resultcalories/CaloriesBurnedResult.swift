@@ -63,9 +63,9 @@ struct CaloriesBurnedResult: View {
         }
         .onAppear {
             animatedResult = 0
-            Timer.scheduledTimer(withTimeInterval: 0.02, repeats: true) { timer in
+            Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { timer in
                 if animatedResult < resultCalories {
-                    animatedResult += 0.5
+                    animatedResult += 10
                 } else {
                     animatedResult = resultCalories
                     timer.invalidate()

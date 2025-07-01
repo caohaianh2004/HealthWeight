@@ -15,7 +15,7 @@
 "abc_filtness" = "Fitness & Health Calculators";
 "abc_bmi" = "BMI \n CALCULATOR";
 "abc_calorice" = "CALORIE \n CALCULATOR";
-"abc_bmr" = "BMR \n CALCULATOR";
+"abc_bmrr" = "BMR \n CALCULATOR";
 "abc_body" = "BODY FAT \n CALCULATOR";
 "abc_weightToday" = "Enter Your Weight Today ";
 "abc_text" = "Slide your weight today to track";
