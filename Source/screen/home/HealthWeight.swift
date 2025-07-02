@@ -16,6 +16,12 @@ struct HealthWeight: View {
     ]
     
     var body: some View {
+        let showFame2 = loadTabState(key: "show_fame2")
+        let showFame3 = loadTabState(key: "show_fame3")
+        let showFame4 = loadTabState(key: "show_fame4")
+        let showFame5 = loadTabState(key: "show_fame5")
+        let showFame6 = loadTabState(key: "show_fame6")
+        
         ZStack {
             Color.gray.opacity(0.3).ignoresSafeArea()
             ScrollView {
@@ -82,29 +88,35 @@ struct HealthWeight: View {
                     }
                     .padding(.horizontal)
                     
-                    HStack(spacing: 16) {
-                        smallGridButton(image: "fame2", text: localizedkey("abc_idealweight")) {
-                            route.navigateTo(.manageidealweight)
+            
+                    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 10) {
+                        if showFame2 {
+                            smallGridButton(image: "fame2", text: "Ideal Weight") {
+                                route.navigateTo(.manageidealweight)
+                            }
                         }
-                        
-                        smallGridButton(image: "fame3", text: localizedkey("abc_leanbody")) {
-                            route.navigateTo(.manageleanboy)
+                        if showFame3 {
+                            smallGridButton(image: "fame3", text: "Lean Body") {
+                                route.navigateTo(.manageleanboy)
+                            }
                         }
-                        
-                        smallGridButton(image: "fame4", text: localizedkey("abc_health")) {
-                            route.navigateTo(.manageHealthyWeight)
+                        if showFame4 {
+                            smallGridButton(image: "fame4", text: "Healthy Weight") {
+                                route.navigateTo(.manageHealthyWeight)
+                            }
+                        }
+                        if showFame5 {
+                            smallGridButton(image: "fame5", text: "Army Body Fat") {
+                                route.navigateTo(.managearmybodyfat)
+                            }
+                        }
+                        if showFame6 {
+                            smallGridButton(image: "fame6", text: "Calories Burned") {
+                                route.navigateTo(.managecaloriesburned)
+                            }
                         }
                     }
-                    
-                    HStack(spacing: 16) {
-                        smallGridButton(image: "fame5", text: localizedkey("abc_army")) {
-                            route.navigateTo(.managearmybodyfat)
-                        }
-                        
-                        smallGridButton(image: "fame6", text: localizedkey("abc_calorie")) {
-                            route.navigateTo(.managecaloriesburned)
-                        }       
-                    }
+                    .padding(.horizontal)
                 }
             }
             

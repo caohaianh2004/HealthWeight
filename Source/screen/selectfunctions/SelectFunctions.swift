@@ -9,11 +9,12 @@ import SwiftUI
 
 struct SelectFunctions: View {
     @EnvironmentObject var route: Router
-    @State private var selection4 = true
-    @State private var selection5 = true
-    @State private var selection6 = true
-    @State private var selection7 = true
-    @State private var selection8 = true
+    
+    @State private var selection4 = loadTabState(key: "show_fame2")
+    @State private var selection5 = loadTabState(key: "show_fame3")
+    @State private var selection6 = loadTabState(key: "show_fame4")
+    @State private var selection7 = loadTabState(key: "show_fame5")
+    @State private var selection8 = loadTabState(key: "show_fame6")
     
     var body: some View {
         VStack {
@@ -51,7 +52,7 @@ struct SelectFunctions: View {
                         
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(6)
+                    .padding(4)
                     
                     HStack {
                         Image("fame126")
@@ -68,7 +69,7 @@ struct SelectFunctions: View {
 
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(6)
+                    .padding(4)
                     
                     HStack {
                         Image("fame7")
@@ -84,7 +85,7 @@ struct SelectFunctions: View {
                             .foregroundStyle(Color.black.opacity(0.2))
                         }
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(6)
+                    .padding(4)
                     
                     HStack {
                         Image("fame221")
@@ -95,117 +96,45 @@ struct SelectFunctions: View {
                             .font(.system(size: 13))
                         
                         Spacer()
-   
-                            Image(systemName: "circle.circle.fill")
+                        
+                        Image(systemName: "circle.circle.fill")
                             .foregroundStyle(Color.black.opacity(0.2))
-
+                        
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(6)
+                    .padding(4)
                     
-                    HStack {
-                        Image("fame2")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 25)
-                        Text("ideal weight").textCase(.uppercase)
-                            .font(.system(size: 13))
-                        
-                        Spacer()
-                        
-                        Button {
-                            selection4.toggle()
-                        } label: {
-                            Image(systemName: selection4 ? "circle.circle" : "circle.circle.fill")
-                                .foregroundStyle(Color.black)
-                        }
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(6)
+                    tabToggle(name: "Ideal Weight", image: "fame2", isOn: $selection4, key: "show_fame2")
+                    tabToggle(name: "Lean Body", image: "fame3", isOn: $selection5, key: "show_fame3")
+                    tabToggle(name: "Healthy Weight", image: "fame4", isOn: $selection6, key: "show_fame4")
+                    tabToggle(name: "Army Body Fat", image: "fame5", isOn: $selection7, key: "show_fame5")
+                    tabToggle(name: "Calories Burned", image: "fame6", isOn: $selection8, key: "show_fame6")
                     
-                    HStack {
-                        Image("fame3")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 25)
-                        Text("lean body mass").textCase(.uppercase)
-                            .font(.system(size: 13))
-                        
-                        Spacer()
-                        
-                        Button {
-                            selection5.toggle()
-                        } label: {
-                            Image(systemName: selection5 ? "circle.circle" : "circle.circle.fill")
-                                .foregroundStyle(Color.black)
-                        }
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(6)
-                    
-                    HStack {
-                        Image("fame4")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 25)
-                        Text("healthy weight").textCase(.uppercase)
-                            .font(.system(size: 13))
-                        
-                        Spacer()
-                        
-                        Button {
-                            selection6.toggle()
-                        } label: {
-                            Image(systemName: selection6 ? "circle.circle" : "circle.circle.fill")
-                                .foregroundStyle(Color.black)
-                        }
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(6)
-                    
-                    HStack {
-                        Image("fame5")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 25)
-                        Text("army body fat").textCase(.uppercase)
-                            .font(.system(size: 13))
-                        
-                        Spacer()
-                        
-                        Button {
-                            selection7.toggle()
-                        } label: {
-                            Image(systemName: selection7 ? "circle.circle" : "circle.circle.fill")
-                                .foregroundStyle(Color.black)
-                        }
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(6)
-                    
-                    HStack {
-                        Image("fame6")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 25)
-                        Text("calories burned").textCase(.uppercase)
-                            .font(.system(size: 13))
-                        
-                        Spacer()
-                        
-                        Button {
-                            selection8.toggle()
-                        } label: {
-                            Image(systemName: selection8 ? "circle.circle" : "circle.circle.fill")
-                                .foregroundStyle(Color.black)
-                        }
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(6)
                 }
                 .padding()
         }
         Spacer()
+    }
+    
+    func tabToggle(name: String, image: String, isOn: Binding<Bool>, key: String) -> some View {
+        HStack {
+            Image(image)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 30, height: 30)
+            Text(name)
+                .textCase(.uppercase)
+                .font(.system(size: 13))
+            Spacer()
+            Button {
+                isOn.wrappedValue.toggle()
+                saveTabState(key: key, value: isOn.wrappedValue)
+            } label: {
+                Image(systemName: isOn.wrappedValue ? "circle.circle.fill" : "circle.circle")
+                    .foregroundColor(.black)
+            }
+        }
+        .padding(4)
     }
 }
 

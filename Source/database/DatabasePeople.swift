@@ -193,5 +193,5 @@ class DatabasePeople: ObservableObject {
             }
         }
     }
-
+    
 }

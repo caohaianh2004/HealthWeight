@@ -46,26 +46,44 @@ struct ManaEditProfileScreen: View {
                     var heightToSave = heightCm
                     var heightFt = 0.0
                     var heightIn = 0.0
-                    
+                    var weightToSaveKg = weight
+                    var weightToSaveLb = weightlb
+
                     if selectionTab == 0 {
-                    heightFt = selectedHeight
+                        // US Units: lb → kg
+                        heightFt = selectedHeight
                         heightIn = selectionValue
                         heightToSave = (heightFt * 30.48) + (heightIn * 2.54)
+                        weightToSaveKg = weightlb / 2.20462
+                    } else {
+                        // Metric: kg → lb
+                        weightToSaveLb = weight * 2.20462
                     }
-                    
+
                     let person = Person(
                         image: image,
-                        heightCm: heightCm,
-                        weightKg: weight,
+                        heightCm: heightToSave,
+                        weightKg: weightToSaveKg,
                         age: age,
                         targetWeightLb: weightgoal,
                         heightFt: heightFt,
                         heightln: heightIn,
-                        weightLb: weightlb
+                        weightLb: weightToSaveLb
                     )
 
                     db.addPerson(person)
-                    route.navigateTo(.home)
+
+                    // 👉 Ghi thêm vào bảng `data` cho HistoryWeight
+                    let today = DateFormatter.localizedString(from: Date(), dateStyle: .short, timeStyle: .none)
+                    let formattedDate = formatToYYYYMMDD(today)
+                    DatabaseData.shared.addWeight(
+                        time: formattedDate,
+                        weightKg: weightToSaveKg,
+                        weightLb: weightToSaveLb
+                    )
+
+                    route.navigateTo(.history)
+
                 } label: {
                     Text(localizedkey: "abc_next")
                         .frame(width: 50, height: 40)
@@ -74,6 +92,7 @@ struct ManaEditProfileScreen: View {
                         .background(Color.green)
                         .cornerRadius(10)
                 }
+
             }
             .padding(10)
             
@@ -124,8 +143,18 @@ struct ManaEditProfileScreen: View {
             }
         }
     }
+
+    func formatToYYYYMMDD(_ dateStr: String) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy"
+        if let date = formatter.date(from: dateStr) {
+            formatter.dateFormat = "yyyy-MM-dd"
+            return formatter.string(from: date)
+        }
+        return dateStr
+    }
 }
 
 #Preview {
-        ManaEditProfileScreen()
+    ManaEditProfileScreen()
 }
