@@ -10,10 +10,12 @@ import SlidingRuler
 
 struct AddWeight: View {
     @EnvironmentObject var route: Router
-    @State private var selectionKg: Double = 73.2
+    @State private var selectionKg: Double = .zero
+    @State private var weightkg: Double = .zero
+    @State private var weightlb: Double = .zero
     @StateObject var viewModel = UserViewModel()
     @State private var selectedTab = 1
-
+    
     var body: some View {
         VStack {
             addWeightTopbar()
@@ -25,59 +27,71 @@ struct AddWeight: View {
                         .resizable().scaledToFit()
                         .frame(width: 200)
                 }
-                Text(String(format: "Current Weight (%.1f kg)", selectionKg))
+                Text(String(format: "Current Weight (%.1f %@)", selectedTab == 0 ? weightlb : weightkg, selectedTab == 0 ? "lb" : "kg"))
                     .font(.system(size: 18))
                     .foregroundStyle(Color.green)
                 
                 SlidingRuler (
-                    value: $selectionKg,
+                    value: selectedTab == 0 ? $weightlb : $weightkg,
                     in: 0...269,
                     step: 1,
                     snap: .fraction,
                     tick: .fraction
                 )
                 .padding()
+                .onChange(of: weightkg) { newValue in
+                    if selectedTab == 1 {
+                        weightlb = newValue * 2.20462
+                        updateWeightInDatabase(weight: newValue)
+                    }
+                }
+                .onChange(of: weightlb) { newValue in
+                    if selectedTab == 0 {
+                        weightkg = newValue / 2.20462
+                        updateWeightInDatabase(weight: weightkg)
+                    }
+                }
                 
                 if let person = viewModel.people.first {
                     MeasuringmachineUpdated(
-                        weight: selectionKg,
+                        weight: selectedTab == 0 ? weightlb : weightkg,
                         heightCm: person.heightCm,
                         heightFt: person.heightFt,
                         heightIn: person.heightln,
                         selectedTab: selectedTab
                     )
                 }
-            }
-            .onAppear {
-                viewModel.fetchPeople()
             }
             Spacer()
         }
+
         .onAppear {
             selectedTab = UserDefaults.standard.integer(forKey: "selectedTab")
-        }
-        .onAppear {
             viewModel.fetchPeople()
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 if let person = viewModel.people.first {
-                    MeasuringmachineUpdated(
-                        weight: selectionKg,
-                        heightCm: person.heightCm,
-                        heightFt: person.heightFt,
-                        heightIn: person.heightln,
-                        selectedTab: selectedTab
-                    )
+                    weightkg = person.weightKg
+                    weightlb = person.weightKg * 2.20462
                 }
-
             }
         }
+
         .onChange(of: selectionKg) { newValue in
-            if let person = viewModel.people.first, let id = person.id {
+            if let person = viewModel.people.first,
+               let id = person.id {
                 viewModel.people[0].weightKg = newValue
                 DatabasePeople.shared.updateWeight(for: id, newWeight: newValue)
             }
         }
-
+    }
+    
+    private func updateWeightInDatabase(weight: Double) {
+        if let person = viewModel.people.first,
+           let id = person.id {
+            viewModel.people[0].weightKg = weight
+            DatabasePeople.shared.updateWeight(for: id, newWeight: weight)
+        }
     }
     
     private var formatter: NumberFormatter {
@@ -93,9 +107,9 @@ struct AddWeight: View {
             Button {
                 route.navigateBack()
             }label: {
-                    Image(systemName: "arrow.left")
-                        .foregroundColor(.black)
-                        .font(.title)
+                Image(systemName: "arrow.left")
+                    .foregroundColor(.black)
+                    .font(.title)
             }
             
             Spacer()
@@ -117,8 +131,9 @@ struct AddWeight: View {
         }
         .padding()
     }
-
 }
+
+
 
 struct MeasuringmachineUpdated: View {
     var weight: Double     // kg hoặc lb
@@ -126,7 +141,7 @@ struct MeasuringmachineUpdated: View {
     var heightFt: Double   // dùng cho US
     var heightIn: Double   // dùng cho US
     var selectedTab: Int   // 0 = US Units, 1 = Metric
-
+    
     var currentBMI: Double {
         if selectedTab == 0 {
             // US Units: BMI = (lb * 703) / (in * in)
@@ -138,7 +153,7 @@ struct MeasuringmachineUpdated: View {
             return heightInMeter > 0 ? weight / (heightInMeter * heightInMeter) : 0
         }
     }
-
+    
     let bmiZones: [(range: ClosedRange<Double>, label: String, color: Color)] = [
         (0...16.0, "Severe Thinness", .blue),
         (16.1...17.0, "Moderate Thinness", .blue.opacity(0.5)),
@@ -149,26 +164,26 @@ struct MeasuringmachineUpdated: View {
         (35.0...39.9, "Obese II", .red.opacity(0.7)),
         (40.0...269.0, "Obese III", .red)
     ]
-
+    
     var bmiCategoryLabel: String {
         bmiZones.first(where: { $0.range.contains(currentBMI) })?.label ?? "Unknown"
     }
-
+    
     var bmiCategoryColor: Color {
         bmiZones.first(where: { $0.range.contains(currentBMI) })?.color ?? .gray
     }
-
+    
     let minAngle: Double = -97
     let maxAngle: Double = 97
     let minBMI: Double = 0
     let maxBMI: Double = 60
-
+    
     var needleAngle: Double {
         let clampedBMI = min(max(currentBMI, minBMI), maxBMI)
         let ratio = (clampedBMI - minBMI) / (maxBMI - minBMI)
         return minAngle + ratio * (maxAngle - minAngle)
     }
-
+    
     var body: some View {
         VStack(spacing: 12) {
             ZStack {
@@ -176,7 +191,7 @@ struct MeasuringmachineUpdated: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 300)
-
+                
                 Image("needle")
                     .resizable()
                     .scaledToFit()
@@ -185,11 +200,11 @@ struct MeasuringmachineUpdated: View {
                     .rotationEffect(.degrees(needleAngle), anchor: .bottom)
                     .offset(y: -10)
             }
-
+            
             Text(String(format: "BMI = %.1f %@", currentBMI, selectedTab == 0 ? "lb/in²" : "kg/m²"))
                 .font(.title3)
                 .bold()
-
+            
             Text("(\(bmiCategoryLabel))")
                 .font(.system(size: 18))
                 .bold()

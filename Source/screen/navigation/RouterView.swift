@@ -60,6 +60,7 @@ class Router: ObservableObject {
         case managecaloriesburned
         case resultcalories(resultCalories: Double)
         case history
+        case weighttracker
     }
     @Published var path: NavigationPath = NavigationPath()
     
@@ -118,6 +119,8 @@ class Router: ObservableObject {
             CaloriesBurnedResult(resultCalories: resultCalories).navigationBarBackButtonHidden()
         case .history:
             HistoryWeight().navigationBarBackButtonHidden()
+        case .weighttracker:
+            WeightTracker().navigationBarBackButtonHidden()
         }
     }
     

@@ -81,8 +81,9 @@ struct ManaEditProfileScreen: View {
                         weightKg: weightToSaveKg,
                         weightLb: weightToSaveLb
                     )
-
-                    route.navigateTo(.history)
+                   
+                    DatabaseData.shared.syncLatestWeightToHistory()
+                    route.navigateTo(.home)
 
                 } label: {
                     Text(localizedkey: "abc_next")

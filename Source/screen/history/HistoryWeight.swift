@@ -34,14 +34,12 @@ struct HistoryWeight: View {
                 Spacer()
                 
                 Button {
-                    route.navigateTo(.home)
+                   
                 } label: {
-                    Text(localizedkey: "abc_next")
-                        .frame(width: 50, height: 40)
-                        .foregroundColor(.white)
-                        .bold()
-                        .background(Color.green)
-                        .cornerRadius(10)
+                    Image("crown")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 25, height: 25)
                 }
             }
             .padding()
@@ -151,7 +149,6 @@ struct HistoryWeight: View {
             }
         )
         .onAppear {
-            DatabaseData.shared.syncLatestWeightToHistory()
             DatabaseData.shared.deleteEntriesOlderThan7Days()
             self.historyList = DatabaseData.shared.getRecent7Days()
         }

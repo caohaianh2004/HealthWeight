@@ -1,9 +1,11 @@
 import SwiftUI
+import StoreKit
 
 struct HamburgerMenuView: View {
     @EnvironmentObject var route: Router
     @Binding var showMenu: Bool
-    let url = URL(string: "https://www.example.com")!
+    @Environment(\.requestReview) private var requestReview
+    @State var isShowingShareSheet : Bool = false
     
     var body: some View {
         ZStack {
@@ -59,7 +61,7 @@ struct HamburgerMenuView: View {
                                 .background(Color.black)
                             
                             Button {
-                                /*Nhập nội dung*/
+                                EmailHelper.shared.send(subject: LocalizationSystem.sharedInstance.localizedStringForKey(key:"menu_help_title", comment: ""), body: LocalizationSystem.sharedInstance.localizedStringForKey(key:"menu_help_detail", comment: ""), to: ["phunggtheduy4896@gmail.com"])
                             } label: {
                                 Image(systemName: "text.bubble.fill")
                                     .font(.system(size: 15))
@@ -71,7 +73,9 @@ struct HamburgerMenuView: View {
                                 .background(Color.black)
                             
                             Button {
-                                /*Nhập nội dung*/
+                                if let url = URL(string: "itms-apps://apps.apple.com/developer") {
+                                    UIApplication.shared.open(url)
+                                }
                             } label: {
                                 Image(systemName: "square.grid.2x2.fill")
                                     .font(.system(size: 15))
@@ -83,7 +87,7 @@ struct HamburgerMenuView: View {
                                 .background(Color.black)
                             
                             Button {
-                                /*Nhập nội dung*/
+                                requestReview()
                             } label: {
                                 Image(systemName: "star.fill")
                                     .font(.system(size: 15))
@@ -94,9 +98,19 @@ struct HamburgerMenuView: View {
                             Divider()
                                 .background(Color.black)
                             
-                            ShareLink(item: "Chia sẻ liên kết: https://www.example.com") {
-                                Label("Share", systemImage: "square.and.arrow.up.fill")
+                            Button {
+                                isShowingShareSheet.toggle()
+                            } label: {
+                                Image(systemName: "square.and.arrow.up.fill")
+                                    .font(.system(size: 15))
+                                
+                                Text("Share")
+                                    .font(.system(size: 16))
                             }
+                            .sheet(isPresented: $isShowingShareSheet) {
+                                ShareSheet(activityItems: ["English Grammar..."])
+                            }
+                            
                         }
                         .foregroundColor(.black)
                         .frame(maxWidth: .infinity, alignment: .leading)

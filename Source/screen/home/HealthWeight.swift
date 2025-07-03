@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import Charts
 
 struct HealthWeight: View {
     @EnvironmentObject var route: Router
     @State private var showMenu = false
+    @State private var history: [HistoryObject] = []
     let columns = [
         GridItem(.flexible()),
         GridItem(.flexible())
@@ -61,11 +63,65 @@ struct HealthWeight: View {
                     
                     dailyWeght()
                     
+                    VStack {
+                        Button {
+                            route.navigateTo(.history)
+                        } label: {
+                            HStack {
+                                Text("7-day weight history")
+                                    .foregroundStyle(Color.black)
+                                
+                                Spacer()
+                                
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.black)
+                            }
+                            .padding(5)
+                        }
+                        Chart {
+                            ForEach(last7DaysWithData, id: \.date) { entry in
+                                LineMark(
+                                    x: .value("Date", entry.date),
+                                    y: .value("Weight", entry.weight)
+                                )
+                                .interpolationMethod(.monotone)
+                                .foregroundStyle(.blue)
+                                
+                                PointMark(
+                                    x: .value("Date", entry.date),
+                                    y: .value("Weight", entry.weight)
+                                )
+                                .foregroundStyle(entry.weight == 0 ? .gray.opacity(0.4) : .red)
+                                
+                                RuleMark(x: .value("Date", entry.date))
+                                    .foregroundStyle(Color.gray.opacity(0.3))
+                            }
+                        }
+                    }
+                    .chartXAxis {
+                        AxisMarks(values: .stride(by: .day)) { value in
+                            AxisGridLine()
+                            AxisTick()
+                            AxisValueLabel(format: .dateTime.day().month(), centered: true)
+                                .font(.system(size: 10))
+                                .foregroundStyle(.black.opacity(0.3))
+                        }
+                    }
+                    .chartYAxis {
+                        AxisMarks(position: .leading)
+                    }
+                    .frame(height: 250)
+                    .padding()
+                    .background(Color.white.opacity(0.8))
+                    .cornerRadius(12)
+                    .shadow(radius: 3)
+                    .padding(.horizontal)
+                    
                     Text(localizedkey: "abc_filtness")
                         .font(.system(size: 17))
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding()
-                        .padding(.top, -30)
+                        .padding(.top, -10)
                     
                     LazyVGrid(columns: columns, spacing: 10) {
                         
@@ -88,8 +144,8 @@ struct HealthWeight: View {
                     }
                     .padding(.horizontal)
                     
-            
-                    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 10) {
+                    
+                    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())], spacing: 10) {
                         if showFame2 {
                             smallGridButton(image: "fame2", text: "Ideal Weight") {
                                 route.navigateTo(.manageidealweight)
@@ -118,6 +174,10 @@ struct HealthWeight: View {
                     }
                     .padding(.horizontal)
                 }
+                
+                .onAppear {
+                    history = DatabaseData.shared.getHistory(forDays: 7)
+                }
             }
             
             HamburgerMenuView(showMenu: $showMenu)
@@ -126,6 +186,31 @@ struct HealthWeight: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
                 .padding()
         }
+    }
+    
+    /// Trả về 7 ngày gần nhất và dữ liệu nếu có, nếu không có thì weight = 0
+    var last7DaysWithData: [(date: Date, weight: Double)] {
+        let today = Calendar.current.startOfDay(for: Date())
+        let past7Dates = (0..<7).map { Calendar.current.date(byAdding: .day, value: -$0, to: today)! }
+        let formatted = past7Dates.map { Calendar.current.startOfDay(for: $0) }
+        
+        // Group dữ liệu theo ngày
+        let grouped = Dictionary(grouping: history) { Calendar.current.startOfDay(for: toDate($0.time) ?? Date.distantPast) }
+        
+        // Trả về mảng tuple
+        return formatted.reversed().map { day in
+            if let item = grouped[day]?.first {
+                return (date: day, weight: Double(item.weightKg))
+            } else {
+                return (date: day, weight: 0)
+            }
+        }
+    }
+    
+    func toDate(_ time: String) -> Date? {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        return formatter.date(from: time)
     }
 }
 
@@ -179,7 +264,7 @@ struct dailyWeght: View {
         HStack {
             VStack {
                 Button {
-                    
+                    route.navigateTo(.weighttracker)
                 } label: {
                     HStack {
                         Text(localizedkey: "abc_daily")
@@ -219,7 +304,7 @@ struct dailyWeght: View {
                 }
                 
                 Button {
-                    
+                    route.navigateTo(.weighttracker)
                 } label: {
                     HStack {
                         Image("goal")

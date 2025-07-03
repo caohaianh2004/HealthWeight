@@ -184,7 +184,6 @@ class DatabaseData: ObservableObject {
         databaseQueue?.inDatabase { db in
             do {
                 try db.executeUpdate(query, values: nil)
-                print("🧹 Đã xoá các bản ghi cũ hơn 7 ngày")
             } catch {
                 print("🚨 Lỗi khi xoá bản ghi cũ: \(error.localizedDescription)")
             }
