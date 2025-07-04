@@ -61,7 +61,7 @@ struct HamburgerMenuView: View {
                                 .background(Color.black)
                             
                             Button {
-                                EmailHelper.shared.send(subject: LocalizationSystem.sharedInstance.localizedStringForKey(key:"menu_help_title", comment: ""), body: LocalizationSystem.sharedInstance.localizedStringForKey(key:"menu_help_detail", comment: ""), to: ["phunggtheduy4896@gmail.com"])
+                                EmailHelper.shared.send(subject: LocalizationSystem.sharedInstance.localizedStringForKey(key:"menu_help_title", comment: ""), body: LocalizationSystem.sharedInstance.localizedStringForKey(key:"menu_help_detail", comment: ""), to: ["caohaianh26@gmail.com"])
                             } label: {
                                 Image(systemName: "text.bubble.fill")
                                     .font(.system(size: 15))
