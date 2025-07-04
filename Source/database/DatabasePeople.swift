@@ -155,11 +155,12 @@ class DatabasePeople: ObservableObject {
                         image: result.string(forColumn: "image") ?? "",
                         heightCm: Double(result.double(forColumn: "heightCm")),
                         weightKg: Double(result.double(forColumn: "weightKg")),
+                        weightLb: Double(result.double(forColumn: "weightLb")), 
                         age: Int(result.int(forColumn: "age")),
                         targetWeightLb: Double(result.double(forColumn: "targetWeightLb")),
+                        targetWeightKg: Double(result.double(forColumn: "targetWeightKg")),
                         heightFt: Double(result.double(forColumn: "heightFt")),
-                        heightln: Double(result.double(forColumn: "heightln")),
-                        weightLb: Double(result.double(forColumn: "weightLb"))
+                        heightln: Double(result.double(forColumn: "heightln"))
                     )
                     person.append(people)
                 }

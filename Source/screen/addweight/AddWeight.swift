@@ -215,6 +215,6 @@ struct MeasuringmachineUpdated: View {
 }
 
 
-#Preview {
-    AddWeight()
-}
+//#Preview {
+//    AddWeight()
+//}

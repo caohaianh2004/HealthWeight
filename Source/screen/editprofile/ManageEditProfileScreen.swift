@@ -64,11 +64,12 @@ struct ManaEditProfileScreen: View {
                         image: image,
                         heightCm: heightToSave,
                         weightKg: weightToSaveKg,
+                        weightLb: weightToSaveLb,
                         age: age,
                         targetWeightLb: weightgoal,
+                        targetWeightKg: weightlb,
                         heightFt: heightFt,
-                        heightln: heightIn,
-                        weightLb: weightToSaveLb
+                        heightln: heightIn
                     )
 
                     db.addPerson(person)

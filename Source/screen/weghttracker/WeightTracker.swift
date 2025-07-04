@@ -28,6 +28,11 @@ struct WeightTracker: View {
     @State private var goalWeight: Double = .zero
     @StateObject private var viewModel = UserViewModel()
     @State private var history: [HistoryObject] = []
+    @State private var stats = WeightStats()
+    @State private var selectedTab = 1
+    @State private var weightkg: Double = .zero
+    @State private var weightlb: Double = .zero
+    @State private var selectedRange: String = "2W"
     
     var body: some View {
         VStack {
@@ -71,70 +76,80 @@ struct WeightTracker: View {
                     .padding()
                 }
             }
+            .padding(.top, -20)
             
             HStack {
                 HStack {
-                    Text("70.1")
-                    Text("kg")
+                    Text(String(format: "%.1f", convertedWeight(stats.startWeight)))
+                    Text(weightUnitLabel())
                     Image(systemName: "pencil")
                 }
+                
                 .font(.system(size: 13))
                 .padding(.leading, 30)
+                
                 Spacer()
                 
                 HStack {
-                    Text("62.5")
-                    Text("kg")
+                    Text(String(format: "%.1f", convertedWeight(stats.currentWeight)))
+                    Text(weightUnitLabel())
                     Image(systemName: "pencil")
                 }
                 .font(.system(size: 13))
                 .foregroundStyle(Color.green)
+                
                 Spacer()
                 
                 HStack {
-                    Text("60.5")
-                    Text("kg")
+                    Text(String(format: "%.1f", convertedWeight(stats.targetWeight)))
+                    Text(weightUnitLabel())
                     Image(systemName: "pencil")
                 }
                 .font(.system(size: 13))
             }
             .padding()
             .padding(.top, -40)
-            
+ 
             HStack {
-                ForEach(month, id: \.self) { list in
+                ForEach(month, id: \.self) { range in
                     Button {
-                        textWeight = list
+                        selectedRange = range
                     } label: {
-                        Text(list)
-                            .foregroundStyle(textWeight == list ? Color.green : Color.gray)
-                            .bold()
+                        Text(range)
                             .font(.system(size: 14))
+                            .fontWeight(.semibold)
+                            .foregroundColor(selectedRange == range ? .green : .gray)
                     }
-                    .padding()
-                    .padding(.top, -20)
-                    Spacer()
+                    .padding(.horizontal, 6)
+                    .padding(.vertical, 4)
+                    .background(selectedRange == range ? Color.green.opacity(0.1) : Color.clear)
+                    .clipShape(Capsule())
                 }
             }
+            .padding(5)
+            .padding(.horizontal)
             
             Chart {
-                ForEach(last7DaysWithData, id: \.date) { entry in
+                ForEach(filteredData, id: \.date) { entry in
                     LineMark(
                         x: .value("Date", entry.date),
-                        y: .value("Weight", entry.weight)
+                        y: .value("Weight", convertedWeight(entry.weight))
                     )
                     .interpolationMethod(.monotone)
                     .foregroundStyle(.blue)
                     
                     PointMark(
                         x: .value("Date", entry.date),
-                        y: .value("Weight", entry.weight)
+                        y: .value("Weight", convertedWeight(entry.weight))
                     )
-                    .foregroundStyle(entry.weight == 0 ? .gray.opacity(0.4) : .red)
+                    .foregroundStyle(entry.weight == 0 ? .gray.opacity(0.3) : .red)
                     
                     RuleMark(x: .value("Date", entry.date))
-                        .foregroundStyle(Color.gray.opacity(0.3))
+                        .foregroundStyle(Color.gray.opacity(0.2))
                 }
+            }
+            .chartYAxis {
+                AxisMarks(position: .leading)
             }
             .chartXAxis {
                 AxisMarks(values: .stride(by: .day)) { value in
@@ -145,9 +160,7 @@ struct WeightTracker: View {
                         .foregroundStyle(.black.opacity(0.3))
                 }
             }
-            .chartYAxis {
-                AxisMarks(position: .leading)
-            }
+            .chartYScale(domain: yAxisRange)
             .frame(height: 150)
             .padding()
             .background(Color.white.opacity(0.9))
@@ -155,67 +168,41 @@ struct WeightTracker: View {
             .shadow(radius: 3)
             .padding(.horizontal)
             
-            HStack {
-                ForEach(textlist, id: \.self) { list in
-                    Text(list)
-                        .foregroundStyle(Color.black)
-                        .font(.system(size: 13))
-                }
-                .padding()
-            }
-            Spacer()
+            
             
             HStack {
-                HStack {
-                    Image(systemName: "arrow.up")
-                    Text("+22")
-                    Text("kg")
+                VStack {
+                    Text("Change")
+                    Text(String(format: "%.1f \(weightUnitLabel())", convertedWeight(stats.change)))
+                        .foregroundColor(stats.change >= 0 ? .green : .red)
+                    
                 }
                 .font(.system(size: 13))
-                
                 Spacer()
-                
-                
-                HStack {
-                    Text("62.5")
-                    Text("kg")
+                VStack {
+                    Text("Average")
+                    Text(String(format: "%.1f \(weightUnitLabel())", convertedWeight(stats.average)))
                 }
                 .font(.system(size: 13))
-                .foregroundStyle(Color.green)
-             
                 Spacer()
-                
-                HStack {
-                    Text("-30.5")
-                    Text("kg")
+                VStack {
+                    Text("Remaining")
+                    Text(String(format: "%.1f \(weightUnitLabel())", convertedWeight(stats.remaining)))
+                        .foregroundColor(stats.remaining >= 0 ? .blue : .orange)
                 }
                 .font(.system(size: 13))
-                
-                
             }
             .padding()
-            .padding(.top, -40)
             
-            ZStack {
-                Image("control")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 300)
-                
-                Image("needle")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 30)
-                    .padding(.top, 20)
-                //                    .rotationEffect(.degrees(needleAngle), anchor: .bottom)
-                    .offset(y: -10)
+            if let person = viewModel.people.first {
+                MeasuringmachineUpdated(
+                    weight: selectedTab == 0 ? weightlb : weightkg,
+                    heightCm: person.heightCm,
+                    heightFt: person.heightFt,
+                    heightIn: person.heightln,
+                    selectedTab: selectedTab
+                )
             }
-            
-            Text("BMI = 15.9 kg/m2")
-                .bold()
-            Text("(Normal)")
-                .foregroundStyle(Color.green)
-                .bold()
             
             buttonthere()
             
@@ -223,8 +210,90 @@ struct WeightTracker: View {
         .onAppear {
             history = DatabaseData.shared.getHistory(forDays: 7)
         }
+        .onAppear {
+            let people = DatabasePeople.shared.getPerson()
+            if let person = people.first {
+                goalWeight = person.targetWeightLb   // hoặc .targetWeightKg nếu dùng metric
+                let historyData = DatabaseData.shared.getHistory(forDays: 7)
+                history = historyData
+                
+                // currentWeight là cân nặng mới nhất trong bảng data
+                let currentWeight = Double(historyData.last?.weightKg ?? Float(person.weightKg))
+                
+                stats = calculateWeightStatsInline(
+                    history: historyData,
+                    currentWeight: currentWeight,
+                    targetWeight: person.targetWeightLb // Nếu dùng US thì đổi sang targetWeightLb
+                )
+            }
+        }
+        .onAppear {
+            selectedTab = UserDefaults.standard.integer(forKey: "selectedTab")
+            viewModel.fetchPeople()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                if let person = viewModel.people.first {
+                    weightkg = person.weightKg
+                    weightlb = person.weightKg * 2.20462
+                }
+            }
+        }
+        
         Spacer()
     }
+    
+    var yAxisRange: ClosedRange<Double> {
+        let values = filteredData.map { convertedWeight($0.weight) }
+        let maxVal = values.max() ?? 0
+        
+        if maxVal <= 0 {
+            return 0...10  // không có dữ liệu → giữ thang nhỏ
+        } else {
+            let paddedMax = ceil(maxVal / 10) * 10 + 10 // làm tròn lên
+            return 0...paddedMax
+        }
+    }
+    
+    
+    var filteredData: [(date: Date, weight: Double)] {
+        let today = Calendar.current.startOfDay(for: Date())
+        var days = 7
+        
+        switch selectedRange {
+        case "1M": days = 30
+        case "3M": days = 90
+        case "6M": days = 180
+        case "1Y": days = 365
+        case "ALL": days = 730
+        default: days = 7
+        }
+        
+        let pastDates = (0..<days).map {
+            Calendar.current.date(byAdding: .day, value: -$0, to: today)!
+        }
+        
+        let formattedDates = pastDates.map { Calendar.current.startOfDay(for: $0) }
+        
+        let grouped = Dictionary(grouping: history) { Calendar.current.startOfDay(for: toDate($0.time) ?? Date.distantPast) }
+        
+        return formattedDates.reversed().map { day in
+            if selectedRange == "2W", let item = grouped[day]?.first {
+                return (date: day, weight: Double(item.weightKg))
+            } else {
+                // Từ 1M trở đi thì tất cả các điểm đều là 0 (nếu không có dữ liệu)
+                return (date: day, weight: 0)
+            }
+        }
+    }
+
+    func convertedWeight(_ weight: Double) -> Double {
+        return selectedTab == 0 ? weight * 2.20462 : weight
+    }
+    
+    func weightUnitLabel() -> String {
+        return selectedTab == 0 ? "lb" : "kg"
+    }
+    
     
     var last7DaysWithData: [(date: Date, weight: Double)] {
         let today = Calendar.current.startOfDay(for: Date())
@@ -263,7 +332,7 @@ struct WeightTracker: View {
                             .foregroundColor(.white)
                     }
                 }
-
+                
                 Button {
                     route.navigateTo(.editProfile)
                 } label: {
@@ -275,6 +344,7 @@ struct WeightTracker: View {
                             .font(.system(size: 13))
                             .foregroundColor(.white)
                     }
+                    .padding(.leading, 62)
                 }
             }
             .frame(maxWidth: .infinity)
@@ -285,7 +355,7 @@ struct WeightTracker: View {
             .shadow(radius: 2)
             .padding()
             
-        
+            
             Button {
                 route.navigateTo(.add)
             } label: {
@@ -293,7 +363,7 @@ struct WeightTracker: View {
                     Circle()
                         .fill(Color.white)
                         .frame(width: 70, height: 70)
-
+                    
                     Text("+")
                         .font(.system(size: 32, weight: .bold))
                         .foregroundColor(Color.green)
@@ -306,6 +376,45 @@ struct WeightTracker: View {
     }
 }
 
+
+struct WeightStats {
+    var startWeight: Double = 0
+    var currentWeight: Double = 0
+    var targetWeight: Double = 0
+    var change: Double = 0
+    var average: Double = 0
+    var remaining: Double = 0
+}
+
+func calculateWeightStatsInline(history: [HistoryObject], currentWeight: Double, targetWeight: Double) -> WeightStats {
+    guard !history.isEmpty else {
+        return WeightStats(
+            startWeight: currentWeight,
+            currentWeight: currentWeight,
+            targetWeight: targetWeight,
+            change: 0,
+            average: currentWeight,
+            remaining: targetWeight - currentWeight
+        )
+    }
+    
+    let start = Double(history.first?.weightKg ?? 0)
+    let current = currentWeight
+    let average = history.map { Double($0.weightKg) }.reduce(0, +) / Double(history.count)
+    
+    return WeightStats(
+        startWeight: start,
+        currentWeight: current,
+        targetWeight: targetWeight,
+        change: current - start,
+        average: average,
+        remaining: targetWeight - current
+    )
+}
+
 #Preview {
     WeightTracker()
 }
+
+
+
