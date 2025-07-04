@@ -1,0 +1,1066 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BF74BCCC2E14CCF200274B4B /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF74BCCB2E14CCF200274B4B /* Utils.swift */; };
+		BF74BCCF2E14D2C600274B4B /* WeightTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF74BCCE2E14D2C600274B4B /* WeightTracker.swift */; };
+		BF74BCD22E14E2BF00274B4B /* HistoryWeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF74BCD12E14E2BF00274B4B /* HistoryWeight.swift */; };
+		BF74BCD42E14E4BF00274B4B /* HistoryObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF74BCD32E14E4BF00274B4B /* HistoryObject.swift */; };
+		BF74BCD62E14EAF200274B4B /* DatabaseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF74BCD52E14EAF200274B4B /* DatabaseData.swift */; };
+		BF7C66A02E151F5700A64D12 /* DailogWeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7C669F2E151F5700A64D12 /* DailogWeight.swift */; };
+		BF7C66A32E161A9500A64D12 /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = BF7C66A22E161A9500A64D12 /* DGCharts */; };
+		BF7C66A52E161A9500A64D12 /* DGChartsDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = BF7C66A42E161A9500A64D12 /* DGChartsDynamic */; };
+		BF7C66A92E16961400A64D12 /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7C66A82E16961400A64D12 /* MailView.swift */; };
+		BFA75CC92E053F78002DCC20 /* Results.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA75CC82E053F78002DCC20 /* Results.swift */; };
+		BFA75CCC2E054C5B002DCC20 /* ManageBMRCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA75CCB2E054C5B002DCC20 /* ManageBMRCalculator.swift */; };
+		BFA75CCE2E055076002DCC20 /* BmrUs.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA75CCD2E055076002DCC20 /* BmrUs.swift */; };
+		BFA75CD02E055086002DCC20 /* BmrMetric.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA75CCF2E055086002DCC20 /* BmrMetric.swift */; };
+		BFA75CD32E0570EC002DCC20 /* BmrResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA75CD22E0570EC002DCC20 /* BmrResult.swift */; };
+		BFB589A72DFFB89F009D356F /* MetricUnitS.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB589A62DFFB89F009D356F /* MetricUnitS.swift */; };
+		BFB589AA2DFFBEE5009D356F /* SlidingRuler in Frameworks */ = {isa = PBXBuildFile; productRef = BFB589A92DFFBEE5009D356F /* SlidingRuler */; };
+		BFB589B12E016647009D356F /* ManageCalorieCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB589B02E016647009D356F /* ManageCalorieCalculator.swift */; };
+		BFB589B32E02541B009D356F /* ViewUs.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB589B22E02541A009D356F /* ViewUs.swift */; };
+		BFB589B52E025442009D356F /* ViewMetric.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB589B42E025442009D356F /* ViewMetric.swift */; };
+		BFB589B72E0264CD009D356F /* ChooseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB589B62E0264CD009D356F /* ChooseList.swift */; };
+		BFB589BB2E02A891009D356F /* MoreList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB589BA2E02A891009D356F /* MoreList.swift */; };
+		BFB589C02E03A4F3009D356F /* CalorieResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB589BF2E03A4F3009D356F /* CalorieResult.swift */; };
+		BFB589C22E03CD05009D356F /* FMDB in Frameworks */ = {isa = PBXBuildFile; productRef = BFB589C12E03CD05009D356F /* FMDB */; };
+		BFB589C52E03CD20009D356F /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = BFB589C42E03CD20009D356F /* Kingfisher */; };
+		BFBED6F42E12248700F1367C /* ManageCaloriesBurned.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBED6F32E12248700F1367C /* ManageCaloriesBurned.swift */; };
+		BFBED6F62E12288200F1367C /* CaloriesBurned.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBED6F52E12288200F1367C /* CaloriesBurned.swift */; };
+		BFBED6F82E1228AA00F1367C /* CalorieBurnedByDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBED6F72E1228AA00F1367C /* CalorieBurnedByDistance.swift */; };
+		BFBED6FA2E122B2B00F1367C /* DailogActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBED6F92E122B2B00F1367C /* DailogActivity.swift */; };
+		BFBED6FC2E12300D00F1367C /* DailogWRCS.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBED6FB2E12300D00F1367C /* DailogWRCS.swift */; };
+		BFBED6FE2E123BE900F1367C /* DailogGymActivites.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBED6FD2E123BE900F1367C /* DailogGymActivites.swift */; };
+		BFBED7002E12439500F1367C /* DialogTrainingSports.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBED6FF2E12439500F1367C /* DialogTrainingSports.swift */; };
+		BFBED7022E12489100F1367C /* DialogOutdoor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBED7012E12489100F1367C /* DialogOutdoor.swift */; };
+		BFBED7042E12553B00F1367C /* DailogHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBED7032E12553B00F1367C /* DailogHome.swift */; };
+		BFBED7072E128DE300F1367C /* CaloriesBurnedResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBED7062E128DE300F1367C /* CaloriesBurnedResult.swift */; };
+		BFBED7092E137A8B00F1367C /* DailogWRC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBED7082E137A8B00F1367C /* DailogWRC.swift */; };
+		BFBED70B2E13811300F1367C /* DailogSP.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBED70A2E13811300F1367C /* DailogSP.swift */; };
+		BFBED70D2E139A9E00F1367C /* DailogDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBED70C2E139A9E00F1367C /* DailogDistance.swift */; };
+		BFBED70F2E13A20900F1367C /* DailogKP.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBED70E2E13A20900F1367C /* DailogKP.swift */; };
+		BFC8C7AA2E08EA7300910177 /* ManageBodyFat.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC8C7A92E08EA7300910177 /* ManageBodyFat.swift */; };
+		BFC8C7AC2E08EE2100910177 /* BodyUS.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC8C7AB2E08EE2100910177 /* BodyUS.swift */; };
+		BFC8C7AE2E08EE2D00910177 /* BodyMetric.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC8C7AD2E08EE2D00910177 /* BodyMetric.swift */; };
+		BFC8C7B12E08F8F500910177 /* BodyFatResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC8C7B02E08F8F500910177 /* BodyFatResult.swift */; };
+		BFC8C7B32E09414000910177 /* Gender.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC8C7B22E09414000910177 /* Gender.swift */; };
+		BFC8C7B82E0ABB7E00910177 /* IdealWeightUS.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC8C7B72E0ABB7E00910177 /* IdealWeightUS.swift */; };
+		BFC8C7BA2E0B92B700910177 /* ManageIdealWeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC8C7B92E0B92B700910177 /* ManageIdealWeight.swift */; };
+		BFC8C7BC2E0B967900910177 /* IdealWeightMetric.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC8C7BB2E0B967900910177 /* IdealWeightMetric.swift */; };
+		BFC8C7BF2E0BB29F00910177 /* IdealWeightResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC8C7BE2E0BB29F00910177 /* IdealWeightResult.swift */; };
+		BFC8C7C22E0BF3B600910177 /* ManageLeanBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC8C7C12E0BF3B600910177 /* ManageLeanBody.swift */; };
+		BFC8C7C42E0BF6CB00910177 /* leanboyUS.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC8C7C32E0BF6CB00910177 /* leanboyUS.swift */; };
+		BFC8C7C62E0BF70A00910177 /* leanboyMetric.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC8C7C52E0BF70A00910177 /* leanboyMetric.swift */; };
+		BFC8C7C92E0C0B3900910177 /* LeanBodyResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC8C7C82E0C0B3900910177 /* LeanBodyResult.swift */; };
+		BFC8C7CC2E0D40FF00910177 /* ManageHealthyWeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC8C7CB2E0D40FF00910177 /* ManageHealthyWeight.swift */; };
+		BFC8C7CE2E0D46BA00910177 /* HealthyUS.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC8C7CD2E0D46BA00910177 /* HealthyUS.swift */; };
+		BFC8C7D02E0D46CB00910177 /* HealthyMetric.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC8C7CF2E0D46CB00910177 /* HealthyMetric.swift */; };
+		BFC8C7D32E0D50A500910177 /* HealthyWeightResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC8C7D22E0D50A500910177 /* HealthyWeightResult.swift */; };
+		BFC8C7D62E0E3BF800910177 /* ManageArmyBodyFat.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC8C7D52E0E3BF800910177 /* ManageArmyBodyFat.swift */; };
+		BFC8C7D82E0E3C6200910177 /* ArmyBodyFatUs.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC8C7D72E0E3C6200910177 /* ArmyBodyFatUs.swift */; };
+		BFC8C7DA2E0E3C9600910177 /* ArmyBodyFatMetric.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC8C7D92E0E3C9600910177 /* ArmyBodyFatMetric.swift */; };
+		BFC8C7DF2E0E506C00910177 /* ResultArmBodyFat.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC8C7DE2E0E506C00910177 /* ResultArmBodyFat.swift */; };
+		BFCE98E42DF6BD38004DDC59 /* StandbyScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCE98E32DF6BD38004DDC59 /* StandbyScreen.swift */; };
+		BFCE98EA2DF6CCBD004DDC59 /* RouterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCE98E92DF6CCBD004DDC59 /* RouterView.swift */; };
+		BFCE98EE2DF6E5BD004DDC59 /* HealthWeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCE98ED2DF6E5BD004DDC59 /* HealthWeight.swift */; };
+		BFCE98F12DF6EA47004DDC59 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BFCE98F02DF6EA47004DDC59 /* Localizable.strings */; };
+		BFCE98F32DF6EA8A004DDC59 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCE98F22DF6EA8A004DDC59 /* BackgroundView.swift */; };
+		BFCE98F62DF6EB8F004DDC59 /* LocalizationSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCE98F52DF6EB8F004DDC59 /* LocalizationSystem.swift */; };
+		BFCE98F92DF7DEB9004DDC59 /* FMDB in Frameworks */ = {isa = PBXBuildFile; productRef = BFCE98F82DF7DEB9004DDC59 /* FMDB */; };
+		BFCE98FF2DF7DF99004DDC59 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = BFCE98FE2DF7DF99004DDC59 /* Lottie */; };
+		BFCE99022DF7E299004DDC59 /* anim_loading.json in Resources */ = {isa = PBXBuildFile; fileRef = BFCE99012DF7E299004DDC59 /* anim_loading.json */; };
+		BFCE990C2DF816DD004DDC59 /* DatabasePeople.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCE990B2DF816DD004DDC59 /* DatabasePeople.swift */; };
+		BFCE990E2DF81708004DDC59 /* DataPeople.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCE990D2DF81708004DDC59 /* DataPeople.swift */; };
+		BFCE99102DF82B90004DDC59 /* Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCE990F2DF82B90004DDC59 /* Add.swift */; };
+		BFCE99142DF91C08004DDC59 /* AddWeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCE99132DF91C08004DDC59 /* AddWeight.swift */; };
+		BFCE99192DF97A83004DDC59 /* BmiResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCE99182DF97A82004DDC59 /* BmiResult.swift */; };
+		BFD237E32DEFED7D00903A35 /* Health_WeightApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD237E22DEFED7D00903A35 /* Health_WeightApp.swift */; };
+		BFD237E52DEFED7D00903A35 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD237E42DEFED7D00903A35 /* ContentView.swift */; };
+		BFD237E72DEFED7F00903A35 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFD237E62DEFED7F00903A35 /* Assets.xcassets */; };
+		BFD237EA2DEFED7F00903A35 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFD237E92DEFED7F00903A35 /* Preview Assets.xcassets */; };
+		BFD237F62DF028E300903A35 /* OnBoandingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD237F52DF028E300903A35 /* OnBoandingScreen.swift */; };
+		BFD237F92DF0353E00903A35 /* ManageEditProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD237F82DF0353E00903A35 /* ManageEditProfileScreen.swift */; };
+		BFD237FB2DF035C800903A35 /* UsUnits.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD237FA2DF035C800903A35 /* UsUnits.swift */; };
+		BFD237FD2DF035DA00903A35 /* MetricUnits.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD237FC2DF035DA00903A35 /* MetricUnits.swift */; };
+		BFD2380A2DF1795600903A35 /* ChooseWeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD238092DF1795600903A35 /* ChooseWeight.swift */; };
+		BFD238122DF2A47F00903A35 /* HamburgerMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD238112DF2A47F00903A35 /* HamburgerMenuView.swift */; };
+		BFD238152DF2E9F200903A35 /* SelectFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD238142DF2E9F200903A35 /* SelectFunctions.swift */; };
+		BFE9F0B82DFAC72F0010B06B /* USUnits.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE9F0B72DFAC72F0010B06B /* USUnits.swift */; };
+		BFE9F0BA2DFAC7A40010B06B /* ManageBMICalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE9F0B92DFAC7A40010B06B /* ManageBMICalculator.swift */; };
+		BFE9F0BC2DFBBF220010B06B /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE9F0BB2DFBBF220010B06B /* Person.swift */; };
+		BFE9F0C12DFC17E60010B06B /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE9F0C02DFC17E60010B06B /* UserViewModel.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		BF74BCCB2E14CCF200274B4B /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		BF74BCCE2E14D2C600274B4B /* WeightTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightTracker.swift; sourceTree = "<group>"; };
+		BF74BCD12E14E2BF00274B4B /* HistoryWeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryWeight.swift; sourceTree = "<group>"; };
+		BF74BCD32E14E4BF00274B4B /* HistoryObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryObject.swift; sourceTree = "<group>"; };
+		BF74BCD52E14EAF200274B4B /* DatabaseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseData.swift; sourceTree = "<group>"; };
+		BF7C669F2E151F5700A64D12 /* DailogWeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailogWeight.swift; sourceTree = "<group>"; };
+		BF7C66A82E16961400A64D12 /* MailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
+		BFA75CC82E053F78002DCC20 /* Results.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Results.swift; sourceTree = "<group>"; };
+		BFA75CCB2E054C5B002DCC20 /* ManageBMRCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageBMRCalculator.swift; sourceTree = "<group>"; };
+		BFA75CCD2E055076002DCC20 /* BmrUs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BmrUs.swift; sourceTree = "<group>"; };
+		BFA75CCF2E055086002DCC20 /* BmrMetric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BmrMetric.swift; sourceTree = "<group>"; };
+		BFA75CD22E0570EC002DCC20 /* BmrResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BmrResult.swift; sourceTree = "<group>"; };
+		BFB589A62DFFB89F009D356F /* MetricUnitS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricUnitS.swift; sourceTree = "<group>"; };
+		BFB589B02E016647009D356F /* ManageCalorieCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageCalorieCalculator.swift; sourceTree = "<group>"; };
+		BFB589B22E02541A009D356F /* ViewUs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUs.swift; sourceTree = "<group>"; };
+		BFB589B42E025442009D356F /* ViewMetric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewMetric.swift; sourceTree = "<group>"; };
+		BFB589B62E0264CD009D356F /* ChooseList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseList.swift; sourceTree = "<group>"; };
+		BFB589BA2E02A891009D356F /* MoreList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreList.swift; sourceTree = "<group>"; };
+		BFB589BF2E03A4F3009D356F /* CalorieResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalorieResult.swift; sourceTree = "<group>"; };
+		BFBED6F32E12248700F1367C /* ManageCaloriesBurned.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageCaloriesBurned.swift; sourceTree = "<group>"; };
+		BFBED6F52E12288200F1367C /* CaloriesBurned.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaloriesBurned.swift; sourceTree = "<group>"; };
+		BFBED6F72E1228AA00F1367C /* CalorieBurnedByDistance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalorieBurnedByDistance.swift; sourceTree = "<group>"; };
+		BFBED6F92E122B2B00F1367C /* DailogActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailogActivity.swift; sourceTree = "<group>"; };
+		BFBED6FB2E12300D00F1367C /* DailogWRCS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailogWRCS.swift; sourceTree = "<group>"; };
+		BFBED6FD2E123BE900F1367C /* DailogGymActivites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailogGymActivites.swift; sourceTree = "<group>"; };
+		BFBED6FF2E12439500F1367C /* DialogTrainingSports.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogTrainingSports.swift; sourceTree = "<group>"; };
+		BFBED7012E12489100F1367C /* DialogOutdoor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogOutdoor.swift; sourceTree = "<group>"; };
+		BFBED7032E12553B00F1367C /* DailogHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailogHome.swift; sourceTree = "<group>"; };
+		BFBED7062E128DE300F1367C /* CaloriesBurnedResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaloriesBurnedResult.swift; sourceTree = "<group>"; };
+		BFBED7082E137A8B00F1367C /* DailogWRC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailogWRC.swift; sourceTree = "<group>"; };
+		BFBED70A2E13811300F1367C /* DailogSP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailogSP.swift; sourceTree = "<group>"; };
+		BFBED70C2E139A9E00F1367C /* DailogDistance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailogDistance.swift; sourceTree = "<group>"; };
+		BFBED70E2E13A20900F1367C /* DailogKP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailogKP.swift; sourceTree = "<group>"; };
+		BFC8C7A92E08EA7300910177 /* ManageBodyFat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageBodyFat.swift; sourceTree = "<group>"; };
+		BFC8C7AB2E08EE2100910177 /* BodyUS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyUS.swift; sourceTree = "<group>"; };
+		BFC8C7AD2E08EE2D00910177 /* BodyMetric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyMetric.swift; sourceTree = "<group>"; };
+		BFC8C7B02E08F8F500910177 /* BodyFatResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyFatResult.swift; sourceTree = "<group>"; };
+		BFC8C7B22E09414000910177 /* Gender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gender.swift; sourceTree = "<group>"; };
+		BFC8C7B72E0ABB7E00910177 /* IdealWeightUS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdealWeightUS.swift; sourceTree = "<group>"; };
+		BFC8C7B92E0B92B700910177 /* ManageIdealWeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageIdealWeight.swift; sourceTree = "<group>"; };
+		BFC8C7BB2E0B967900910177 /* IdealWeightMetric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdealWeightMetric.swift; sourceTree = "<group>"; };
+		BFC8C7BE2E0BB29F00910177 /* IdealWeightResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdealWeightResult.swift; sourceTree = "<group>"; };
+		BFC8C7C12E0BF3B600910177 /* ManageLeanBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageLeanBody.swift; sourceTree = "<group>"; };
+		BFC8C7C32E0BF6CB00910177 /* leanboyUS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = leanboyUS.swift; sourceTree = "<group>"; };
+		BFC8C7C52E0BF70A00910177 /* leanboyMetric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = leanboyMetric.swift; sourceTree = "<group>"; };
+		BFC8C7C82E0C0B3900910177 /* LeanBodyResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeanBodyResult.swift; sourceTree = "<group>"; };
+		BFC8C7CB2E0D40FF00910177 /* ManageHealthyWeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageHealthyWeight.swift; sourceTree = "<group>"; };
+		BFC8C7CD2E0D46BA00910177 /* HealthyUS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthyUS.swift; sourceTree = "<group>"; };
+		BFC8C7CF2E0D46CB00910177 /* HealthyMetric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthyMetric.swift; sourceTree = "<group>"; };
+		BFC8C7D22E0D50A500910177 /* HealthyWeightResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthyWeightResult.swift; sourceTree = "<group>"; };
+		BFC8C7D52E0E3BF800910177 /* ManageArmyBodyFat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageArmyBodyFat.swift; sourceTree = "<group>"; };
+		BFC8C7D72E0E3C6200910177 /* ArmyBodyFatUs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmyBodyFatUs.swift; sourceTree = "<group>"; };
+		BFC8C7D92E0E3C9600910177 /* ArmyBodyFatMetric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmyBodyFatMetric.swift; sourceTree = "<group>"; };
+		BFC8C7DE2E0E506C00910177 /* ResultArmBodyFat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultArmBodyFat.swift; sourceTree = "<group>"; };
+		BFCE98E32DF6BD38004DDC59 /* StandbyScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandbyScreen.swift; sourceTree = "<group>"; };
+		BFCE98E92DF6CCBD004DDC59 /* RouterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterView.swift; sourceTree = "<group>"; };
+		BFCE98ED2DF6E5BD004DDC59 /* HealthWeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthWeight.swift; sourceTree = "<group>"; };
+		BFCE98F02DF6EA47004DDC59 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		BFCE98F22DF6EA8A004DDC59 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
+		BFCE98F52DF6EB8F004DDC59 /* LocalizationSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationSystem.swift; sourceTree = "<group>"; };
+		BFCE99012DF7E299004DDC59 /* anim_loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = anim_loading.json; sourceTree = "<group>"; };
+		BFCE99032DF7E420004DDC59 /* data.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = data.db; sourceTree = "<group>"; };
+		BFCE990B2DF816DD004DDC59 /* DatabasePeople.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabasePeople.swift; sourceTree = "<group>"; };
+		BFCE990D2DF81708004DDC59 /* DataPeople.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPeople.swift; sourceTree = "<group>"; };
+		BFCE990F2DF82B90004DDC59 /* Add.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Add.swift; sourceTree = "<group>"; };
+		BFCE99132DF91C08004DDC59 /* AddWeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWeight.swift; sourceTree = "<group>"; };
+		BFCE99182DF97A82004DDC59 /* BmiResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BmiResult.swift; sourceTree = "<group>"; };
+		BFD237DF2DEFED7D00903A35 /* Health_Weight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Health_Weight.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFD237E22DEFED7D00903A35 /* Health_WeightApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Health_WeightApp.swift; sourceTree = "<group>"; };
+		BFD237E42DEFED7D00903A35 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		BFD237E62DEFED7F00903A35 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BFD237E92DEFED7F00903A35 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		BFD237F52DF028E300903A35 /* OnBoandingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoandingScreen.swift; sourceTree = "<group>"; };
+		BFD237F82DF0353E00903A35 /* ManageEditProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageEditProfileScreen.swift; sourceTree = "<group>"; };
+		BFD237FA2DF035C800903A35 /* UsUnits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsUnits.swift; sourceTree = "<group>"; };
+		BFD237FC2DF035DA00903A35 /* MetricUnits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricUnits.swift; sourceTree = "<group>"; };
+		BFD238092DF1795600903A35 /* ChooseWeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseWeight.swift; sourceTree = "<group>"; };
+		BFD238112DF2A47F00903A35 /* HamburgerMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HamburgerMenuView.swift; sourceTree = "<group>"; };
+		BFD238142DF2E9F200903A35 /* SelectFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFunctions.swift; sourceTree = "<group>"; };
+		BFE9F0B72DFAC72F0010B06B /* USUnits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = USUnits.swift; sourceTree = "<group>"; };
+		BFE9F0B92DFAC7A40010B06B /* ManageBMICalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageBMICalculator.swift; sourceTree = "<group>"; };
+		BFE9F0BB2DFBBF220010B06B /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		BFE9F0C02DFC17E60010B06B /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BFD237DC2DEFED7D00903A35 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFB589C22E03CD05009D356F /* FMDB in Frameworks */,
+				BFB589AA2DFFBEE5009D356F /* SlidingRuler in Frameworks */,
+				BFCE98F92DF7DEB9004DDC59 /* FMDB in Frameworks */,
+				BFCE98FF2DF7DF99004DDC59 /* Lottie in Frameworks */,
+				BF7C66A32E161A9500A64D12 /* DGCharts in Frameworks */,
+				BF7C66A52E161A9500A64D12 /* DGChartsDynamic in Frameworks */,
+				BFB589C52E03CD20009D356F /* Kingfisher in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BF74BCCD2E14D29D00274B4B /* weghttracker */ = {
+			isa = PBXGroup;
+			children = (
+				BF74BCCE2E14D2C600274B4B /* WeightTracker.swift */,
+			);
+			path = weghttracker;
+			sourceTree = "<group>";
+		};
+		BF74BCD02E14E29700274B4B /* history */ = {
+			isa = PBXGroup;
+			children = (
+				BF74BCD12E14E2BF00274B4B /* HistoryWeight.swift */,
+			);
+			path = history;
+			sourceTree = "<group>";
+		};
+		BFA75CCA2E054BD4002DCC20 /* bmrcalculator */ = {
+			isa = PBXGroup;
+			children = (
+				BFA75CCB2E054C5B002DCC20 /* ManageBMRCalculator.swift */,
+				BFA75CCD2E055076002DCC20 /* BmrUs.swift */,
+				BFA75CCF2E055086002DCC20 /* BmrMetric.swift */,
+			);
+			path = bmrcalculator;
+			sourceTree = "<group>";
+		};
+		BFA75CD12E056FD8002DCC20 /* bmrresults */ = {
+			isa = PBXGroup;
+			children = (
+				BFA75CD22E0570EC002DCC20 /* BmrResult.swift */,
+			);
+			path = bmrresults;
+			sourceTree = "<group>";
+		};
+		BFB589AF2E0162E0009D356F /* caloriecalculator */ = {
+			isa = PBXGroup;
+			children = (
+				BFB589B02E016647009D356F /* ManageCalorieCalculator.swift */,
+				BFB589B22E02541A009D356F /* ViewUs.swift */,
+				BFB589B42E025442009D356F /* ViewMetric.swift */,
+			);
+			path = caloriecalculator;
+			sourceTree = "<group>";
+		};
+		BFB589BE2E03A4BF009D356F /* calorieresult */ = {
+			isa = PBXGroup;
+			children = (
+				BFB589BF2E03A4F3009D356F /* CalorieResult.swift */,
+				BFA75CC82E053F78002DCC20 /* Results.swift */,
+			);
+			path = calorieresult;
+			sourceTree = "<group>";
+		};
+		BFBED6F22E12238400F1367C /* caloriesburned */ = {
+			isa = PBXGroup;
+			children = (
+				BFBED6F32E12248700F1367C /* ManageCaloriesBurned.swift */,
+				BFBED6F52E12288200F1367C /* CaloriesBurned.swift */,
+				BFBED6F72E1228AA00F1367C /* CalorieBurnedByDistance.swift */,
+			);
+			path = caloriesburned;
+			sourceTree = "<group>";
+		};
+		BFBED7052E128DA400F1367C /* resultcalories */ = {
+			isa = PBXGroup;
+			children = (
+				BFBED7062E128DE300F1367C /* CaloriesBurnedResult.swift */,
+			);
+			path = resultcalories;
+			sourceTree = "<group>";
+		};
+		BFC8C7A82E08EA2B00910177 /* bodyfat */ = {
+			isa = PBXGroup;
+			children = (
+				BFC8C7A92E08EA7300910177 /* ManageBodyFat.swift */,
+				BFC8C7AB2E08EE2100910177 /* BodyUS.swift */,
+				BFC8C7AD2E08EE2D00910177 /* BodyMetric.swift */,
+			);
+			path = bodyfat;
+			sourceTree = "<group>";
+		};
+		BFC8C7AF2E08F87800910177 /* bodyfatresults */ = {
+			isa = PBXGroup;
+			children = (
+				BFC8C7B02E08F8F500910177 /* BodyFatResult.swift */,
+			);
+			path = bodyfatresults;
+			sourceTree = "<group>";
+		};
+		BFC8C7B62E0ABB2C00910177 /* idealweight */ = {
+			isa = PBXGroup;
+			children = (
+				BFC8C7B92E0B92B700910177 /* ManageIdealWeight.swift */,
+				BFC8C7B72E0ABB7E00910177 /* IdealWeightUS.swift */,
+				BFC8C7BB2E0B967900910177 /* IdealWeightMetric.swift */,
+			);
+			path = idealweight;
+			sourceTree = "<group>";
+		};
+		BFC8C7BD2E0BB27400910177 /* idealweightresult */ = {
+			isa = PBXGroup;
+			children = (
+				BFC8C7BE2E0BB29F00910177 /* IdealWeightResult.swift */,
+			);
+			path = idealweightresult;
+			sourceTree = "<group>";
+		};
+		BFC8C7C02E0BEEAD00910177 /* leanbodymass */ = {
+			isa = PBXGroup;
+			children = (
+				BFC8C7C12E0BF3B600910177 /* ManageLeanBody.swift */,
+				BFC8C7C32E0BF6CB00910177 /* leanboyUS.swift */,
+				BFC8C7C52E0BF70A00910177 /* leanboyMetric.swift */,
+			);
+			path = leanbodymass;
+			sourceTree = "<group>";
+		};
+		BFC8C7C72E0C0A6D00910177 /* leanbodyresult */ = {
+			isa = PBXGroup;
+			children = (
+				BFC8C7C82E0C0B3900910177 /* LeanBodyResult.swift */,
+			);
+			path = leanbodyresult;
+			sourceTree = "<group>";
+		};
+		BFC8C7CA2E0D40A500910177 /* healthyweight */ = {
+			isa = PBXGroup;
+			children = (
+				BFC8C7CB2E0D40FF00910177 /* ManageHealthyWeight.swift */,
+				BFC8C7CD2E0D46BA00910177 /* HealthyUS.swift */,
+				BFC8C7CF2E0D46CB00910177 /* HealthyMetric.swift */,
+			);
+			path = healthyweight;
+			sourceTree = "<group>";
+		};
+		BFC8C7D12E0D505E00910177 /* healthyweightresult */ = {
+			isa = PBXGroup;
+			children = (
+				BFC8C7D22E0D50A500910177 /* HealthyWeightResult.swift */,
+			);
+			path = healthyweightresult;
+			sourceTree = "<group>";
+		};
+		BFC8C7D42E0E3B8500910177 /* armybodyfat */ = {
+			isa = PBXGroup;
+			children = (
+				BFC8C7D52E0E3BF800910177 /* ManageArmyBodyFat.swift */,
+				BFC8C7D72E0E3C6200910177 /* ArmyBodyFatUs.swift */,
+				BFC8C7D92E0E3C9600910177 /* ArmyBodyFatMetric.swift */,
+			);
+			path = armybodyfat;
+			sourceTree = "<group>";
+		};
+		BFC8C7DD2E0E4F8900910177 /* resultarmybodyfat */ = {
+			isa = PBXGroup;
+			children = (
+				BFC8C7DE2E0E506C00910177 /* ResultArmBodyFat.swift */,
+			);
+			path = resultarmybodyfat;
+			sourceTree = "<group>";
+		};
+		BFCE98E22DF6BD07004DDC59 /* splash */ = {
+			isa = PBXGroup;
+			children = (
+				BFCE98E32DF6BD38004DDC59 /* StandbyScreen.swift */,
+			);
+			path = splash;
+			sourceTree = "<group>";
+		};
+		BFCE98E82DF6CC83004DDC59 /* navigation */ = {
+			isa = PBXGroup;
+			children = (
+				BFCE98E92DF6CCBD004DDC59 /* RouterView.swift */,
+			);
+			path = navigation;
+			sourceTree = "<group>";
+		};
+		BFCE98EF2DF6E9FB004DDC59 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				BFCE99032DF7E420004DDC59 /* data.db */,
+				BFCE98F02DF6EA47004DDC59 /* Localizable.strings */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		BFCE98F42DF6EB72004DDC59 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				BFCE98F52DF6EB8F004DDC59 /* LocalizationSystem.swift */,
+			);
+			path = utils;
+			sourceTree = "<group>";
+		};
+		BFCE99002DF7E203004DDC59 /* Raw */ = {
+			isa = PBXGroup;
+			children = (
+				BFCE99012DF7E299004DDC59 /* anim_loading.json */,
+			);
+			path = Raw;
+			sourceTree = "<group>";
+		};
+		BFCE99052DF7E573004DDC59 /* database */ = {
+			isa = PBXGroup;
+			children = (
+				BFCE990B2DF816DD004DDC59 /* DatabasePeople.swift */,
+				BF74BCD52E14EAF200274B4B /* DatabaseData.swift */,
+			);
+			path = database;
+			sourceTree = "<group>";
+		};
+		BFCE99062DF7E58E004DDC59 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				BFCE990D2DF81708004DDC59 /* DataPeople.swift */,
+				BFE9F0BB2DFBBF220010B06B /* Person.swift */,
+				BFC8C7B22E09414000910177 /* Gender.swift */,
+				BF74BCD32E14E4BF00274B4B /* HistoryObject.swift */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		BFCE99122DF91BEE004DDC59 /* addweight */ = {
+			isa = PBXGroup;
+			children = (
+				BFCE99132DF91C08004DDC59 /* AddWeight.swift */,
+			);
+			path = addweight;
+			sourceTree = "<group>";
+		};
+		BFCE99172DF97A36004DDC59 /* bmiresult */ = {
+			isa = PBXGroup;
+			children = (
+				BFCE99182DF97A82004DDC59 /* BmiResult.swift */,
+			);
+			path = bmiresult;
+			sourceTree = "<group>";
+		};
+		BFD237D62DEFED7C00903A35 = {
+			isa = PBXGroup;
+			children = (
+				BFD237E12DEFED7D00903A35 /* Health_Weight */,
+				BFD237E02DEFED7D00903A35 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BFD237E02DEFED7D00903A35 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BFD237DF2DEFED7D00903A35 /* Health_Weight.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BFD237E12DEFED7D00903A35 /* Health_Weight */ = {
+			isa = PBXGroup;
+			children = (
+				BFCE99002DF7E203004DDC59 /* Raw */,
+				BFCE98EF2DF6E9FB004DDC59 /* Resource */,
+				BFD237F02DF0273300903A35 /* Source */,
+				BFD237E22DEFED7D00903A35 /* Health_WeightApp.swift */,
+				BFD237E62DEFED7F00903A35 /* Assets.xcassets */,
+				BFD237E82DEFED7F00903A35 /* Preview Content */,
+			);
+			path = Health_Weight;
+			sourceTree = "<group>";
+		};
+		BFD237E82DEFED7F00903A35 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				BFD237E92DEFED7F00903A35 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		BFD237F02DF0273300903A35 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				BFE9F0BF2DFC16F30010B06B /* viewmodel */,
+				BFCE99062DF7E58E004DDC59 /* model */,
+				BFCE99052DF7E573004DDC59 /* database */,
+				BFD237FE2DF134D900903A35 /* views */,
+				BFD237F32DF027BE00903A35 /* screen */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		BFD237F32DF027BE00903A35 /* screen */ = {
+			isa = PBXGroup;
+			children = (
+				BF74BCD02E14E29700274B4B /* history */,
+				BF74BCCD2E14D29D00274B4B /* weghttracker */,
+				BFBED7052E128DA400F1367C /* resultcalories */,
+				BFBED6F22E12238400F1367C /* caloriesburned */,
+				BFC8C7DD2E0E4F8900910177 /* resultarmybodyfat */,
+				BFC8C7D42E0E3B8500910177 /* armybodyfat */,
+				BFC8C7D12E0D505E00910177 /* healthyweightresult */,
+				BFC8C7CA2E0D40A500910177 /* healthyweight */,
+				BFC8C7C72E0C0A6D00910177 /* leanbodyresult */,
+				BFC8C7C02E0BEEAD00910177 /* leanbodymass */,
+				BFC8C7BD2E0BB27400910177 /* idealweightresult */,
+				BFC8C7B62E0ABB2C00910177 /* idealweight */,
+				BFC8C7AF2E08F87800910177 /* bodyfatresults */,
+				BFC8C7A82E08EA2B00910177 /* bodyfat */,
+				BFA75CD12E056FD8002DCC20 /* bmrresults */,
+				BFA75CCA2E054BD4002DCC20 /* bmrcalculator */,
+				BFB589BE2E03A4BF009D356F /* calorieresult */,
+				BFB589AF2E0162E0009D356F /* caloriecalculator */,
+				BFE9F0B62DFAC6ED0010B06B /* bmicalculator */,
+				BFCE99172DF97A36004DDC59 /* bmiresult */,
+				BFCE99122DF91BEE004DDC59 /* addweight */,
+				BFCE98E82DF6CC83004DDC59 /* navigation */,
+				BFCE98E22DF6BD07004DDC59 /* splash */,
+				BFD238132DF2E99F00903A35 /* selectfunctions */,
+				BFD2380B2DF2884000903A35 /* home */,
+				BFD237F72DF0350900903A35 /* editprofile */,
+				BFD237F42DF028BB00903A35 /* onboard */,
+				BFD237E42DEFED7D00903A35 /* ContentView.swift */,
+			);
+			path = screen;
+			sourceTree = "<group>";
+		};
+		BFD237F42DF028BB00903A35 /* onboard */ = {
+			isa = PBXGroup;
+			children = (
+				BFD237F52DF028E300903A35 /* OnBoandingScreen.swift */,
+			);
+			path = onboard;
+			sourceTree = "<group>";
+		};
+		BFD237F72DF0350900903A35 /* editprofile */ = {
+			isa = PBXGroup;
+			children = (
+				BFD237F82DF0353E00903A35 /* ManageEditProfileScreen.swift */,
+				BFD237FA2DF035C800903A35 /* UsUnits.swift */,
+				BFD237FC2DF035DA00903A35 /* MetricUnits.swift */,
+			);
+			path = editprofile;
+			sourceTree = "<group>";
+		};
+		BFD237FE2DF134D900903A35 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				BFCE98F42DF6EB72004DDC59 /* utils */,
+				BFD238022DF14E7100903A35 /* dialog */,
+				BFCE990F2DF82B90004DDC59 /* Add.swift */,
+				BFCE98F22DF6EA8A004DDC59 /* BackgroundView.swift */,
+				BF7C66A82E16961400A64D12 /* MailView.swift */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		BFD238022DF14E7100903A35 /* dialog */ = {
+			isa = PBXGroup;
+			children = (
+				BFD238092DF1795600903A35 /* ChooseWeight.swift */,
+				BFD238112DF2A47F00903A35 /* HamburgerMenuView.swift */,
+				BFB589B62E0264CD009D356F /* ChooseList.swift */,
+				BFB589BA2E02A891009D356F /* MoreList.swift */,
+				BFBED6F92E122B2B00F1367C /* DailogActivity.swift */,
+				BFBED6FB2E12300D00F1367C /* DailogWRCS.swift */,
+				BFBED6FD2E123BE900F1367C /* DailogGymActivites.swift */,
+				BFBED6FF2E12439500F1367C /* DialogTrainingSports.swift */,
+				BFBED7012E12489100F1367C /* DialogOutdoor.swift */,
+				BFBED7032E12553B00F1367C /* DailogHome.swift */,
+				BFBED7082E137A8B00F1367C /* DailogWRC.swift */,
+				BFBED70A2E13811300F1367C /* DailogSP.swift */,
+				BFBED70C2E139A9E00F1367C /* DailogDistance.swift */,
+				BFBED70E2E13A20900F1367C /* DailogKP.swift */,
+				BF7C669F2E151F5700A64D12 /* DailogWeight.swift */,
+			);
+			path = dialog;
+			sourceTree = "<group>";
+		};
+		BFD2380B2DF2884000903A35 /* home */ = {
+			isa = PBXGroup;
+			children = (
+				BFCE98ED2DF6E5BD004DDC59 /* HealthWeight.swift */,
+			);
+			path = home;
+			sourceTree = "<group>";
+		};
+		BFD238132DF2E99F00903A35 /* selectfunctions */ = {
+			isa = PBXGroup;
+			children = (
+				BFD238142DF2E9F200903A35 /* SelectFunctions.swift */,
+			);
+			path = selectfunctions;
+			sourceTree = "<group>";
+		};
+		BFE9F0B62DFAC6ED0010B06B /* bmicalculator */ = {
+			isa = PBXGroup;
+			children = (
+				BFE9F0B92DFAC7A40010B06B /* ManageBMICalculator.swift */,
+				BFE9F0B72DFAC72F0010B06B /* USUnits.swift */,
+				BFB589A62DFFB89F009D356F /* MetricUnitS.swift */,
+			);
+			path = bmicalculator;
+			sourceTree = "<group>";
+		};
+		BFE9F0BF2DFC16F30010B06B /* viewmodel */ = {
+			isa = PBXGroup;
+			children = (
+				BFE9F0C02DFC17E60010B06B /* UserViewModel.swift */,
+				BF74BCCB2E14CCF200274B4B /* Utils.swift */,
+			);
+			path = viewmodel;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BFD237DE2DEFED7D00903A35 /* Health_Weight */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BFD237ED2DEFED7F00903A35 /* Build configuration list for PBXNativeTarget "Health_Weight" */;
+			buildPhases = (
+				BFD237DB2DEFED7D00903A35 /* Sources */,
+				BFD237DC2DEFED7D00903A35 /* Frameworks */,
+				BFD237DD2DEFED7D00903A35 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Health_Weight;
+			packageProductDependencies = (
+				BFCE98F82DF7DEB9004DDC59 /* FMDB */,
+				BFCE98FE2DF7DF99004DDC59 /* Lottie */,
+				BFB589A92DFFBEE5009D356F /* SlidingRuler */,
+				BFB589C12E03CD05009D356F /* FMDB */,
+				BFB589C42E03CD20009D356F /* Kingfisher */,
+				BF7C66A22E161A9500A64D12 /* DGCharts */,
+				BF7C66A42E161A9500A64D12 /* DGChartsDynamic */,
+			);
+			productName = Health_Weight;
+			productReference = BFD237DF2DEFED7D00903A35 /* Health_Weight.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BFD237D72DEFED7C00903A35 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1520;
+				LastUpgradeCheck = 1520;
+				TargetAttributes = {
+					BFD237DE2DEFED7D00903A35 = {
+						CreatedOnToolsVersion = 15.2;
+					};
+				};
+			};
+			buildConfigurationList = BFD237DA2DEFED7C00903A35 /* Build configuration list for PBXProject "Health_Weight" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BFD237D62DEFED7C00903A35;
+			packageReferences = (
+				BFCE98F72DF7DEB9004DDC59 /* XCRemoteSwiftPackageReference "fmdb" */,
+				BFCE98FD2DF7DF99004DDC59 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				BFB589A82DFFBEE5009D356F /* XCRemoteSwiftPackageReference "SlidingRuler" */,
+				BFB589C32E03CD20009D356F /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				BF7C66A12E161A9500A64D12 /* XCRemoteSwiftPackageReference "Charts" */,
+			);
+			productRefGroup = BFD237E02DEFED7D00903A35 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BFD237DE2DEFED7D00903A35 /* Health_Weight */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BFD237DD2DEFED7D00903A35 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFD237EA2DEFED7F00903A35 /* Preview Assets.xcassets in Resources */,
+				BFCE98F12DF6EA47004DDC59 /* Localizable.strings in Resources */,
+				BFD237E72DEFED7F00903A35 /* Assets.xcassets in Resources */,
+				BFCE99022DF7E299004DDC59 /* anim_loading.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BFD237DB2DEFED7D00903A35 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFE9F0BC2DFBBF220010B06B /* Person.swift in Sources */,
+				BFC8C7D02E0D46CB00910177 /* HealthyMetric.swift in Sources */,
+				BFE9F0C12DFC17E60010B06B /* UserViewModel.swift in Sources */,
+				BFC8C7DA2E0E3C9600910177 /* ArmyBodyFatMetric.swift in Sources */,
+				BFC8C7AA2E08EA7300910177 /* ManageBodyFat.swift in Sources */,
+				BF74BCD42E14E4BF00274B4B /* HistoryObject.swift in Sources */,
+				BFC8C7D82E0E3C6200910177 /* ArmyBodyFatUs.swift in Sources */,
+				BFD238122DF2A47F00903A35 /* HamburgerMenuView.swift in Sources */,
+				BFBED6FC2E12300D00F1367C /* DailogWRCS.swift in Sources */,
+				BFB589B52E025442009D356F /* ViewMetric.swift in Sources */,
+				BFB589B12E016647009D356F /* ManageCalorieCalculator.swift in Sources */,
+				BFC8C7BA2E0B92B700910177 /* ManageIdealWeight.swift in Sources */,
+				BFC8C7B32E09414000910177 /* Gender.swift in Sources */,
+				BFBED70B2E13811300F1367C /* DailogSP.swift in Sources */,
+				BFCE99142DF91C08004DDC59 /* AddWeight.swift in Sources */,
+				BF74BCD62E14EAF200274B4B /* DatabaseData.swift in Sources */,
+				BFD238152DF2E9F200903A35 /* SelectFunctions.swift in Sources */,
+				BFE9F0B82DFAC72F0010B06B /* USUnits.swift in Sources */,
+				BFD2380A2DF1795600903A35 /* ChooseWeight.swift in Sources */,
+				BFCE98EA2DF6CCBD004DDC59 /* RouterView.swift in Sources */,
+				BFCE99192DF97A83004DDC59 /* BmiResult.swift in Sources */,
+				BFA75CCC2E054C5B002DCC20 /* ManageBMRCalculator.swift in Sources */,
+				BFC8C7BC2E0B967900910177 /* IdealWeightMetric.swift in Sources */,
+				BFB589C02E03A4F3009D356F /* CalorieResult.swift in Sources */,
+				BFC8C7D32E0D50A500910177 /* HealthyWeightResult.swift in Sources */,
+				BFC8C7B82E0ABB7E00910177 /* IdealWeightUS.swift in Sources */,
+				BF7C66A92E16961400A64D12 /* MailView.swift in Sources */,
+				BFCE98F32DF6EA8A004DDC59 /* BackgroundView.swift in Sources */,
+				BFA75CD02E055086002DCC20 /* BmrMetric.swift in Sources */,
+				BFC8C7C42E0BF6CB00910177 /* leanboyUS.swift in Sources */,
+				BFC8C7BF2E0BB29F00910177 /* IdealWeightResult.swift in Sources */,
+				BFC8C7C62E0BF70A00910177 /* leanboyMetric.swift in Sources */,
+				BFC8C7C22E0BF3B600910177 /* ManageLeanBody.swift in Sources */,
+				BFCE990C2DF816DD004DDC59 /* DatabasePeople.swift in Sources */,
+				BFCE98E42DF6BD38004DDC59 /* StandbyScreen.swift in Sources */,
+				BFC8C7AC2E08EE2100910177 /* BodyUS.swift in Sources */,
+				BFC8C7D62E0E3BF800910177 /* ManageArmyBodyFat.swift in Sources */,
+				BFC8C7AE2E08EE2D00910177 /* BodyMetric.swift in Sources */,
+				BFC8C7DF2E0E506C00910177 /* ResultArmBodyFat.swift in Sources */,
+				BFA75CD32E0570EC002DCC20 /* BmrResult.swift in Sources */,
+				BFD237F62DF028E300903A35 /* OnBoandingScreen.swift in Sources */,
+				BFD237F92DF0353E00903A35 /* ManageEditProfileScreen.swift in Sources */,
+				BF7C66A02E151F5700A64D12 /* DailogWeight.swift in Sources */,
+				BFCE98EE2DF6E5BD004DDC59 /* HealthWeight.swift in Sources */,
+				BFBED70D2E139A9E00F1367C /* DailogDistance.swift in Sources */,
+				BF74BCD22E14E2BF00274B4B /* HistoryWeight.swift in Sources */,
+				BFE9F0BA2DFAC7A40010B06B /* ManageBMICalculator.swift in Sources */,
+				BFC8C7CE2E0D46BA00910177 /* HealthyUS.swift in Sources */,
+				BFBED7002E12439500F1367C /* DialogTrainingSports.swift in Sources */,
+				BFBED7022E12489100F1367C /* DialogOutdoor.swift in Sources */,
+				BFD237E52DEFED7D00903A35 /* ContentView.swift in Sources */,
+				BFBED6FE2E123BE900F1367C /* DailogGymActivites.swift in Sources */,
+				BFBED7092E137A8B00F1367C /* DailogWRC.swift in Sources */,
+				BFCE99102DF82B90004DDC59 /* Add.swift in Sources */,
+				BFA75CCE2E055076002DCC20 /* BmrUs.swift in Sources */,
+				BFCE990E2DF81708004DDC59 /* DataPeople.swift in Sources */,
+				BFBED6FA2E122B2B00F1367C /* DailogActivity.swift in Sources */,
+				BFB589B32E02541B009D356F /* ViewUs.swift in Sources */,
+				BFB589BB2E02A891009D356F /* MoreList.swift in Sources */,
+				BF74BCCC2E14CCF200274B4B /* Utils.swift in Sources */,
+				BFBED70F2E13A20900F1367C /* DailogKP.swift in Sources */,
+				BFD237FB2DF035C800903A35 /* UsUnits.swift in Sources */,
+				BFA75CC92E053F78002DCC20 /* Results.swift in Sources */,
+				BF74BCCF2E14D2C600274B4B /* WeightTracker.swift in Sources */,
+				BFBED7042E12553B00F1367C /* DailogHome.swift in Sources */,
+				BFBED6F82E1228AA00F1367C /* CalorieBurnedByDistance.swift in Sources */,
+				BFCE98F62DF6EB8F004DDC59 /* LocalizationSystem.swift in Sources */,
+				BFBED7072E128DE300F1367C /* CaloriesBurnedResult.swift in Sources */,
+				BFC8C7CC2E0D40FF00910177 /* ManageHealthyWeight.swift in Sources */,
+				BFB589B72E0264CD009D356F /* ChooseList.swift in Sources */,
+				BFB589A72DFFB89F009D356F /* MetricUnitS.swift in Sources */,
+				BFC8C7C92E0C0B3900910177 /* LeanBodyResult.swift in Sources */,
+				BFBED6F62E12288200F1367C /* CaloriesBurned.swift in Sources */,
+				BFD237E32DEFED7D00903A35 /* Health_WeightApp.swift in Sources */,
+				BFC8C7B12E08F8F500910177 /* BodyFatResult.swift in Sources */,
+				BFBED6F42E12248700F1367C /* ManageCaloriesBurned.swift in Sources */,
+				BFD237FD2DF035DA00903A35 /* MetricUnits.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		BFD237EB2DEFED7F00903A35 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		BFD237EC2DEFED7F00903A35 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BFD237EE2DEFED7F00903A35 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Health_Weight/Preview Content\"";
+				DEVELOPMENT_TEAM = 989H8F754D;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.Health-Weight";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BFD237EF2DEFED7F00903A35 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Health_Weight/Preview Content\"";
+				DEVELOPMENT_TEAM = 989H8F754D;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.Health-Weight";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BFD237DA2DEFED7C00903A35 /* Build configuration list for PBXProject "Health_Weight" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFD237EB2DEFED7F00903A35 /* Debug */,
+				BFD237EC2DEFED7F00903A35 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BFD237ED2DEFED7F00903A35 /* Build configuration list for PBXNativeTarget "Health_Weight" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFD237EE2DEFED7F00903A35 /* Debug */,
+				BFD237EF2DEFED7F00903A35 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BF7C66A12E161A9500A64D12 /* XCRemoteSwiftPackageReference "Charts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danielgindi/Charts.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.0;
+			};
+		};
+		BFB589A82DFFBEE5009D356F /* XCRemoteSwiftPackageReference "SlidingRuler" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Pyroh/SlidingRuler";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.0;
+			};
+		};
+		BFB589C32E03CD20009D356F /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.3.2;
+			};
+		};
+		BFCE98F72DF7DEB9004DDC59 /* XCRemoteSwiftPackageReference "fmdb" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ccgus/fmdb.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.7.12;
+			};
+		};
+		BFCE98FD2DF7DF99004DDC59 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BF7C66A22E161A9500A64D12 /* DGCharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BF7C66A12E161A9500A64D12 /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = DGCharts;
+		};
+		BF7C66A42E161A9500A64D12 /* DGChartsDynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BF7C66A12E161A9500A64D12 /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = DGChartsDynamic;
+		};
+		BFB589A92DFFBEE5009D356F /* SlidingRuler */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BFB589A82DFFBEE5009D356F /* XCRemoteSwiftPackageReference "SlidingRuler" */;
+			productName = SlidingRuler;
+		};
+		BFB589C12E03CD05009D356F /* FMDB */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BFCE98F72DF7DEB9004DDC59 /* XCRemoteSwiftPackageReference "fmdb" */;
+			productName = FMDB;
+		};
+		BFB589C42E03CD20009D356F /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BFB589C32E03CD20009D356F /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		BFCE98F82DF7DEB9004DDC59 /* FMDB */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BFCE98F72DF7DEB9004DDC59 /* XCRemoteSwiftPackageReference "fmdb" */;
+			productName = FMDB;
+		};
+		BFCE98FE2DF7DF99004DDC59 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BFCE98FD2DF7DF99004DDC59 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = BFD237D72DEFED7C00903A35 /* Project object */;
+}
