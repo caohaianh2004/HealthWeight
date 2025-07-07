@@ -81,7 +81,6 @@
 		BFCE99142DF91C08004DDC59 /* AddWeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCE99132DF91C08004DDC59 /* AddWeight.swift */; };
 		BFCE99192DF97A83004DDC59 /* BmiResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCE99182DF97A82004DDC59 /* BmiResult.swift */; };
 		BFD237E32DEFED7D00903A35 /* Health_WeightApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD237E22DEFED7D00903A35 /* Health_WeightApp.swift */; };
-		BFD237E52DEFED7D00903A35 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD237E42DEFED7D00903A35 /* ContentView.swift */; };
 		BFD237E72DEFED7F00903A35 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFD237E62DEFED7F00903A35 /* Assets.xcassets */; };
 		BFD237EA2DEFED7F00903A35 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFD237E92DEFED7F00903A35 /* Preview Assets.xcassets */; };
 		BFD237F62DF028E300903A35 /* OnBoandingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD237F52DF028E300903A35 /* OnBoandingScreen.swift */; };
@@ -167,7 +166,6 @@
 		BFCE99182DF97A82004DDC59 /* BmiResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BmiResult.swift; sourceTree = "<group>"; };
 		BFD237DF2DEFED7D00903A35 /* Health_Weight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Health_Weight.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFD237E22DEFED7D00903A35 /* Health_WeightApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Health_WeightApp.swift; sourceTree = "<group>"; };
-		BFD237E42DEFED7D00903A35 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		BFD237E62DEFED7F00903A35 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BFD237E92DEFED7F00903A35 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BFD237F52DF028E300903A35 /* OnBoandingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoandingScreen.swift; sourceTree = "<group>"; };
@@ -518,7 +516,6 @@
 				BFD2380B2DF2884000903A35 /* home */,
 				BFD237F72DF0350900903A35 /* editprofile */,
 				BFD237F42DF028BB00903A35 /* onboard */,
-				BFD237E42DEFED7D00903A35 /* ContentView.swift */,
 			);
 			path = screen;
 			sourceTree = "<group>";
@@ -748,7 +745,6 @@
 				BFC8C7CE2E0D46BA00910177 /* HealthyUS.swift in Sources */,
 				BFBED7002E12439500F1367C /* DialogTrainingSports.swift in Sources */,
 				BFBED7022E12489100F1367C /* DialogOutdoor.swift in Sources */,
-				BFD237E52DEFED7D00903A35 /* ContentView.swift in Sources */,
 				BFBED6FE2E123BE900F1367C /* DailogGymActivites.swift in Sources */,
 				BFBED7092E137A8B00F1367C /* DailogWRC.swift in Sources */,
 				BFCE99102DF82B90004DDC59 /* Add.swift in Sources */,
